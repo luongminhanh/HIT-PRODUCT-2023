@@ -4,6 +4,7 @@ import facebook from '../assets/images/facebook.png';
 import google from '../assets/images/google.png';
 import instagram from '../assets/images/instagram.png';
 import twitter from '../assets/images/twitter.png';
+import logo from '../assets/images/logo.png';
 import '../assets/scss/components/Register.scss'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -19,8 +20,8 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
     const newUser = {
-      username: username, 
-      password: password 
+      username: username,
+      password: password
     };
     registerUser(newUser, dispatch, navigate);
   }
@@ -30,25 +31,31 @@ const Register = () => {
         <img src={img} alt="mon an"></img>
       </div>
       <div className='register__form'>
-        <h1>ĐĂNG KÝ TÀI KHOẢN</h1>
+        <div className='register__form--title'>
+          <h1>Đăng ký</h1>
+          <div className='register__form--title--logo'>
+            <img src={logo}></img>
+          </div>
+        </div>
+
         <form onSubmit={handleRegister}>
-          <span>Tên đăng nhập</span><br/>
-          <input 
-          type="text" 
-          onChange={(e) => setUsername(e.target.value)}        
+          <span>Tên đăng nhập</span><br />
+          <input
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
           />
-          <br/>
-          <span>Mật khẩu</span><br/>
-          <input 
-          type="password" 
-          onChange={(e) => setPassword(e.target.value)} 
+          <br />
+          <span>Mật khẩu</span><br />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
-          <br/>
-          <button>Đăng ký</button><br/>
+          <br />
+          <button>Đăng ký</button><br />
         </form>
-        <br/>
+        <br />
         <span className='__login'>Đã có tài khoản? <a href="/login">Đăng nhập</a></span>
-        <br/>
+        <br />
         <span>Hoặc đăng ký bằng</span>
         <div className='register__form--social'>
           <img src={instagram} alt=""></img>
@@ -58,6 +65,8 @@ const Register = () => {
         </div>
       </div>
     </div>
+
+
   )
 }
 
