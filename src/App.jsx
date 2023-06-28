@@ -3,6 +3,7 @@
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // import LayoutPage from "./layouts/LayoutPage";
+import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
 function App() {
 
@@ -10,7 +11,8 @@ function App() {
   return (
  
       <div className="App">
-        <Register/>
+        {/* <Register/> */}
+        <LogIn/>
         {/* <Routes>
         <Route element={<LayoutPage/>}>
           <Route path="/" element={<Home></Home>}/>
