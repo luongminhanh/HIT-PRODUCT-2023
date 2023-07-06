@@ -5,14 +5,16 @@
 // import LayoutPage from "./layouts/LayoutPage";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
+import UserInfor from "./pages/UserInfor";
 function App() {
 
 
   return (
  
       <div className="App">
-        {/* <Register/> */}
+        <Register/>
         <LogIn/>
+        <UserInfor/>
         {/* <Routes>
         <Route element={<LayoutPage/>}>
           <Route path="/" element={<Home></Home>}/>
