@@ -1,4 +1,3 @@
-import React from 'react';
 import img from "../assets/images/imageLogin.jpg"
 import '../assets/scss/components/UserInfor.scss'
 
