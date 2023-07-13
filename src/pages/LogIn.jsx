@@ -52,7 +52,7 @@ const LogIn = () => {
                                             type="text"
                                             name="username"
                                             className="field"
-                                            placeholder='Nhập username của bạn...'
+                                            placeholder='Your username...'
                                         />
                                     </div>
                                     <div className='err-message'>
@@ -67,7 +67,7 @@ const LogIn = () => {
                                             type={isShow ? "text" : "password"}
                                             name="password"
                                             className="field"
-                                            placeholder='Nhập password của bạn...'
+                                            placeholder='Your password...'
                                         />
                                         <i onClick={handleShowPassword} className={`fa-sharp fa-solid ${isShow ? 'fa-eye' : 'fa-eye-slash'} `}></i>
                                     </div>
