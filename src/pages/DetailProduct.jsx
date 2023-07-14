@@ -2,6 +2,8 @@ import img from '../assets/images/imageLogin.jpg'
 import '../assets/scss/components/DetailProduct.scss'
 import ReactStars from "react-rating-stars-component";
 import Food from '../components/Food'
+import Button from '../components/Button';
+import Icon from '../components/Icon';
 const firstExample = {
     size: 35,
     value: 3,
@@ -9,6 +11,9 @@ const firstExample = {
 };
 
 const DetailProduct = () => {
+    const handleClickAddToCart = () => {
+        console.log("thêm sp vào giỏ");
+    }
     return (
         <>
             <div className='detail-product'>
@@ -16,25 +21,35 @@ const DetailProduct = () => {
                     <img src={img} />
                 </div>
                 <div className='detail-product-infor'>
-                    <span>Trang chủ >> HCM</span>
+                    <span className='navigate-address'>Trang chủ >> HCM</span>
                     <h3>Canh gà nấm mỡ</h3>
-                    <span>194 Bàu Cát, P. 11, Tân Bình, TP. Hồ Chí Minh</span>
-                    <span><ReactStars {...firstExample} /></span>
-                    <span>Nguyên liệu: nấm mỡ, thịt gà, hành, cà rốt, ...</span>
+                    <span className='shop-address'>194 Bàu Cát, P. 11, Tân Bình, TP. Hồ Chí Minh</span>
+                    <span className='product-rating'><ReactStars {...firstExample} /></span>
+                    <span className='product-components'>Nguyên liệu: nấm mỡ, thịt gà, hành, cà rốt, ...</span>
                     <div className='detail-product-infor-price'>
                         <span>70.000đ</span>
                     </div>
                     <div className='detail-product-infor-number'>
                         <span>Số lượng</span>
                         <div className='detail-product-infor-number-change'>
-                            <button>-</button>
+                            <Button
+                                className='numberOfProd'
+                                text='-' />
                             <input value='1' />
-                            <button>+</button>
+                            <Button
+                                className='numberOfProd'
+                                text='+' />
                         </div>
                     </div>
                     <div className='detail-product-add'>
-                        <button className='detail-product-add-to-buy'>Đặt hàng</button>
-                        <button className='detail-product-add-to-cart'>Thêm vào giỏ hàng</button>
+                        <Button
+                            className='detail-product-add-to-cart'
+                            text="Thêm vào giỏ hàng"
+                            onClick={handleClickAddToCart} />
+                        <Button
+                            className='detail-product-add-to-buy'
+                            text='Đặt hàng'
+                            onClick={handleClickAddToCart} />
                     </div>
                 </div>
             </div>
@@ -46,7 +61,7 @@ const DetailProduct = () => {
                     <span>Quán Thảo Béo</span>
                     <span className='shop-infor-detail-online'>Đang hoạt động</span>
                     <div className='shop-infor-detail-phone'>
-                        <i class="fa-solid fa-phone-volume"></i>
+                        <Icon className='fa-solid fa-phone-volume' />
                         <span>0123456789</span>
                     </div>
                 </div>

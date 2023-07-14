@@ -1,8 +1,13 @@
 import logo from '../assets/images/logo.png';
 import mode from '../assets/images/brightness.png';
 import '../assets/scss/components/Header.scss';
+import Button from './Button';
+import Icon from './Icon';
 
 const Header = () => {
+    const handleClickLogin = () => {
+        console.log('click đăng nhập');
+    }
     return (
         <div className="header">
             <div className='header-left'>
@@ -10,16 +15,21 @@ const Header = () => {
             </div>
             <div className='header-right'>
                 <div className='header-right-search'>
-                    <i className="fas fa-search"></i>
+                    <Icon className='fas fa-search' />
                 </div>
                 <div className='header-right-cart'>
-                    <i className="fa-solid fa-cart-shopping"></i>
+                    <Icon className='fa-solid fa-cart-shopping' />
                 </div>
                 <div className='header-right-login'>
-                    <button className=''>Đăng nhập</button>
+                    <Button
+                        text='Đăng nhập'
+                        onClick={handleClickLogin}
+                    />
                 </div>
                 <div className='header-right-mode'>
-                    <img src={mode} />
+                    <Button 
+                    text={<img src={mode}/>} 
+                    />
                 </div>
             </div>
         </div>

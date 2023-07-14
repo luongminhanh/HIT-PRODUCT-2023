@@ -1,8 +1,8 @@
-import React from 'react'
+import '../assets/scss/components/Button.scss'
 
-const Button = () => {
+const Button = ({ text, onClick, className }) => {
   return (
-    <div>Button</div>
+    <button className={className} onClick={onClick}>{text}</button>
   )
 }
 
