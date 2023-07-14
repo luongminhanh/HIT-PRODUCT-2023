@@ -3,23 +3,33 @@
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // import LayoutPage from "./layouts/LayoutPage";
+import Food from "./components/Food";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import DetailProduct from "./pages/DetailProduct";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
+import UserInfor from "./pages/UserInfor";
 function App() {
 
 
   return (
- 
-      <div className="App">
-        {/* <Register/> */}
-        <LogIn/>
-        {/* <Routes>
+
+    <div className="App">
+      <Header />
+      {/* <Register /> */}
+      {/* <LogIn /> */}
+      {/* <UserInfor /> */}
+      {/* <Food /> */}
+      <DetailProduct />
+      <Footer />
+      {/* <Routes>
         <Route element={<LayoutPage/>}>
           <Route path="/" element={<Home></Home>}/>
           <Route path="/contact" element= {<Contact></Contact>} />
         </Route>
       </Routes> */}
-      </div>
+    </div>
   )
 }
 

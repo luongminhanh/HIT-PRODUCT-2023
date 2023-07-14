@@ -1,0 +1,240 @@
+@import '../mixin';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;700&display=swap');
+
+.userinfor-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.userinfor {
+    background-color: white;
+    width: 100%;
+    height: 80%;
+
+    &__main {
+        @include mobile() {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    &__title {
+        width: 90%;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        padding-left: 20px;
+        font-family: 'Roboto Slab', serif;
+        font-weight: 400;
+        font-size: 18px;
+        border-top: 10px solid orange;
+        border-radius: 0 0 20px 20px;
+        background-color: #fff;
+        height: 50px;
+        margin-left: 3%;
+        box-shadow: 0 0px 10px rgba(36, 39, 37, 0.1);
+    }
+
+    &__basic {
+        width: 250px !important;
+
+        @include tablet() {
+            width: 250px !important;
+        }
+
+        @include mobile() {
+            width: 300px !important;
+        }
+
+        height: 70vh;
+        margin-left: 3%;
+        background-color: #fff;
+        box-shadow: 0 0px 20px rgba(36, 39, 37, 0.1);
+        position: relative;
+
+        &--picture {
+            position: absolute;
+            left: 10px;
+            top: -20px;
+
+            @include tablet() {
+                right: 110px;
+            }
+
+            @include mobile() {
+                left: 20px;
+                width: 265px;
+            }
+
+            width: 245px;
+            height: 260px;
+            border-top: 8px solid orange;
+        }
+
+        &--name {
+            background-color: orange;
+            position: absolute;
+            top: 220px;
+            padding: 15px 25px;
+            border-radius: 10px;
+            right: 10px;
+
+            @include tablet() {
+                left: 30px;
+                right: 20px;
+                text-align: center;
+            }
+
+            font-family: 'Roboto Slab',
+            serif;
+            font-size: 18px;
+        }
+
+        &--main {
+            position: absolute;
+            top: 300px;
+            left: 60px;
+            font-family: 'Roboto Slab', serif;
+            font-size: 18px;
+
+            &--address {
+                margin-top: 30px;
+                margin-bottom: 15px;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            &--birth {
+                margin-bottom: 15px;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            &--phone {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+        }
+    }
+
+    &__change--main {
+        display: flex;
+
+        @include tablet() {
+            flex-direction: column;
+        }
+
+        @include mobile() {
+            margin: 0;
+            margin-top: 20px;
+        }
+
+        justify-content: center;
+        gap: 50px;
+        margin-left: 80px;
+        font-family: 'Roboto Slab',
+        serif;
+
+        & input {
+            padding: 7px;
+            padding-left: 10px;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid #CCCCCC;
+            width: 250px;
+            font-family: 'Roboto Slab', serif;
+            font-size: 15px;
+        }
+
+        & button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: orange;
+            border-radius: 10px;
+            width: 170px;
+            margin: auto;
+            border: none;
+            font-family: 'Roboto Slab', serif;
+            font-size: 17px;
+        }
+    }
+
+    &__changeInfor {
+        width: 420px;
+
+        @include tablet() {
+            width: 370px;
+            margin-top: 0;
+        }
+
+        @include mobile() {
+            width: 300px;
+        }
+
+        height: 300px;
+        box-shadow: 0 0px 10px rgba(36, 39, 37, 0.1);
+        display: flex;
+        gap: 20px;
+        padding: 40px;
+        flex-direction: column;
+        border-top: 10px solid orange;
+
+        &--name,
+        &--phone,
+        &--address,
+        &--birth {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+    }
+
+    &__changePassword {
+        width: 440px;
+
+        @include tablet() {
+            width: 370px;
+        }
+
+        @include mobile() {
+            width: 300px;
+        }
+
+        height: 300px;
+        box-shadow: 0 0px 10px rgba(36, 39, 37, 0.1);
+        display: flex;
+        gap: 20px;
+        padding: 40px;
+        flex-direction: column;
+        border-top: 10px solid orange;
+
+        &--old,
+        &--new,
+        &--confirm {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        & button {
+            margin-top: 10px;
+        }
+    }
+}
+
+.userinfor__main {
+    display: flex;
+    margin-top: 40px;
+}
