@@ -6,6 +6,8 @@
 import Food from "./components/Food";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import SideBar from "./components/AdminSideBar";
+import Admin from "./pages/Admin";
 import DetailProduct from "./pages/DetailProduct";
 import LogIn from "./pages/LogIn";
 import Register from "./pages/Register";
@@ -16,13 +18,14 @@ function App() {
   return (
 
     <div className="App">
+      {/* <Register />
+      <LogIn />
       <Header />
-      {/* <Register /> */}
-      {/* <LogIn /> */}
-      {/* <UserInfor /> */}
+      <UserInfor /> */}
+      <Admin />
       {/* <Food /> */}
-      <DetailProduct />
-      <Footer />
+      {/* <DetailProduct /> */}
+      {/* <Footer /> */}
       {/* <Routes>
         <Route element={<LayoutPage/>}>
           <Route path="/" element={<Home></Home>}/>
