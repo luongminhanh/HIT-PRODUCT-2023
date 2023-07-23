@@ -6,12 +6,13 @@ const UserInfor = () => {
         <div className='userinfor-container'>
             <div className="userinfor">
                 <div className='userinfor__title'>
-                    Thông tin cá nhân
+                    <span>Xin chào</span>
+                    <b>Nguyễn Thị Trang</b>!
                 </div>
                 <div className='userinfor__main'>
                     <div className="userinfor__basic">
                         <img className="userinfor__basic--picture" src={img} />
-                        <div className='userinfor__basic--name'>Nguyễn Thị Trang</div>
+                        <div className='userinfor__basic--name'>Phát</div>
                         <div className='userinfor__basic--main'>
                             <div className='userinfor__basic--main--address'>
                                 <i className="fa-solid fa-house-chimney"></i>

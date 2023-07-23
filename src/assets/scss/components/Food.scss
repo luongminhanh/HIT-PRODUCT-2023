@@ -1,20 +1,21 @@
+@import '../vari';
+
 .food {
     display: flex;
     position: relative;
-    font-family: 'Roboto Slab', serif;
-    color: hsl(0, 0%, 13%);
-    width: 330px;
-    background-color: #F1F1F1;
-    height: 160px;
+    font-family: $robotoFont;
+    color: $blackText;
+    width: 280px;
+    background-color: $bgColor;
+    height: 150px;
     border-radius: 10px;
     cursor: pointer;
 
     & h3 {
-        font-size: 19px;
+        font-size: $text-16;
         font-weight: 500;
         padding: 0;
         margin: 0;
-        margin-bottom: 10px;
     }
 
     & h4 {
