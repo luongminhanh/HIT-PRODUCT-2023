@@ -10,9 +10,9 @@ body {
 
 .register {
     display: flex;
-    margin-top: 60px;
     font-family: $gilroyFont;
     justify-content: center;
+    margin-top: 20px;
 
     &__form {
         height: max-content;
