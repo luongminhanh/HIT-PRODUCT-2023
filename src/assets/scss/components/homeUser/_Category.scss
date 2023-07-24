@@ -1,0 +1,74 @@
+@import '../../mixin';
+@import '../../vari';
+
+.home-category {
+    padding: $pad60-0;
+    background-color: $whiteText;
+}
+
+.list-category {
+    width: $pageSize;
+
+    h1 {
+        @include styleTitleH1();
+    }
+
+    &-card {
+        @include flexbox-center-between();
+        justify-content: space-between;
+
+        .categoryItem {
+            width: 15%;
+            background-color: #fff9e9;
+            border-radius: 30px;
+            padding: 50px 0 20px;
+            transition: all .3s ease;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s;
+
+            .categoryImage {
+                position: relative;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background-color: $whiteText;
+                margin: 0 auto;
+
+                img {
+                    @include absBox(20%, null, null, 5%);
+                    width: 94%;
+                    transition: all 0.4s;
+                }
+
+
+            }
+
+            .categoryContent {
+                padding: $pad20-0;
+
+                h4 {
+                    color: $color1e1d23;
+                    line-height: 10px;
+                    opacity: 0.95;
+                }
+
+                p {
+                    color: $color808080;
+                    line-height: 5px;
+                    font-size: $text-13;
+                }
+
+            }
+
+            &:hover {
+                background-color: $yellowColorLight;
+
+                img {
+                    transform: scale(1.4);
+                }
+            }
+        }
+
+    }
+}

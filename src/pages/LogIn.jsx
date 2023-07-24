@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import React, { useState } from 'react';
-import imageLogin from '../assets/images/imageLogin.jpg';
+//import imageLogin from '../assets/images/imageLogin.jpg';
 import logo from '../assets/images/logo.png'
 import { Link } from 'react-router-dom';
 
@@ -18,7 +18,7 @@ const LogIn = () => {
                     <i className="fa-sharp fa-solid fa-xmark"></i>
                 </div>
                 <div className='login__img'>
-                    <img src={imageLogin} alt="" />
+                    {/* <img src={imageLogin} alt="" /> */}
                 </div>
                 <div className='login__form'>
                     <Formik
