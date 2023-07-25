@@ -1,0 +1,25 @@
+@import '../../mixin';
+@import '../../vari';
+
+.information {
+
+    background-color: #f7f2e2;
+    padding: $pad60-0;
+
+    >div {
+        width: $pageSize;
+        overflow: hidden;
+    }
+
+    h1 {
+        @include styleTitleH1();
+        text-align: center;
+    }
+
+    p {
+        text-align: center;
+        margin: 28px 120px;
+        color: #333;
+        line-height: 1.5;
+    }
+}

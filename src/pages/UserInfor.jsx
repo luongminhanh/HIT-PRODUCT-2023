@@ -1,4 +1,4 @@
-import img from "../assets/images/imageLogin.jpg"
+//import img from "../assets/images/imageLogin.jpg"
 import '../assets/scss/components/UserInfor.scss'
 
 const UserInfor = () => {
@@ -11,8 +11,7 @@ const UserInfor = () => {
                 </div>
                 <div className='userinfor__main'>
                     <div className="userinfor__basic">
-                        <img className="userinfor__basic--picture" src={img} />
-                        <div className='userinfor__basic--name'>Phát</div>
+                        <div className='userinfor__basic--name'>Nguyễn Thị Trang</div>
                         <div className='userinfor__basic--main'>
                             <div className='userinfor__basic--main--address'>
                                 <i className="fa-solid fa-house-chimney"></i>

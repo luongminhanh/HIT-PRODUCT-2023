@@ -1,0 +1,28 @@
+@import '../../mixin';
+@import '../../vari';
+@import '../homeUser/Banner';
+@import '../homeUser/Category';
+@import '../homeUser/FoodSuggestions';
+@import '../homeUser/Information';
+
+
+
+.home {
+    background-color: #fff;
+    color: $blackText;
+    font-family: $robotoFont;
+}
+
+.home-container {
+    @include flexbox-center-between;
+}
+
+.bgColorImage {
+    background-image: url('/src/assets/images/imageBG_2.jpg');
+    padding: $pad60-0;
+
+}
+
+.bgColorWhite {
+    @include bgColor($whiteText);
+}
