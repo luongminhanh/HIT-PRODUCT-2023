@@ -1,11 +1,11 @@
 import '../assets/scss/components/Food.scss';
-import img from '../assets/images/imageLogin.jpg';
+//import img from '../assets/images/imageLogin.jpg';
 
 const Food = () => {
     return (
         <div className='food'>
             <div className="food-image">
-                <img src={img} />
+                {/* <img src={img} /> */}
             </div>
             <div className='food-detail'>
                 <h3>Canh gà nấm mỡ</h3>

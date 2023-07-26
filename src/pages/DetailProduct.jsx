@@ -1,4 +1,4 @@
-import img from '../assets/images/imageLogin.jpg'
+// import img from '../assets/images/imageLogin.jpg'
 import '../assets/scss/components/DetailProduct.scss'
 import ReactStars from "react-rating-stars-component";
 import Food from '../components/Food'
@@ -18,10 +18,10 @@ const DetailProduct = () => {
         <>
             <div className='detail-product'>
                 <div className='detail-product-image'>
-                    <img src={img} />
+                    {/* <img src={img} /> */}
                 </div>
                 <div className='detail-product-infor'>
-                    <span className='navigate-address'>Trang chủ >> HCM</span>
+                    <span className='navigate-address'>{`Trang chủ >> HCM`}</span>
                     <h3>Canh gà nấm mỡ</h3>
                     <span className='shop-address'>194 Bàu Cát, P. 11, Tân Bình, TP. Hồ Chí Minh</span>
                     <span className='product-rating'><ReactStars {...firstExample} /></span>

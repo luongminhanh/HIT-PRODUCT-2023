@@ -1,96 +1,71 @@
 @import '../mixin';
+@import '../vari';
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;700&display=swap');
 
 body {
     margin: 0;
     padding: 0;
-    background-color: white;
+    background-color: #fff9e9;
 }
 
 .register {
     display: flex;
-    height: 100vh;
-    font-family: 'Roboto Slab', serif;
-
-    &__img {
-        width: 55%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        @include tablet() {
-            width: 40%;
-        }
-
-        & img {
-            object-fit: cover;
-            width: 90%;
-            height: 90%;
-            border-radius: 0%;
-            animation: biani 4.5s linear infinite alternate;
-            box-shadow: 0 0px 20px rgba(36, 39, 37, 0.3);
-
-            @include tablet() {
-                height: 70%;
-            }
-        }
-
-        @include mobile() {
-            display: none;
-        }
-    }
+    font-family: $gilroyFont;
+    justify-content: center;
+    margin-top: 20px;
 
     &__form {
-        height: 100%;
+        height: max-content;
         font-size: 15px;
-        margin-left: 7%;
         font-weight: 300;
+        min-width: 360px;
         align-items: center;
         margin: auto;
         background-color: white;
-        padding-left: 60px;
-        padding-right: 40px;
+        border-radius: 30px;
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-top: 30px;
+        padding-bottom: 40px;
         box-shadow: 0 0px 20px rgba(36, 39, 37, 0.3);
+        margin-bottom: 60px;
+
+        img {
+            width: 100%;
+            margin: 0;
+        }
 
         h1 {
-            font-size: 45px;
+            font-size: 44px;
+            text-align: center !important;
+            font-weight: 500;
+            margin: 0;
+            margin-bottom: 30px;
+            margin-top: 10px;
 
             @include mobile() {}
         }
 
         input {
+            position: relative;
             margin-top: 5px;
-            font-weight: 700;
-            font-family: 'Roboto Slab', serif;
-            font-size: 17px;
-            width: 80%;
-            padding: 10px 20px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            font-size: 16px;
+            width: 94%;
+            padding: 4px 8px;
+            margin-bottom: 30px;
             outline: none;
             border: none;
-            background-color: rgb(242, 236, 236);
-            color: rgb(36, 30, 28);
+            font-family: $gilroyFont;
+            border-bottom: 1px solid #000;
+            font-weight: 100;
         }
 
         button {
-            background-color: rgb(255, 119, 0);
-            color: white;
-            font-size: 19px;
-            font-family: 'Roboto Slab', serif;
-            justify-content: center;
-            align-items: center;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 35px;
-            text-align: center;
-            justify-content: center;
-            font-weight: 700;
-            cursor: pointer;
+            width: 100%;
+            transition: all ease 1.25s;
 
             &:hover {
-                background-color: red;
-                transition: 0.3s;
+                background-color: $greenCokor;
             }
         }
 
@@ -99,15 +74,18 @@ body {
             font-weight: 400;
         }
 
+
+
         ///logo social media
         &--social {
             margin-top: 20px;
-
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
 
             img {
-                margin-right: 45px;
-                width: 40px;
-                height: 40px;
+                width: 32px;
+                height: 32px;
                 cursor: pointer;
                 object-fit: cover;
 
@@ -126,7 +104,6 @@ body {
         }
 
         &--title {
-            display: flex;
 
             h1 {
                 @include mobile() {
@@ -172,23 +149,40 @@ body {
         }
     }
 
-}
-
-@keyframes biani {
-
-    0% {
-        border-radius: 48% 52% 57% 43% / 34% 44% 56% 66%;
+    form>div {
+        position: relative;
     }
 
-    25% {
-        border-radius: 62% 38% 64% 36% / 34% 55% 45% 66%;
+    .register-error {
+        @include absBox(null, null, 8px, 0);
+        color: red;
+        font-size: 14px;
+        font-family: $robotoFont;
+        letter-spacing: 1.2px;
     }
 
-    50% {
-        border-radius: 43% 57% 51% 49% / 33% 42% 58% 67%;
+    .btn-login {
+        background-color: $whiteText;
+        color: $blackText;
+        // border: 1px solid $orangeColor;
+        width: 24%;
+        margin-left: 0px;
+        font-size: 18PX;
     }
 
-    100% {
-        border-radius: 40% 60% 43% 57% / 52% 32% 68% 48%;
+    .or {
+        display: flex;
+
+        hr {
+            width: 40%;
+            border: 1px solid #ccc;
+        }
+    }
+
+    .--login {
+        margin-top: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }

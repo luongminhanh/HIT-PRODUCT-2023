@@ -1,0 +1,203 @@
+@import '../../mixin';
+@import '../../vari';
+
+.home-banner {
+    width: $fullWidth;
+    position: relative;
+    background-image: url('/src/assets/images/FoodBanner.png');
+    height: 700px;
+    overflow: hidden;
+
+    .tomatoImage {
+        @include absBox(-16%, -10%, null, null)
+    }
+
+    .leaves_2_Image {
+        @include absBox(4%, null, null, -18%);
+    }
+
+    .squidImage {
+        @include absBox(null, 5%, 12%, null);
+        width: 670px;
+        z-index: 5;
+        animation: scale 1.75s linear 1 alternate;
+    }
+
+    .leavesImage {
+        @include absBox(null, 6%, 8%, null);
+        opacity: 0.8;
+        transition: all .5s;
+        animation: changePositionLeaves 2.5s ease-in-out 1 alternate;
+    }
+
+    .onionImage {
+        @include absBox(14%, 36%, null, null);
+        transition: all .5s;
+        animation: changePositionOnion 2.5s ease-in-out 1 alternate;
+    }
+
+    &:hover {
+        .leavesImage {
+            right: 8%;
+            bottom: 10%;
+        }
+
+        .onionImage {
+            top: 18%;
+            right: 39%;
+        }
+    }
+
+    .home-banner-content {
+        margin-top: 80px;
+        text-shadow: 1px 0 6px #000;
+        font-family: $gilroyFont;
+        line-height: 1.8;
+        color: $whiteText;
+        width: $pageSize;
+        overflow: hidden;
+
+        h1 {
+            font-size: 76px;
+            line-height: 46px;
+        }
+
+        h2 {
+            font-size: 36px;
+        }
+    }
+
+    .line {
+        opacity: 0;
+    }
+
+    @for $i from 1 through 10 {
+        .line:nth-child(#{$i}) {
+            animation: show-line 1.25s ease-in-out #{$i * 0.5}s forwards;
+        }
+    }
+
+    // Tạo animation để hiển thị từng dòng
+    @keyframes show-line {
+        from {
+            opacity: 0;
+            transform: translate(-150%);
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .search {
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        padding: $pad12;
+        display: flex;
+        margin: $mar40-0;
+        width: 47.5%;
+
+        input {
+            width: 94%;
+            font-size: $text-16;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            color: $whiteText;
+        }
+
+        i {
+            color: $whiteText;
+        }
+    }
+
+    .contentIcon {
+        @include flexbox-center-between;
+        justify-content: left;
+
+        img {
+            width: 90px;
+        }
+
+        h1 {
+            margin: 0;
+        }
+    }
+
+    .searchBtn {
+        background-color: $orangeColor ;
+        color: $whiteText;
+        padding: $pad20-45;
+        border-radius: $boderRadius8;
+        font-weight: $fontWeight500;
+        width: 50%;
+
+        &:hover {
+            transition: all .3s;
+            background-color: $greenCokor ;
+        }
+
+    }
+
+}
+
+
+@keyframes scale {
+
+    0%,
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(1.25, .75, 1);
+    }
+
+    40% {
+        transform: scale3d(.75, 1.25, 1);
+    }
+
+    50% {
+        transform: scale3d(1.15, .85, 1);
+    }
+
+    65% {
+        transform: scale3d(.95, 1.05, 1);
+    }
+
+    75% {
+        transform: scale3d(1.05, .95, 1);
+    }
+}
+
+@keyframes changePositionLeaves {
+    0% {
+        right: 18%;
+        bottom: 24%;
+        opacity: 0;
+        transform-origin: top left;
+        transform: rotate3d(0, 0, 1, -45deg);
+    }
+
+    100% {
+        right: 6%;
+        bottom: 8%;
+        opacity: 1;
+        transform-origin: left top;
+        transform: none;
+    }
+}
+
+@keyframes changePositionOnion {
+    0% {
+        right: 24%;
+        top: 28%;
+        opacity: 0;
+    }
+
+    100% {
+        right: 36%;
+        top: 14%;
+        opacity: 1;
+    }
+}
