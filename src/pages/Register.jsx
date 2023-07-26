@@ -53,7 +53,6 @@ const Register = () => {
                 <Field
                   type="text"
                   name="username"
-
                 />
                 <div className='register-error' >
                   <ErrorMessage name="username"></ErrorMessage>
