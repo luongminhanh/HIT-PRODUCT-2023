@@ -18,10 +18,10 @@ function App() {
   return (
 
     <div className="App">
-      {/* <Register />
-      <LogIn />
+       <Register />
+      {/*<LogIn />
       <Header />
-      <UserInfor /> */}
+      <UserInfor /> 
       <Admin />
       {/* <Food /> */}
       {/* <DetailProduct /> */}
