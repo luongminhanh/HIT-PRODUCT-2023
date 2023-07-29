@@ -1,9 +1,19 @@
 import { Modal } from "react-bootstrap"
 import Button from "../Button"
+import { deleteUser } from "../../store/apiRequest";
+import { useEffect } from "react";
 
-const ModalDeleteUser = ({ show, setShow }) => {
+const ModalDeleteUser = ({ show, setShow, fetchListUser, userId }) => {
+
     const handleClose = () => setShow(false);
-    
+    const handleSubmitDeleteUser = async () => {
+        deleteUser(userId);
+        await fetchListUser();
+        handleClose();
+    }
+    useEffect(() => {
+        fetchListUser()
+    }, [])
     return (
         <div>
             <Modal
@@ -15,12 +25,12 @@ const ModalDeleteUser = ({ show, setShow }) => {
                 </Modal.Header>
                 <Modal.Body>Bạn có chắc muốn xóa người dùng này?</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <button className="btn btn-secondary" onClick={handleClose}>
                         Hủy
-                    </Button>
-                    <Button variant="primary">
+                    </button>
+                    <button className="btn btn-primary" onClick={handleSubmitDeleteUser}>
                         Xác nhận
-                    </Button>
+                    </button>
                 </Modal.Footer>
             </Modal>
         </div>

@@ -2,9 +2,14 @@ import momo from '../../assets/images/momo.png'
 import AdminDataTable from "../AdminDataTable";
 import '../../assets/scss/components/ManageUser.scss'
 import ModalAddNewUser from "./ModalAddNewUser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../Button";
 import ModalDeleteUser from './ModalDeleteUser';
+import TableUsers from './TableUsers';
+import { getCardMediaUtilityClass } from '@mui/material';
+import { getAllUsers } from '../../store/apiRequest';
+import ModalUpdateUser from './ModalUpdateUser';
+import ModalViewUser from './ModalViewUser';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -53,35 +58,93 @@ const rows = [
     { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36, phone: '012342983' },
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65, phone: '012342983' },
 ];
+
+// const listUser1 = [
+//     {
+//         id: 1,
+//         username: "minhanh",
+//         email: "minhanh@gmail.com"
+//     },
+//     {
+//         id: 2,
+//         username: "minhanh",
+//         email: "minhanh@gmail.com"
+//     },
+//     {
+//         id: 3,
+//         username: "minhanh",
+//         email: "minhanh@gmail.com"
+//     }
+// ]
 const ManageUsers = () => {
     const [showModalAddNewUser, setShowModalAddNewUser] = useState(false);
-    const [showModalDeleteNewUser, setShowModalDeleteUser] = useState(false);
+    const [listUser, setListUser] = useState([]);
+    const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+    const [dataUser, setDataUser] = useState({});
+    const [showModalViewUser, setShowModalViewUser] = useState(false);
+    const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
+    const [dataDeleteUser, setDataDeleteUser] = useState({});
 
-    const handleClickBtnAdd = () => {
-        setShowModalAddNewUser(true);
+    const handleClickBtnUpdate = (user) => {
+        setShowModalUpdateUser(true);
+        setDataUser(user);
     }
-    const handleDeleteUser = () => {
+
+    const handleClickViewUser = (user) => {
+        setShowModalViewUser(true);
+        setDataUser(user);
+    }
+
+    const handleClickBtnDelete = (user) => {
         setShowModalDeleteUser(true);
+        setDataDeleteUser(user);
     }
+
+    const fetchListUser = async () => {
+        const res = await getAllUsers();
+        if (res && res.data) {
+            console.log(res);
+            setListUser(res.data);
+        }
+    }
+
+    useEffect(() => {
+        fetchListUser();
+    }, [])
+
     return (
         <div className="manage-users">
             <div className="info">
                 <h1>Quản lý khách hàng</h1>
-                <Button text='Thêm mới' onClick={handleClickBtnAdd} />
+                <button className="btn btn-primary" onClick={() => setShowModalAddNewUser(true)}>Thêm mới</button>
             </div>
             <ModalAddNewUser
                 show={showModalAddNewUser}
                 setShow={setShowModalAddNewUser}
+                fetchListUser={fetchListUser}
             />
             <ModalDeleteUser
-                show={showModalDeleteNewUser}
+                show={showModalDeleteUser}
                 setShow={setShowModalDeleteUser}
+                fetchListUser={fetchListUser}
+                userId={dataDeleteUser}
             />
-            <AdminDataTable
-                slug="users"
-                columns={columns}
-                rows={rows}
-                handleDeleteUser={handleDeleteUser}
+            <ModalUpdateUser
+                show={showModalUpdateUser}
+                setShow={setShowModalUpdateUser}
+                fetchListUser={fetchListUser}
+                dataUser={dataUser}
+            />
+            <ModalViewUser
+                show={showModalViewUser}
+                setShow={setShowModalViewUser}
+                dataUser={dataUser}
+            />
+            <TableUsers
+                listUser={listUser}
+                handleClickBtnUpdate={handleClickBtnUpdate}
+                handleClickViewUser={handleClickViewUser}
+                handleClickBtnDelete={handleClickBtnDelete}
             />
         </div>
     )

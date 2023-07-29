@@ -2,7 +2,7 @@ import '../assets/scss/components/AdminDataTable.scss';
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import momo from '../assets/images/momo.png'
 import { Link } from 'react-router-dom';
-import { FaEdit, FaStreetView } from 'react-icons/fa';
+import { FaEdit } from 'react-icons/fa';
 import {AiFillDelete} from 'react-icons/ai'
 import { FcViewDetails } from 'react-icons/fc';
 
