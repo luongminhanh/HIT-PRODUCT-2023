@@ -1,38 +1,39 @@
 import React from 'react';
 import Button from '../Button';
-import tomato from '/src/assets/images/tomato.png';
-import leaves from '/src/assets/images/leaves.png';
-import leaves_2 from '/src/assets/images/leaves_2.png';
-import squid from '/src/assets/images/fried-squid.png';
-import onion from '/src/assets/images/onion.png';
-import smile from '/src/assets/images/smile.png'
+import { useNavigate } from 'react-router-dom';
+import bg_1_1 from '../../assets/images/bg_1_1_2.png';
 
 
 const Banner = () => {
+    const navigate = useNavigate();
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude);
+    }
     return (
         <div className="home-banner">
-            <div className="home-container">
+            <div>
                 < div className="home-banner-content">
-                    <div className='contentIcon line'>
-                        <h2>Xin chào </h2>
-                        <img src={smile} alt="" />
-                    </div>
-                    <div className='contentIcon line'>
-                        <h1>Hôm nay, </h1>
-                    </div>
-                    <h1 className='line'>bạn muốn ăn gì?</h1>
+                    <h2 className='line'>Welcome to HitFood </h2>
+                    <h1 className='line'>Hôm nay, bạn muốn ăn gì?</h1>
                     <div className="search line" >
-                        <input type="text" placeholder='Tìm kiếm...' />
-                        <i className='fas fa-search' />
+                        <div className='search-position' >
+                            <Button text={<i className="fa-solid fa-crosshairs" onClick={() => getLocation()}></i>}></Button>
+                            <input type="text" placeholder='Nhập vị trí của bạn...' />
+                        </div>
+                        <Button text={<i className='fas fa-search' />} onClick={() => navigate('/search')}></Button>
                     </div>
-                    <Button className="searchBtn line" text={"Search"} />
                 </div>
                 <div>
-                    <img src={tomato} className='tomatoImage' alt="" />
-                    <img src={leaves} className='leavesImage' alt="" />
-                    <img src={leaves_2} className='leaves_2_Image' alt="" />
-                    <img src={squid} alt="" className="squidImage" />
-                    <img src={onion} alt="" className="onionImage" />
+                    <img src={bg_1_1} alt="" className="fish_fry " />
                 </div>
             </div>
         </div>
