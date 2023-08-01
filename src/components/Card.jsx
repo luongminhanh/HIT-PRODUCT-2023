@@ -10,6 +10,7 @@ const Card = ({
   address,
   price
 }) => {
+
   return (
     <div className='card'>
       <div className="box">Đang hoạt động</div>
@@ -31,7 +32,7 @@ const Card = ({
           <p>{address}</p>
           <div className="productItem">
             <div style={{ display: 'flex', alignItems: 'center ' }}>
-              <img src={money} alt="" />
+              {/* <img src={money} alt="" /> */}
               <h3>{price} VND</h3>
             </div>
             <div>

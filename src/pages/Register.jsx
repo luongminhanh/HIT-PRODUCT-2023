@@ -16,6 +16,7 @@ import Button from '../components/Button';
 const Schema = Yup.object({
   password: Yup.string().required("Chưa nhập nhập mật khẩu"),
   passwordConfirm: Yup.string()
+    .required("Chưa nhập nhập xác nhận mật khẩu")
     .oneOf([Yup.ref('password'), null], 'Mật khẩu chưa khớp'),
   username: Yup.string().required("Chưa nhập tên đăng nhập"),
   email: Yup.string().email('Email không đúng').required('Chưa nhập email'),
@@ -23,11 +24,13 @@ const Schema = Yup.object({
 
 const Register = () => {
   const [type, setType] = useState("password");
-
+  const navigate = useNavigate();
   return (
     <div className="register">
       <div className='register__form'>
-        {/* <img src={img} alt="mon an"></img> */}
+        <div className='login-close' onClick={() => navigate('/login')}>
+          <i className="fa-sharp fa-solid fa-xmark"></i>
+        </div>
         <div className='register__form--title'>
           <h1>SIGNUP</h1>
         </div>
@@ -48,57 +51,61 @@ const Register = () => {
             /* and other goodies */
           }) => (
             <form action="" onSubmit={handleSubmit}>
-              <div>
-                <span>Username</span><br />
-                <Field
-                  type="text"
-                  name="username"
+              <div className="register-item-group">
+                <div>
+                  <span>Username</span><br />
+                  <Field
+                    type="text"
+                    name="username"
 
-                />
-                <div className='register-error' >
-                  <ErrorMessage name="username"></ErrorMessage>
+                  />
+                  <div className='register-error' >
+                    <ErrorMessage name="username"></ErrorMessage>
+                  </div>
+                </div>
+
+                <div>
+                  <span>Gmail</span><br />
+                  <Field
+                    type="text"
+                    name="email"
+
+                  />
+                  <div className='register-error'>
+
+                    <ErrorMessage name="email"></ErrorMessage>
+                  </div>
+
                 </div>
               </div>
 
-              <div>
-                <span>Gmail</span><br />
-                <Field
-                  type="text"
-                  name="email"
+              <div className="register-item-group">
+                <div>
+                  <span>Password</span><br />
+                  <Field
+                    type="password"
+                    name="password"
+                    autoComplete="new-password"
+                  />
+                  <div className='register-error'>
+                    <ErrorMessage name="password"></ErrorMessage>
+                  </div>
 
-                />
-                <div className='register-error'>
-
-                  <ErrorMessage name="email"></ErrorMessage>
                 </div>
 
-              </div>
+                <div>
+                  <span>Confirm password</span><br />
+                  <Field
+                    type="password"
+                    name="passwordConfirm"
+                    autoComplete="new-password"
+                  />
+                  <div className='register-error'>
 
-              <div>
-                <span>Password</span><br />
-                <Field
-                  type="password"
-                  name="password"
-                  autoComplete="new-password"
-                />
-                <div className='register-error'>
-                  <ErrorMessage name="password"></ErrorMessage>
+                    <ErrorMessage name="passwordConfirm"></ErrorMessage>
+                  </div>
+
                 </div>
-
-              </div>
-
-              <div>
-                <span>Confirm password</span><br />
-                <Field
-                  type="password"
-                  name="passwordConfirm"
-                  autoComplete="new-password"
-                />
-                <div className='register-error'>
-
-                  <ErrorMessage name="passwordConfirm"></ErrorMessage>
-                </div>
-
               </div>
 
               <br />
@@ -118,7 +125,7 @@ const Register = () => {
           <img src={twitter} alt=""></img>
         </div>
         <br />
-        <div className='--login'>Already a member? <Button className='btn-login' text='LOGIN'></Button></div>
+        <div className='--login' onClick={() => navigate('/login')}>Already a member? <span>Login</span></div>
       </div>
     </div >
   )

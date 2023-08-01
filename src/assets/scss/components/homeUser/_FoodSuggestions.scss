@@ -1,13 +1,20 @@
 @import '../../mixin';
 @import '../../vari';
-// @import './slick.scss';
-// @import './slick-theme.scss';
+
+.foodSuggestions-container {
+    @include flexbox-center-between;
+
+}
 
 .foodSuggestions {
     >div {
         width: $pageSize;
         overflow: hidden;
+
         // height: 748px;
+        @include tablet() {
+            width: 90%;
+        }
     }
 
 
@@ -27,7 +34,15 @@
         padding: 20px 36px;
 
         &:hover {
-            background-color: $greenCokor;
+            background-color: $orangeColor;
         }
     }
+
+    button {
+        background-color: $greenCokor;
+        transition: all linear .8s;
+
+    }
+
+
 }

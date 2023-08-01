@@ -1,87 +1,81 @@
 @import '../../mixin';
 @import '../../vari';
+@import url('https://fonts.googleapis.com/css2?family=Norican&display=swap');
 
 .home-banner {
-    width: $fullWidth;
+    &:hover {
+        .fish_fry {
+            animation: changePosition 8s linear 10 alternate;
+        }
+    }
+
+    display: flex;
+    justify-content: center;
+
+    >div {
+        width: $pageSize;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 600px;
+    }
+
     position: relative;
-    background-image: url('/src/assets/images/FoodBanner.png');
+    background-image: url('/src/assets/images/bg_1.jpg');
     height: 700px;
     overflow: hidden;
+    background-size: contain;
 
-    .tomatoImage {
-        @include absBox(-16%, -10%, null, null)
+    .fish_fry {
+        @include absBox(-4%, 0, 0%, -18%);
+        z-index: 0;
+        width: 150%;
+        height: 150%;
+        animation: scale 1.75s linear 1;
     }
 
-    .leaves_2_Image {
-        @include absBox(4%, null, null, -18%);
-    }
-
-    .squidImage {
-        @include absBox(null, 5%, 12%, null);
-        width: 670px;
-        z-index: 5;
-        animation: scale 1.75s linear 1 alternate;
-    }
-
-    .leavesImage {
-        @include absBox(null, 6%, 8%, null);
-        opacity: 0.8;
-        transition: all .5s;
-        animation: changePositionLeaves 2.5s ease-in-out 1 alternate;
-    }
-
-    .onionImage {
-        @include absBox(14%, 36%, null, null);
-        transition: all .5s;
-        animation: changePositionOnion 2.5s ease-in-out 1 alternate;
-    }
-
-    &:hover {
-        .leavesImage {
-            right: 8%;
-            bottom: 10%;
-        }
-
-        .onionImage {
-            top: 18%;
-            right: 39%;
-        }
-    }
 
     .home-banner-content {
-        margin-top: 80px;
-        text-shadow: 1px 0 6px #000;
+        margin-top: 40px;
+        text-shadow: 1px 0 6px #000000dd;
         font-family: $gilroyFont;
         line-height: 1.8;
         color: $whiteText;
-        width: $pageSize;
-        overflow: hidden;
+        margin: 60px auto;
+        position: relative;
+        z-index: 20;
 
         h1 {
-            font-size: 76px;
+            font-size: 60px;
             line-height: 46px;
+            text-align: center;
         }
 
         h2 {
+            text-align: center !important;
+            font-family: 'Norican', cursive;
+            color: $yellowColorLight;
             font-size: 36px;
+            line-height: 45px;
+            text-shadow: 3px 0 4px #000
         }
     }
 
     .line {
         opacity: 0;
+        text-align: center;
     }
 
     @for $i from 1 through 10 {
         .line:nth-child(#{$i}) {
-            animation: show-line 1.25s ease-in-out #{$i * 0.5}s forwards;
+            animation: show-line 1.25s ease-in-out #{$i * 0.75}s forwards;
         }
     }
 
-    // Tạo animation để hiển thị từng dòng
     @keyframes show-line {
         from {
             opacity: 0;
-            transform: translate(-150%);
+            transform: translateY(150%);
         }
 
         to {
@@ -90,59 +84,68 @@
     }
 
     .search {
-        border: 2px solid #ccc;
+        border: 4px solid #fff;
         border-radius: 4px;
-        padding: $pad12;
         display: flex;
-        margin: $mar40-0;
-        width: 47.5%;
+        width: 80%;
+        margin: 50px auto;
+        background-color: #fff;
+        justify-content: space-between;
 
         input {
-            width: 94%;
             font-size: $text-16;
             border: none;
             outline: none;
             background-color: transparent;
-            color: $whiteText;
+            width: 200%;
         }
 
         i {
             color: $whiteText;
         }
-    }
 
-    .contentIcon {
-        @include flexbox-center-between;
-        justify-content: left;
-
-        img {
-            width: 90px;
+        button:hover {
+            opacity: 0.8;
         }
 
-        h1 {
-            margin: 0;
+        &-position {
+            background-color: #fff;
+            padding: 0;
+            width: 86%;
+            display: flex;
+            align-items: center;
+
+            >button {
+                display: inline-block;
+                // height: ;
+                background-color: #fff;
+                padding-right: 8px;
+                transition: all ease 1.25s;
+
+            }
+
+            i {
+                color: red;
+                // padding: 16px;
+            }
+
+            >button:hover {
+                i {
+                    color: $greenCokor;
+                    // padding: 16px;
+                }
+            }
         }
-    }
-
-    .searchBtn {
-        background-color: $orangeColor ;
-        color: $whiteText;
-        padding: $pad20-45;
-        border-radius: $boderRadius8;
-        font-weight: $fontWeight500;
-        width: 50%;
-
-        &:hover {
-            transition: all .3s;
-            background-color: $greenCokor ;
-        }
-
     }
 
 }
 
 
 @keyframes scale {
+
+    0% {
+        opacity: 0;
+    }
 
     0%,
     100% {
@@ -168,36 +171,74 @@
     75% {
         transform: scale3d(1.05, .95, 1);
     }
-}
-
-@keyframes changePositionLeaves {
-    0% {
-        right: 18%;
-        bottom: 24%;
-        opacity: 0;
-        transform-origin: top left;
-        transform: rotate3d(0, 0, 1, -45deg);
-    }
 
     100% {
-        right: 6%;
-        bottom: 8%;
         opacity: 1;
-        transform-origin: left top;
-        transform: none;
     }
 }
 
-@keyframes changePositionOnion {
-    0% {
-        right: 24%;
-        top: 28%;
-        opacity: 0;
+
+@keyframes changePosition {
+
+    0%,
+    100%,
+    20%,
+    80%,
+    40%,
+    60% {
+        top: -4%;
+        left: -18%;
     }
 
-    100% {
-        right: 36%;
-        top: 14%;
-        opacity: 1;
+    10%,
+    90%,
+    50% {
+        top: -6%;
+        left: -20%;
+    }
+
+    30%,
+    70% {
+        top: -2%;
+        left: -16%;
+    }
+
+}
+
+@include mobile() {
+    .home-banner {
+        display: flex;
+        align-items: center;
+        height: 440px;
+
+        >div {
+            height: 400px;
+        }
+    }
+
+    .home-banner-content {
+        padding: 30px 21px 0;
+
+        h1 {
+            line-height: 76px !important;
+            font-size: 46px !important;
+        }
+
+        h2 {
+            line-height: 0 !important;
+            font-size: 28px !important;
+        }
+
+        .search {
+            margin-top: 0;
+        }
+    }
+}
+
+@include tablet() {
+    .home-banner {
+        height: 500px;
+        align-items: center;
+
     }
 }

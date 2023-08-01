@@ -6,7 +6,7 @@
     background-color: $whiteText;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     position: fixed;
-    top: 0;
+    top: 0 !important;
     left: 0;
     right: 0;
     z-index: 1000;
@@ -34,8 +34,8 @@
             object-fit: cover;
 
             @include mobile() {
-                width: 150px;
-                height: 64px;
+                width: 90px;
+                // height: 64px;
             }
         }
     }
@@ -143,4 +143,16 @@
 
 .bufferZone {
     height: 70px;
+}
+
+@include mobile() {
+    .header {
+        width: 90%;
+    }
+}
+
+@include tablet() {
+    .header {
+        width: 90%;
+    }
 }

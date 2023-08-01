@@ -2,7 +2,10 @@
 @import '../vari';
 
 .card {
-    width: 21%;
+
+    // width: 21%;
+    // width: 100%;
+
     overflow: hidden;
     border: 1px solid $colorE5E5E5;
     border-radius: 30px;
@@ -25,8 +28,9 @@
         // border-radius: 50%;
         @include absBox(10px, null, null, 0);
         color: #fff;
-        padding: 10px;
+        padding: 8px 10px 10px;
         z-index: 5;
+        font-family: $appleFont;
     }
 
     .imgProduct {
@@ -38,12 +42,23 @@
             border-radius: 50%;
             margin: 0 auto;
             transition: all ease 4s;
+            overflow: hidden;
 
             img {
-                width: 70%;
-                @include absBox(24%, null, null, 16%);
+                width: 140px;
+                height: 140px;
+                border-radius: 50%;
+                @include absBox(24%, null, null, 20%);
                 z-index: 3;
                 transition: all ease 2s;
+
+                @include mobile() {
+                    @include absBox(24%, null, null, 24%);
+                }
+
+                @include tablet() {
+                    @include absBox(24%, null, null, 21%);
+                }
             }
 
         }
@@ -77,6 +92,8 @@
         p {
             color: $color808080;
             margin: 10px 0;
+            font-family: $appleFont;
+            font-size: 14px;
         }
     }
 
@@ -93,10 +110,11 @@
         }
 
         h3 {
-            font-size: $text-21;
-            font-weight: 300;
+            font-size: $text-18;
+            font-weight: 600;
             margin: 0;
             margin-left: 8px;
+            color: $greenCokor;
         }
     }
 
@@ -105,7 +123,7 @@
 
         img {
             margin-right: 4px;
-            width: 16px;
+            width: 14px;
         }
     }
 
@@ -122,9 +140,10 @@
         width: 40px;
         text-align: center;
         border-radius: 16px;
+        background-color: $greenCokor;
 
         &:hover {
-            background-color: $greenCokor;
+            background-color: $orangeColor;
         }
     }
 
