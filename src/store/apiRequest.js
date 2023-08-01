@@ -1,7 +1,7 @@
 import axios from "axios"
 import { registerFailed, registerStart, registerSuccess } from "./authSlice"
 
-const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YmYwZGZmMC1jMmQ2LTRkYTAtYTZmNC03Y2RkNjU2YjA5NzkiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MDkwNDI4OSwiaWF0IjoxNjkwOTAwNjg5LCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.nOAkFZYn_FjAJJJPVeT96mB3tsc-DcgsnyFe1sjSRLI'
+const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YmYwZGZmMC1jMmQ2LTRkYTAtYTZmNC03Y2RkNjU2YjA5NzkiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MDkxMzM2MCwiaWF0IjoxNjkwOTA5NzYwLCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.CjmtYuNhlz2720LlewDhJBHZVLLgDLIAxwKoczQhP3Y'
 
 // export const registerUser = async (user, dispatch, navigate) => {
 //     dispatch(registerStart());
