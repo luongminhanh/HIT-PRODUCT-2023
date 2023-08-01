@@ -6,6 +6,8 @@ import Card from "./components/Card";
 import Food from "./components/Food";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import SideBar from "./components/AdminSideBar";
+import Admin from "./pages/Admin";
 import HorizontalCard from "./components/HorizontalCard";
 import Search from "./components/Search";
 import SlideShow from "./components/SlideShow";

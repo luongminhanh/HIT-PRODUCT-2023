@@ -13,12 +13,14 @@ body {
     display: flex;
     font-family: $gilroyFont;
     justify-content: center;
+    margin-top: 10px;
 
     &__form {
         position: relative;
         height: max-content;
         font-size: 15px;
         font-weight: 300;
+        min-width: 460px;
         width: 360px;
         align-items: center;
         margin: 40px auto;
@@ -29,7 +31,9 @@ body {
         padding-top: 30px;
         padding-bottom: 30px;
         box-shadow: 0 0px 20px rgba(36, 39, 37, 0.3);
+
         // margin-bottom: 60px;
+
 
         img {
             width: 100%;
@@ -41,7 +45,7 @@ body {
             text-align: center !important;
             font-weight: 500;
             margin: 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             margin-top: 10px;
 
             @include mobile() {}
@@ -49,11 +53,11 @@ body {
 
         input {
             position: relative;
-            margin-top: 5px;
+            // margin-top: 5px;
             font-size: 16px;
             width: 94%;
-            padding: 4px 8px;
-            margin-bottom: 30px;
+            padding: 2px 8px;
+            margin-bottom: 10px;
             outline: none;
             border: none;
             font-family: $gilroyFont;
@@ -157,12 +161,23 @@ body {
 
     .register-error {
         @include absBox(null, null, 8px, 0);
+        position: relative;
+        bottom: 2px;
         color: red;
         font-size: 14px;
         font-family: $robotoFont;
         letter-spacing: 1.2px;
     }
 
+
+    .btn-login {
+        background-color: $whiteText;
+        color: $blackText;
+        // border: 1px solid $orangeColor;
+        width: 24%;
+        margin-left: 0px;
+        font-size: 18px;
+    }
 
     .or {
         display: flex;
@@ -174,9 +189,8 @@ body {
     }
 
     .--login {
-        margin-top: 16px;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
 
         >span {
