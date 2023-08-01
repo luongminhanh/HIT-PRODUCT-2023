@@ -10,7 +10,7 @@ const SideBar = () => {
     return (
         <>
             <div style={{ padding: "20px 0 20px 40px", borderRight: "2px solid rgba(5, 5, 5, 0.06)" }}>
-                <img style={{ boxShadow: "10px 10px 10px -5px #cca8a8", borderRadius: "10px", objectFit: "cover", width: "120px", height: "60px" }} src={logo} />
+                <img style={{ borderRadius: "10px", objectFit: "cover", width: "120px", height: "60px" }} src={logo} />
             </div>
             <Menu 
             onClick={({key}) => {

@@ -14,7 +14,10 @@ function ModalUpdateUser({ show, setShow, dataUser, fetchListUser }) {
     const [username, setUsername] = useState("");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
-    const [role, setRole] = useState("USER")
+    const [dob, setDob] = useState("");
+    const [address, setAddress] = useState("");
+    const [fullName, setFullName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
 
     const handleClose = () => {
         setShow(false);
@@ -29,61 +32,78 @@ function ModalUpdateUser({ show, setShow, dataUser, fetchListUser }) {
     }
 
     const handleSubmitUpdateUser = async () => {
+        dataUser = {
+            // // ...state,
+            id: dataUser.id,
+            // createdDate: dataUser.createdDate,
+            // lastModifiedDate: dataUser.lastModifiedDate,
+            fullName: fullName,
+            phoneNumber: phoneNumber,
+            address: address,
+            dob: dob,
+        }
+        console.log(dataUser);
         putUpdateUser(dataUser);
         console.log("data: ", dataUser);
         handleClose();
         await fetchListUser();
-}
-
-useEffect(() => {
-    if (!_.isEmpty(dataUser)) {
-        setEmail(dataUser.email);
-        setPassword('');
-        setUsername(dataUser.username);
-        console.log("hello");
-        console.log("dataUser.username", dataUser.username);
     }
-}, [dataUser]);
 
-return (
-    <>
-        <Modal
-            show={show}
-            onHide={handleClose}
-            size="xl"
-            backdrop="static"
-            className='modal-add-user'
-        >
+    useEffect(() => {
+        if (!_.isEmpty(dataUser)) {
+            setEmail(dataUser.email);
+            setPassword('');
+            setUsername(dataUser.username);
+            console.log("hello");
+            console.log("dataUser.username", dataUser.username);
+        }
+    }, [dataUser]);
 
-            <Modal.Header closeButton>
-                <Modal.Title>Update user</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <form className="row g-3">
-                    <div className="col-md-6">
-                        <label className="form-label">Email</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            value={dataUser.email}
-                            disabled={true}
-                            onChange={(event) => setEmail(event.target.value)} />
-                    </div>
-                    <div className="col-md-6">
-                        <label className="form-label">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            value={password}
-                            disabled={true}
-                            onChange={(event) => setPassword(event.target.value)} />
-                    </div>
-                    <div className="col-md-6">
-                        <label className="form-label">Username</label>
-                        <input type="text" className="form-control" value={username}
-                            onChange={(event) => setUsername(event.target.value)} />
-                    </div>
-                    <div className="col-md-4">
+    return (
+        <>
+            <Modal
+                show={show}
+                onHide={handleClose}
+                size="xl"
+                backdrop="static"
+                className='modal-add-user'
+            >
+
+                <Modal.Header closeButton>
+                    <Modal.Title>Update customer</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form className="row g-3">
+                        <div className="col-md-6">
+                            <label className="form-label">Full Name</label>
+                            <input
+                                className="form-control"
+                                // value={dataUser.fullName}
+                                onChange={(event) => setFullName(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Address</label>
+                            <input
+                                className="form-control"
+                                // value={dataUser.address}
+                                onChange={(event) => setAddress(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Phone number</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                // value={dataUser.phoneNumber}
+                                onChange={(event) => setPhoneNumber(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Date of Birth</label>
+                            <input
+                                className="form-control"
+                                // value={dataUser.dob}
+                                onChange={(event) => setDob(event.target.value)} />
+                        </div>
+                        {/* <div className="col-md-4">
                         <label className="form-label">State</label>
                         <select
                             className="form-select"
@@ -93,36 +113,36 @@ return (
                             <option value="USER">USER</option>
                             <option value="ADMIN">ADMIN</option>
                         </select>
-                    </div>
-                    <div className='col-md-12'>
-                        <label className='form-label label-upload' htmlFor='labelUpload'>
-                            <FcPlus /> Upload File Image
-                        </label>
-                        <input type="file"
-                            id="labelUpload"
-                            hidden
-                            onChange={(event) => handleUploadImage(event)} />
-                    </div>
-                    <div className='col-md-12 img-preview'>
-                        {previewImage ?
-                            <img src={previewImage} alt="img" />
-                            :
-                            <span>Preview Image</span>
-                        }
-                    </div>
-                </form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={handleSubmitUpdateUser}>
-                    Save Changes
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    </>
-);
+                    </div> */}
+                        <div className='col-md-12'>
+                            <label className='form-label label-upload' htmlFor='labelUpload'>
+                                <FcPlus /> Upload File Image
+                            </label>
+                            <input type="file"
+                                id="labelUpload"
+                                hidden
+                                onChange={(event) => handleUploadImage(event)} />
+                        </div>
+                        <div className='col-md-12 img-preview'>
+                            {previewImage ?
+                                <img src={previewImage} alt="img" />
+                                :
+                                <span>Preview Image</span>
+                            }
+                        </div>
+                    </form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleSubmitUpdateUser}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 }
 
 export default ModalUpdateUser;

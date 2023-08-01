@@ -7,7 +7,7 @@ import Button from "../Button";
 import ModalDeleteUser from './ModalDeleteUser';
 import TableUsers from './TableUsers';
 import { getCardMediaUtilityClass } from '@mui/material';
-import { getAllUsers } from '../../store/apiRequest';
+import { getAllCustomers, getAllUsers } from '../../store/apiRequest';
 import ModalUpdateUser from './ModalUpdateUser';
 import ModalViewUser from './ModalViewUser';
 
@@ -101,10 +101,10 @@ const ManageUsers = () => {
     }
 
     const fetchListUser = async () => {
-        const res = await getAllUsers();
+        const res = await getAllCustomers();
         if (res && res.data) {
-            console.log(res);
-            setListUser(res.data);
+            console.log(res.data.data.items);
+            setListUser(res.data.data.items);
         }
     }
 

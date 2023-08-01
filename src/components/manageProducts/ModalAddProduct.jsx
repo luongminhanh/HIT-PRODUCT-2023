@@ -4,22 +4,20 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import img from '../../assets/images/bgSidebar.jpg'
 import { Button, Modal } from 'react-bootstrap';
+import { postCreateNewProduct } from '../../store/apiRequest';
 
 
-function ModalAddNewProduct({ show, setShow }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
+function ModalAddNewProduct({ show, setShow, fetchListProduct }) {
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [disCount, setDiscount] = useState("");
+    const [stock, setStock] = useState("");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
 
     const handleClose = () => {
         setShow(false);
-        setEmail('');
-        setPassword('');
-        setUsername('');
-        setImage('');
-        setPreviewImage('');
     }
 
     const handleUploadImage = (event) => {
@@ -37,31 +35,21 @@ function ModalAddNewProduct({ show, setShow }) {
     //       );
     //   };    
 
-    const handleAddNewUser = async () => {
+    const handleAddNewProduct = async () => {
 
         if (!password) {
             toast.error("Invalid Password");
             return;
         }
-
-        // let data = await postCreateNewUser(email, password, username, role, image);
-        // if (data && data.EC === 0) {
-        //     console.log("thành công");
-        //     toast.success(data.EM);
-        //     handleClose();
-        // }
-        // if (data && data.EC !== 0)
-        // {
-        //     console.log("not yet");
-        //     console.log(data.EC);
-        //     toast.error(data.EM);
-        // }
+        postCreateNewUProduct(email, password, username);
+        await fetchListUser();
+        handleClose();
     }
 
     return (
         <>
-      
-            <Modal 
+
+            <Modal
                 show={show}
                 onHide={handleClose}
                 size="xl"
@@ -75,19 +63,34 @@ function ModalAddNewProduct({ show, setShow }) {
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-md-6">
-                            <label className="form-label">Tên sản phẩm</label>
-                            <input type="email" className="form-control" value={email}
-                                onChange={(event) => setEmail(event.target.value)} />
+                            <label className="form-label">Name</label>
+                            <input type="email" className="form-control" value={name}
+                                onChange={(event) => setName(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Danh mục</label>
-                            <input type="password" className="form-control" value={password}
-                                onChange={(event) => setPassword(event.target.value)} />
+                            <label className="form-label">Price</label>
+                            <input type="password" className="form-control" value={price}
+                                onChange={(event) => setPrice(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">XXX</label>
-                            <input type="text" className="form-control" value={username}
-                                onChange={(event) => setUsername(event.target.value)} />
+                            <label className="form-label">Discount</label>
+                            <input type="text" className="form-control" value={description}
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Image</label>
+                            <input type="text" className="form-control" value={disCount}
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Description</label>
+                            <input type="text" className="form-control" value={stock}
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Stock</label>
+                            <input type="text" className="form-control" value={stock}
+                                onChange={(event) => setDescription(event.target.value)} />
                         </div>
                         <div className='col-md-12'>
                             <label className='form-label label-upload' htmlFor='labelUpload'>
@@ -98,6 +101,7 @@ function ModalAddNewProduct({ show, setShow }) {
                                 hidden
                                 onChange={(event) => handleUploadImage(event)} />
                         </div>
+                       
                         <div className='col-md-12 img-preview'>
                             {previewImage ?
                                 <img src={previewImage} alt="img" />
@@ -111,31 +115,11 @@ function ModalAddNewProduct({ show, setShow }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Đóng
                     </Button>
-                    <Button variant="primary" onClick={handleAddNewUser}>
+                    <Button variant="primary" onClick={handleAddNewProduct}>
                         Lưu
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {/* <div
-                className="modal show"
-                style={{ display: 'block', position: 'initial' }}
-            >
-                <Modal.Dialog>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body>
-                        <p>Modal body text goes here.</p>
-                    </Modal.Body>
-
-                    <Modal.Footer>
-                        <Button variant="secondary">Close</Button>
-                        <Button variant="primary">Save changes</Button>
-                    </Modal.Footer>
-                </Modal.Dialog>
-            </div> */}
-           
         </>
     );
 }

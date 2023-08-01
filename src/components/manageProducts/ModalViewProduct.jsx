@@ -7,18 +7,14 @@ import { toast } from 'react-toastify';
 import _ from 'lodash';
 
 
-function ModalViewUser({ show, setShow, dataUser }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
-    const [createdDate, setCreatedDate] = useState("");
-    const [lastModifiedDate, setLastModifiedDate] = useState("");
+function ModalViewProduct({ show, setShow, dataProduct }) {
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [disCount, setDiscount] = useState("");
+    const [stock, setStock] = useState("");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
-    const [job, setJob] = useState("");
-    const [address, setAddress] = useState("");
-    const [fullName, setFullName] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
 
     const handleClose = () => {
         setShow(false);
@@ -34,19 +30,17 @@ function ModalViewUser({ show, setShow, dataUser }) {
     }
 
     useEffect(() => {
-        if (!_.isEmpty(dataUser)) {
-            setEmail(dataUser.email);
-            setPassword('');
-            setUsername(dataUser.username);
-            setCreatedDate(dataUser.createdDate);
-            setLastModifiedDate(dataUser.lastModifiedDate);
-            setFullName(dataUser.fullName);
-            setAddress(dataUser.address);
-            setJob(dataUser.dob);
-            setPhoneNumber(dataUser.phoneNumber);
+        if (!_.isEmpty(dataProduct)) {
+            setName(dataProduct.name);
+            setPrice(dataProduct.price);
+            setStock(dataProduct.stock);
+            setDescription(dataProduct.description);
+            setDiscount(dataProduct.disCount);
+            setImage(dataProduct.image);
+            setPreviewImage(dataProduct.previewImage);
             console.log(show);
         }
-    }, [dataUser]);
+    }, [dataProduct]);
 
     return (
         <>
@@ -59,68 +53,48 @@ function ModalViewUser({ show, setShow, dataUser }) {
             >
 
                 <Modal.Header closeButton>
-                    <Modal.Title>View user</Modal.Title>
+                    <Modal.Title>View Product</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-md-6">
-                            <label className="form-label">Email</label>
+                            <label className="form-label">Name</label>
                             <input
                                 type="email"
                                 className="form-control"
-                                value={dataUser.email}
+                                value={dataProduct.name}
                                 disabled={true}
-                                onChange={(event) => setEmail(event.target.value)} />
+                                onChange={(event) => setName(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Password</label>
+                            <label className="form-label">Price</label>
                             <input
-                                type="password"
                                 className="form-control"
-                                value={password}
+                                value={dataProduct.price}
                                 disabled={true}
-                                onChange={(event) => setPassword(event.target.value)} />
+                                onChange={(event) => setPrice(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Created Date</label>
+                            <label className="form-label">Description</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                value={createdDate}
+                                value={dataProduct.description}
                                 disabled={true}
                             // onChange={(event) => setPassword(event.target.value)} 
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Last Modified Date</label>
+                            <label className="form-label">Stock</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                value={lastModifiedDate}
+                                value={dataProduct.stock}
                                 disabled={true}
                             // onChange={(event) => setPassword(event.target.value)} 
                             />
                         </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Username</label>
-                            <input disabled={true} type="text" className="form-control" value={fullName}
-                                onChange={(event) => setFullName(event.target.value)} />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Date of Birth</label>
-                            <input disabled={true} type="text" className="form-control" value={job}
-                                onChange={(event) => setFullName(event.target.value)} />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Address</label>
-                            <input disabled={true} type="text" className="form-control" value={address}
-                                onChange={(event) => setFullName(event.target.value)} />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Phone number</label>
-                            <input disabled={true} type="text" className="form-control" value={phoneNumber}
-                                onChange={(event) => setFullName(event.target.value)} />
-                        </div>
+                       
                         {/* <div className="col-md-4">
                             <label className="form-label">Role</label>
                             <select
@@ -129,7 +103,7 @@ function ModalViewUser({ show, setShow, dataUser }) {
                                 value={role}
                                 onChange={(event) => setRole(event.target.value)}
                             >
-                                <option value="USER">USER</option>
+                                <option value="Product">Product</option>
                                 <option value="ADMIN">ADMIN</option>
                             </select>
                         </div> */}
@@ -162,4 +136,4 @@ function ModalViewUser({ show, setShow, dataUser }) {
     );
 }
 
-export default ModalViewUser;
+export default ModalViewProduct;

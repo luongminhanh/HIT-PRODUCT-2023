@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const TableUser = ({ listUser, handleClickBtnUpdate, handleClickViewUser, handleClickBtnDelete }) => {
+const TableProducts = ({ listProduct, handleClickBtnUpdate, handleClickViewProduct, handleClickBtnDelete }) => {
 
     return (
         <div>
@@ -9,25 +9,27 @@ const TableUser = ({ listUser, handleClickBtnUpdate, handleClickViewUser, handle
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Username</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Creat Date</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Stock</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {listUser && listUser.length > 0 &&
-                        listUser.map((item, index) => {
+                    {listProduct && listProduct.length > 0 &&
+                        listProduct.map((item, index) => {
                             return (
-                                <tr key={`table-users-${index}`}>
+                                <tr key={`table-products-${index}`}>
                                     <td>{item.id}</td>
-                                    <td>{item.username}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.createdDate}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.price}</td>
+                                    <td>{item.discount}</td>
+                                    <td>{item.stock}</td>
                                     <td>
                                         <button 
                                         className='btn btn-success'
-                                        onClick={() => handleClickViewUser(item)}
+                                        onClick={() => handleClickViewProduct(item)}
                                         >View</button>
                                         <button
                                             className='btn btn-warning mx-3'
@@ -41,7 +43,7 @@ const TableUser = ({ listUser, handleClickBtnUpdate, handleClickViewUser, handle
                                 </tr>
                             )
                         })}
-                    {listUser && listUser.length === 0
+                    {listProduct && listProduct.length === 0
                         && <tr>
                             <td colSpan="4">Not found data</td>
                         </tr>
@@ -53,4 +55,4 @@ const TableUser = ({ listUser, handleClickBtnUpdate, handleClickViewUser, handle
     )
 }
 
-export default TableUser
+export default TableProducts
