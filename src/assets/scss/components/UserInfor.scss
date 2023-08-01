@@ -1,4 +1,5 @@
 @import '../mixin';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;300;400;700&display=swap');
 @import '../vari';
 
 
@@ -35,6 +36,44 @@
     &__basic {
         width: 25%;
 
+    background-color: $whiteText;
+    width: 92%;
+    height: 80%;
+
+    &__main {
+        @include mobile() {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+
+    &__title {
+        width: 95%;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        padding: 5px;
+        padding-left: 20px;
+        font-family: 'Roboto Slab', serif;
+        font-weight: 400;
+        font-size: 18px;
+        border-top: 10px solid $orangeColor;
+        border-radius: 0 0 20px 20px;
+        background-color: #fff;
+        height: 50px;
+        margin-left: 3%;
+        box-shadow: 0 0px 10px rgba(36, 39, 37, 0.1);
+    }
+
+    &__basic {
+        width: 290px !important;
+        display: flex;
+        justify-content: center;
+
         @include mobile() {
             width: 360px;
             margin: 0 auto;
@@ -70,6 +109,40 @@
 
         &--name {
             h3 {
+            // position: absolute;
+            left: 10px;
+            top: -20px;
+
+            @include tablet() {
+                right: 110px;
+            }
+
+            @include mobile() {
+                left: 20px;
+                width: 100%;
+            }
+
+            width: 100%;
+            height: 260px;
+            border-top: 8px solid $orangeColor;
+        }
+
+        &--name {
+            align-items: center;
+            margin: 0 auto;
+            background-color: $orangeColor;
+            position: absolute;
+            top: 45%;
+            padding: $pad15-40;
+            border-radius: 10px;
+            width: 50%;
+            color: $whiteText;
+            display: flex;
+            justify-content: center;
+
+            @include tablet() {
+                left: 30px;
+                right: 20px;
                 text-align: center;
                 font-family: $appleFont;
                 font-size: 25px;
@@ -155,22 +228,44 @@
             }
         }
 
+
         @include tablet() {
             width: 90%;
             margin: 40px auto;
+        & button {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: $orangeColor;
+            border-radius: 10px;
+            width: 170px;
+            margin: auto;
+            border: none;
+            font-family: 'Roboto Slab', serif;
+            font-size: 17px;
         }
-
         .changeInforItemGroup {
             display: flex;
             justify-content: space-between;
             margin-top: 40px;
             align-items: center;
 
+    &__changeInfor {
+        // width: 420px;
+
+
             @include mobile() {
                 flex-direction: column;
             }
         }
 
+
+        height: 300px;
+        box-shadow: 0 0px 10px rgba(36, 39, 37, 0.1);
+        display: flex;
+        gap: 20px;
+        padding: 40px;
+        flex-direction: column;
+        border-top: 10px solid $orangeColor;
 
 
         .inp {
@@ -185,8 +280,13 @@
             }
         }
 
+
         .changeInforItemGroup_address {
             display: block;
+
+    &__changePassword {
+        // width: 440px;
+
 
             .inp {
                 width: 100%;
@@ -197,8 +297,18 @@
             }
         }
 
+
         & button {
             margin: auto;
+
+        height: 300px;
+        box-shadow: 0 0px 10px rgba(36, 39, 37, 0.1);
+        display: flex;
+        gap: 20px;
+        padding: 40px;
+        flex-direction: column;
+        border-top: 10px solid $orangeColor;
+
 
             font-size: $text-16;
 

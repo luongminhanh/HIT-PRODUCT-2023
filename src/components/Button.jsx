@@ -2,7 +2,7 @@ import '../assets/scss/components/Button.scss'
 
 const Button = ({ text, onClick, className }) => {
   return (
-    <button className={className} onClick={onClick}>{text}</button>
+    <button className='button-config' onClick={onClick}>{text}</button>
   )
 }
 
