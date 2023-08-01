@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import img from '../assets/images/imageSignUp.png';
+import img from '../assets/images/loginImage.png';
 import facebook from '../assets/images/facebook.png';
 import google from '../assets/images/google.png';
 import instagram from '../assets/images/instagram.png';
@@ -9,12 +9,14 @@ import '../assets/scss/components/Register.scss'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../store/apiRequest';
-import { Formik, useFormik } from 'formik';
+import { ErrorMessage, Field, Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
+import Button from '../components/Button';
 
-const Schema = Yup.object().shape({
+const Schema = Yup.object({
   password: Yup.string().required("Chưa nhập nhập mật khẩu"),
   passwordConfirm: Yup.string()
+    .required("Chưa nhập nhập xác nhận mật khẩu")
     .oneOf([Yup.ref('password'), null], 'Mật khẩu chưa khớp'),
   username: Yup.string().required("Chưa nhập tên đăng nhập"),
   email: Yup.string().email('Email không đúng').required('Chưa nhập email'),
@@ -22,67 +24,15 @@ const Schema = Yup.object().shape({
 
 const Register = () => {
   const [type, setType] = useState("password");
-
+  const navigate = useNavigate();
   return (
-    // <div className='register'>
-    //   <div className='register__img'>
-    //     <img src={img} alt="mon an"></img>
-    //   </div>
-    //   <div className='register__form'>
-    //     <div className='register__form--title'>
-    //       <h1>Đăng ký</h1>
-    //       <div className='register__form--title--logo'>
-    //         <img src={logo}></img>
-    //       </div>
-    //     </div>
-    //     <form onSubmit={handleRegister}>
-    //       <span>Tên đăng nhập</span><br />
-    //       <input
-    //         type="text"
-    //         onChange={(e) => setUsername(e.target.value)}
-    //       />
-    //       <br />
-    //       {username.length<=6 ? <span className="register-error">Tên đăng nhập phải lớn hơn 6 ký tự</span> : ""}
-    //       <br />
-    //       <span>Gmail</span><br />
-    //       <input
-    //         type="text"
-    //         onChange={(e) => setGmail(e.target.value)}
-    //       />
-    //       <br />
-    //       <span>Mật khẩu</span><br />
-    //       <input
-    //         type="password"
-    //         onChange={(e) => setPassword(e.target.value)}
-    //       />
-    //       <br />
-    //       <span>Nhập lại mật khẩu</span><br />
-    //       <input
-    //         type="password"
-    //         onChange={(e) => setPassword2(e.target.value)}
-    //       />
-    //       <br />
-    //       <button>Đăng ký</button><br />
-    //     </form>
-    //     <br />
-    //     <span className='__login'>Đã có tài khoản? <a href="/login">Đăng nhập</a></span>
-    //     <br />
-    //     <span>Hoặc đăng ký bằng</span>
-    //     <div className='register__form--social'>
-    //       <img src={instagram} alt=""></img>
-    //       <img src={facebook} alt=""></img>
-    //       <img src={google} alt=""></img>
-    //       <img src={twitter} alt=""></img>
-    //     </div>
-    //   </div>
-    // </div>
     <div className="register">
-      <div className='register__img'>
-        <img src={img} alt="mon an"></img>
-      </div>
       <div className='register__form'>
+        <div className='login-close' onClick={() => navigate('/login')}>
+          <i className="fa-sharp fa-solid fa-xmark"></i>
+        </div>
         <div className='register__form--title'>
-          <h1>Đăng ký</h1>
+          <h1>SIGNUP</h1>
         </div>
         <Formik
           initialValues={{
@@ -94,88 +44,88 @@ const Register = () => {
           validationSchema={Schema}
           onSubmit={() => { }}
         >
-          {({ values, errors, handleChange, handleSubmit }) => {
-            return (
-              <>
-                <span>Tên đăng nhập</span><br />
-                <input
-                  type="text"
-                  name="username"
-                  onChange={handleChange}
-                  value={values.username}
-                />
-                <br />
-                {errors.username ?
-                  <span className='register-error' style={{ color: "red" }}>
-                    {errors.username}
-                    <br />
-                  </span>
-                  :
-                  ""
-                }
+          {({
+            values,
+            handleSubmit,
+            isSubmitting,
+            /* and other goodies */
+          }) => (
+            <form action="" onSubmit={handleSubmit}>
+              <div className="register-item-group">
+                <div>
+                  <span>Username</span><br />
+                  <Field
+                    type="text"
+                    name="username"
 
-                <span>Gmail</span><br />
-                <input
-                  type="text"
-                  name="email"
-                  onChange={handleChange}
-                  value={values.email}
-                />
-                <br />
-                {errors.email ?
-                  <span className='register-error' style={{ color: "red" }}>
-                    {errors.email}
-                    <br />
-                  </span>
-                  :
-                  ""
-                }
-                <span>Mật khẩu</span><br />
-                <input
-                  type="password"
-                  name="password"
-                  onChange={handleChange}
-                  value={values.password}
-                />      
-                <br />
-                {errors.password ? <span className='register-error' style={{ color: "red" }}>
-                  {errors.password}
-                  <br />
-                </span> : ""}
+                  />
+                  <div className='register-error' >
+                    <ErrorMessage name="username"></ErrorMessage>
+                  </div>
+                </div>
 
-                <span>Nhập lại mật khẩu</span><br />
-                <input
-                  type="password"
-                  name="passwordConfirm"
-                  onChange={handleChange}
-                  value={values.passwordConfirm}
-                />
-                <br />
-                {errors.passwordConfirm ?
-                  <span className='register-error' style={{ color: "red" }}>
-                    {errors.passwordConfirm}
-                    <br />
-                  </span>
-                  :
-                  ""
-                }
-                <br />
-                <button onClick={handleSubmit}>Đăng ký</button><br />
-              </>
-            )
-          }}
+                <div>
+                  <span>Gmail</span><br />
+                  <Field
+                    type="text"
+                    name="email"
+
+                  />
+                  <div className='register-error'>
+
+                    <ErrorMessage name="email"></ErrorMessage>
+                  </div>
+
+                </div>
+              </div>
+
+              <div className="register-item-group">
+                <div>
+                  <span>Password</span><br />
+                  <Field
+                    type="password"
+                    name="password"
+                    autoComplete="new-password"
+                  />
+                  <div className='register-error'>
+                    <ErrorMessage name="password"></ErrorMessage>
+                  </div>
+
+                </div>
+
+                <div>
+                  <span>Confirm password</span><br />
+                  <Field
+                    type="password"
+                    name="passwordConfirm"
+                    autoComplete="new-password"
+                  />
+                  <div className='register-error'>
+
+                    <ErrorMessage name="passwordConfirm"></ErrorMessage>
+                  </div>
+
+                </div>
+              </div>
+
+              <br />
+              <Button onClick={handleSubmit} text='Submit' />
+              <br />
+
+            </form>
+          )}
 
         </Formik>
         <br />
-        <span className='__login'>Đã có tài khoản? <a href="/login">Đăng nhập</a></span>
-        <br />
-        <span>Hoặc đăng ký bằng</span>
+        <div className='or'><hr />OR<hr /></div>
         <div className='register__form--social'>
           <img src={instagram} alt=""></img>
           <img src={facebook} alt=""></img>
           <img src={google} alt=""></img>
           <img src={twitter} alt=""></img>
         </div>
+        <br />
+        <div className='--login' onClick={() => navigate('/login')}>Already a member? <span>Login</span></div>
       </div>
     </div >
   )
