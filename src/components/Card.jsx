@@ -6,7 +6,7 @@ import Button from './Button'
 
 const Card = ({
   image,
-  productName,
+  name,
   address,
   price
 }) => {

@@ -1,18 +1,7 @@
 import axios from "axios"
-import { registerFailed, registerStart, registerSuccess } from "./authSlice"
 
-const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YmYwZGZmMC1jMmQ2LTRkYTAtYTZmNC03Y2RkNjU2YjA5NzkiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MDkxMzM2MCwiaWF0IjoxNjkwOTA5NzYwLCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.CjmtYuNhlz2720LlewDhJBHZVLLgDLIAxwKoczQhP3Y'
+const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YmYwZGZmMC1jMmQ2LTRkYTAtYTZmNC03Y2RkNjU2YjA5NzkiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MDk2NTE3MiwiaWF0IjoxNjkwOTYxNTcyLCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.D9DL8wJUgPmAEBX93Jhsh-GZCbBIzABvlLwtHa7Pgc0'
 
-// export const registerUser = async (user, dispatch, navigate) => {
-//     dispatch(registerStart());
-//     try {
-//         await axios.post("", user);
-//         dispatch(registerSuccess());
-//         navigate("/login");
-//     } catch (err) {
-//         dispatch(registerFailed());
-//     }
-// }
 
 export const getAllUsers = () => {
     return axios.get('http://localhost:8080/api/v1/user',
@@ -65,7 +54,6 @@ export const deleteUser = (userId) => {
 }
 
 export const putUpdateUser = (data) => {
-    // console.log(String(data.id), "cho fetch");
     axios.put('http://localhost:8080/api/v1/customer/' + data.id,
         data,
         {
@@ -74,11 +62,6 @@ export const putUpdateUser = (data) => {
             }
         }
     )
-        /*fetch('http://localhost:3000/users/' + String(data.id), {
-            method: "PUT",
-            headers: { "content-type": "application/stringify" },
-            body: JSON.stringify(data)
-        })*/
         .then(res => {
             // window.location.reload();
             console.log("ok");
@@ -96,15 +79,22 @@ export const getAllProducts = () => {
         });
 }
 
-export const postCreateNewProduct = (email, password, username) => {
-    const userData = {
-        email: email,
-        password: password,
-        repeatPassword: password,
-        username: username
+export const postCreateNewProduct = (name, price, description, image, discount, stock) => {
+    const product = {
+        name: name,
+        price: price,
+        description: description,
+        image: image,
+        discount: discount,
+        stock: stock
     };
-    axios.post("http://localhost:8080/api/v1/auth/register",
-        userData
+    axios.put("http://localhost:8080/api/v1/product",
+        product,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
     )
         .then(response => {
             console.log("ok", response);
@@ -114,8 +104,8 @@ export const postCreateNewProduct = (email, password, username) => {
         })
 }
 
-export const deleteProduct = (userId) => {
-    axios.delete('http://localhost:8080/api/v1/customer/' + userId, {
+export const deleteProduct = (productId) => {
+    axios.delete('http://localhost:8080/api/v1/product/' + productId, {
         headers: {
             'Authorization': 'Bearer ' + accessToken
         }
@@ -128,26 +118,142 @@ export const deleteProduct = (userId) => {
         });
 }
 
-export const putUpdateProduct = (data) => {
-    // console.log(String(data.id), "cho fetch");
-    axios.put('http://localhost:8080/api/v1/customer/' + data.id,
-        data,
+export const putUpdateProduct = (product) => {
+    axios.put("http://localhost:8080/api/v1/product/" + product.id,
+        product,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         }
     )
-        /*fetch('http://localhost:3000/users/' + String(data.id), {
-            method: "PUT",
-            headers: { "content-type": "application/stringify" },
-            body: JSON.stringify(data)
-        })*/
+        .then(response => {
+            console.log("ok", response);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const getAllShops = () => {
+    return axios.get('http://localhost:8080/api/v1/shop',
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}
+
+export const postCreateNewShop = (name, hotline, timeOpen, timeClose) => {
+    const shop = {
+        name: name,
+        hotline: hotline,
+        timeOpen: timeOpen,
+        timeClose: timeClose
+    };
+    axios.post("http://localhost:8080/api/v1/shop",
+        shop,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(response => {
+            console.log("ok", response);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const deleteShop = (shopId) => {
+    axios.delete('http://localhost:8080/api/v1/shop/' + shopId, {
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }
+    })
         .then(res => {
-            // window.location.reload();
-            console.log("ok");
+            console.log("Xoa thanh cong");
+            window.location.reload();
         }).catch(err => {
             alert(err)
         });
 }
 
+export const putUpdateShop = (shop) => {
+    axios.put("http://localhost:8080/api/v1/shop/" + shop.id,
+        shop,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(response => {
+            console.log("ok", response);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const getAllCategories = () => {
+    return axios.get('http://localhost:8080/api/v1/category',
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}
+
+export const postCreateNewCategory = (name, hotline, timeOpen, timeClose) => {
+    const category = {
+        name: name
+    };
+    axios.post("http://localhost:8080/api/v1/category",
+        category,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(response => {
+            console.log("ok", response);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const deleteCategory = (categoryId) => {
+    axios.delete('http://localhost:8080/api/v1/category/' + categoryId, {
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        }
+    })
+        .then(res => {
+            console.log("Xoa thanh cong");
+            window.location.reload();
+        }).catch(err => {
+            alert(err)
+        });
+}
+
+export const putUpdateCategory = (category) => {
+    axios.put("http://localhost:8080/api/v1/category/" + category.id,
+        category,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(response => {
+            console.log("ok", response);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}

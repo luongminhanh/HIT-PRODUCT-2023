@@ -21,6 +21,8 @@ import Search from './components/Search.jsx';
 import Cart from './pages/Cart.jsx';
 import UserInfor from './pages/UserInfor.jsx';
 import ForgotPassword from './pages/ForgotPassword.jsx';
+import ManageShops from './components/manageShops/ManageShops';
+import ManageCategories from './components/manageCategories/ManageCategories';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -49,7 +51,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route index element={<DashBoard />} />
             <Route path="/admin/users" element={<ManageUsers />} />
             <Route path="/admin/products" element={<ManageProducts />} />
-            <Route path="/admin/orders" element={<ManageOrders />} />
+            <Route path="/admin/shops" element={<ManageShops />} />
+            <Route path="/admin/categories" element={<ManageCategories />} />
           </Route>
         </Routes>
       </BrowserRouter>

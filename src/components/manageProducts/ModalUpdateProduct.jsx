@@ -1,128 +1,135 @@
-import React, { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import '../../assets/scss/components/ManageUser.scss';
+import { useEffect, useState } from 'react';
 import { FcPlus } from "react-icons/fc";
+import axios from 'axios';
 import { toast } from 'react-toastify';
-import _ from 'lodash';
-import { putUpdateUser } from '../../store/apiRequest';
+import img from '../../assets/images/bgSidebar.jpg'
+import { Button, Modal } from 'react-bootstrap';
+import { postCreateNewProduct, putUpdateProduct } from '../../store/apiRequest';
 
 
-function ModalUpdateProduct({ show, setShow, dataUser, fetchListUser }) {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
+function ModalUpdateProduct({ show, setShow, dataProduct, fetchListProduct }) {
+    const [name, setName] = useState("");
+    const [price, setPrice] = useState("");
+    const [description, setDescription] = useState("");
+    const [disCount, setDiscount] = useState("");
+    const [stock, setStock] = useState("");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
-    const [role, setRole] = useState("USER")
 
     const handleClose = () => {
         setShow(false);
     }
+    useEffect(() => {
+        console.log("product", dataProduct);
+    }, [dataProduct])
 
     const handleUploadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImage(URL.createObjectURL(event.target.files[0]));
             setImage(event.target.files[0]);
-            console.log('start');
         }
     }
 
-    const handleSubmitUpdateUser = async () => {
-        putUpdateUser(dataUser);
-        console.log("data: ", dataUser);
+    // const validateEmail = (email) => {
+    //     return String(email)
+    //       .toLowerCase()
+    //       .match(
+    //         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    //       );
+    //   };    
+
+    const handleUpdateProduct = async () => {
+        dataProduct = {
+            id: dataProduct.id,
+            name: name,
+            price: price,
+            description: description,
+            image: image,
+            discount: disCount,
+            stock: stock
+        }
+        console.log(dataProduct);
+        putUpdateProduct(dataProduct);
+        await fetchListProduct();
         handleClose();
-        await fetchListUser();
-}
-
-useEffect(() => {
-    if (!_.isEmpty(dataUser)) {
-        setEmail(dataUser.email);
-        setPassword('');
-        setUsername(dataUser.username);
-        console.log("hello");
-        console.log("dataUser.username", dataUser.username);
     }
-}, [dataUser]);
 
-return (
-    <>
-        <Modal
-            show={show}
-            onHide={handleClose}
-            size="xl"
-            backdrop="static"
-            className='modal-add-user'
-        >
+    return (
+        <>
 
-            <Modal.Header closeButton>
-                <Modal.Title>Update user</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <form className="row g-3">
-                    <div className="col-md-6">
-                        <label className="form-label">Email</label>
-                        <input
-                            type="email"
-                            className="form-control"
-                            value={dataUser.email}
-                            disabled={true}
-                            onChange={(event) => setEmail(event.target.value)} />
-                    </div>
-                    <div className="col-md-6">
-                        <label className="form-label">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            value={password}
-                            disabled={true}
-                            onChange={(event) => setPassword(event.target.value)} />
-                    </div>
-                    <div className="col-md-6">
-                        <label className="form-label">Username</label>
-                        <input type="text" className="form-control" value={username}
-                            onChange={(event) => setUsername(event.target.value)} />
-                    </div>
-                    <div className="col-md-4">
-                        <label className="form-label">State</label>
-                        <select
-                            className="form-select"
-                            value={role}
-                            onChange={(event) => setRole(event.target.value)}
-                        >
-                            <option value="USER">USER</option>
-                            <option value="ADMIN">ADMIN</option>
-                        </select>
-                    </div>
-                    <div className='col-md-12'>
-                        <label className='form-label label-upload' htmlFor='labelUpload'>
-                            <FcPlus /> Upload File Image
-                        </label>
-                        <input type="file"
-                            id="labelUpload"
-                            hidden
-                            onChange={(event) => handleUploadImage(event)} />
-                    </div>
-                    <div className='col-md-12 img-preview'>
-                        {previewImage ?
-                            <img src={previewImage} alt="img" />
-                            :
-                            <span>Preview Image</span>
-                        }
-                    </div>
-                </form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close
-                </Button>
-                <Button variant="primary" onClick={handleSubmitUpdateUser}>
-                    Save Changes
-                </Button>
-            </Modal.Footer>
-        </Modal>
-    </>
-);
+            <Modal
+                show={show}
+                onHide={handleClose}
+                size="xl"
+                backdrop="static"
+                className='modal-add-user'
+            >
+
+                <Modal.Header closeButton>
+                    <Modal.Title>Thêm mới sản phẩm</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form className="row g-3">
+                        <div className="col-md-6">
+                            <label className="form-label">Name</label>
+                            <input className="form-control"
+                                onChange={(event) => setName(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Price</label>
+                            <input className="form-control"
+                                onChange={(event) => setPrice(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Discount</label>
+                            <input type="text" className="form-control"
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Image</label>
+                            <input type="text" className="form-control"
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Description</label>
+                            <input type="text" className="form-control"
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className="col-md-6">
+                            <label className="form-label">Stock</label>
+                            <input type="text" className="form-control"
+                                onChange={(event) => setDescription(event.target.value)} />
+                        </div>
+                        <div className='col-md-12'>
+                            <label className='form-label label-upload' htmlFor='labelUpload'>
+                                <FcPlus /> Upload ảnh sản phẩm
+                            </label>
+                            <input type="file"
+                                id="labelUpload"
+                                hidden
+                                onChange={(event) => handleUploadImage(event)} />
+                        </div>
+
+                        <div className='col-md-12 img-preview'>
+                            {previewImage ?
+                                <img src={previewImage} alt="img" />
+                                :
+                                <span>Xem trước ảnh sản phẩm</span>
+                            }
+                        </div>
+                    </form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Đóng
+                    </Button>
+                    <Button variant="primary" onClick={handleUpdateProduct}>
+                        Lưu
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
 }
 
 export default ModalUpdateProduct;

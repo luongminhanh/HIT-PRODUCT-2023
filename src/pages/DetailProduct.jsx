@@ -4,15 +4,17 @@ import Food from '../components/Food'
 import Button from '../components/Button';
 import Icon from '../components/Icon';
 import imgProduct from '../assets/images/productImage.jpg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FoodSuggestions from '../components/homeUser/FoodSuggestions';
+import { getAllProducts } from '../store/apiRequest';
 const firstExample = {
     size: 18,
     value: 3,
     edit: false
 };
 
-const DetailProduct = () => {
+const DetailProduct = (product) => {
+    const [dataProduct, setDataProduct] = useState([]);
     const handleClickAddToCart = () => {
         console.log("thêm sp vào giỏ");
     }
@@ -20,72 +22,83 @@ const DetailProduct = () => {
     const handleValueInput = (e) => {
         setValueInput(e.target.value);
     }
-    const dataProduct = [
-        {
-            id: 1,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 2,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 3,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 4,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 5,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 6,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 7,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 8,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
+    // const dataProduct = [
+    //     {
+    //         id: 1,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 2,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 3,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 4,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 5,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 6,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 7,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 8,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     }
+    //     ,
+    //     {
+    //         id: 9,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     }
+    // ]
+    const fetchListProduct = async () => {
+        const res = await getAllProducts();
+        if (res && res.data) {
+            console.log(res.data.data.items);
+            setDataProduct(res.data.data.items);
         }
-        ,
-        {
-            id: 9,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        }
-    ]
+    }
+
+    useEffect(() => {
+        fetchListProduct();
+    }, [])
 
     return (
         <div className='detail detail-container'>
@@ -168,38 +181,7 @@ const DetailProduct = () => {
                             voluptatum reiciendis necessitatibus aperiam corporis!
                             Eaque, rem!
                         </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Pariatur minus tempora autem, deserunt ipsa
-                            rerum? Vero suscipit tenetur repellat alias unde
-                            temporibus eaque ad amet aliquam consectetur eos
-                            nemo voluptatum debitis ut obcaecati veniam beatae
-                            quibusdam, dolore doloremque! Alias molestiae
-                            temporibus sunt reiciendis laboriosam voluptas, aut
-                            officiis commodi nostrum sint, enim nulla assumenda
-                            consequuntur maxime ad labore fugiat, ipsam illo
-                            laborum minus corporis quo? Earum unde consequatur
-                            nam cum iusto accusamus amet ullam enim cupiditate
-                            totam sunt, nihil quia, rem officiis modi laboriosam
-                            voluptatum reiciendis necessitatibus aperiam corporis!
-                            Eaque, rem!
-                        </p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Pariatur minus tempora autem, deserunt ipsa
-                            rerum? Vero suscipit tenetur repellat alias unde
-                            temporibus eaque ad amet aliquam consectetur eos
-                            nemo voluptatum debitis ut obcaecati veniam beatae
-                            quibusdam, dolore doloremque! Alias molestiae
-                            temporibus sunt reiciendis laboriosam voluptas, aut
-                            officiis commodi nostrum sint, enim nulla assumenda
-                            consequuntur maxime ad labore fugiat, ipsam illo
-                            laborum minus corporis quo? Earum unde consequatur
-                            nam cum iusto accusamus amet ullam enim cupiditate
-                            totam sunt, nihil quia, rem officiis modi laboriosam
-                            voluptatum reiciendis necessitatibus aperiam corporis!
-                            Eaque, rem!
-                        </p> <br />
+                        <br />
                     </div>
                 </div> <hr />
                 <div className="detail-similar">

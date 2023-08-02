@@ -1,24 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FcPlus } from "react-icons/fc";
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import img from '../../assets/images/bgSidebar.jpg'
 import { Button, Modal } from 'react-bootstrap';
-import { postCreateNewProduct } from '../../store/apiRequest';
+import { postCreateNewShop, putUpdateShop } from '../../store/apiRequest';
 
 
-function ModalAddNewProduct({ show, setShow, fetchListProduct }) {
+function ModalUpdateShop({ show, setShow, dataShop, fetchListShop }) {
     const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [disCount, setDiscount] = useState("");
-    const [stock, setStock] = useState("");
+    const [hotline, setHotline] = useState("");
+    const [timeOpen, setTimeOpen] = useState("");
+    const [timeClose, setTimeClose] = useState("");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
 
     const handleClose = () => {
         setShow(false);
     }
+    useEffect(() => {
+        console.log("Shop", dataShop);
+    }, [dataShop])
 
     const handleUploadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -27,9 +29,17 @@ function ModalAddNewProduct({ show, setShow, fetchListProduct }) {
         }
     }  
 
-    const handleAddNewProduct = async () => {
-        postCreateNewProduct(name, price, description, image, disCount, stock);
-        await fetchListProduct();
+    const handleUpdateShop = async () => {
+        dataShop = {
+            id: dataShop.id,
+            name, 
+            timeOpen: timeOpen,
+            timeClose: timeClose, 
+            hotline: hotline
+        }
+        console.log(dataShop);
+        putUpdateShop(dataShop);
+        await fetchListShop();
         handleClose();
     }
 
@@ -55,45 +65,35 @@ function ModalAddNewProduct({ show, setShow, fetchListProduct }) {
                                 onChange={(event) => setName(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Price</label>
+                            <label className="form-label">Hotline</label>
                             <input className="form-control"
-                                onChange={(event) => setPrice(event.target.value)} />
+                                onChange={(event) => setHotline(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Discount</label>
+                            <label className="form-label">Time Open</label>
                             <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
+                                onChange={(event) => setTimeOpen(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Image</label>
+                            <label className="form-label">Time Close</label>
                             <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Description</label>
-                            <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
-                        </div>
-                        <div className="col-md-6">
-                            <label className="form-label">Stock</label>
-                            <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
+                                onChange={(event) => setTimeClose(event.target.value)} />
                         </div>
                         <div className='col-md-12'>
                             <label className='form-label label-upload' htmlFor='labelUpload'>
-                                <FcPlus /> Upload ảnh sản phẩm
+                                <FcPlus /> Upload ảnh shop
                             </label>
                             <input type="file"
                                 id="labelUpload"
                                 hidden
                                 onChange={(event) => handleUploadImage(event)} />
                         </div>
-                       
+
                         <div className='col-md-12 img-preview'>
                             {previewImage ?
                                 <img src={previewImage} alt="img" />
                                 :
-                                <span>Xem trước ảnh sản phẩm</span>
+                                <span>Xem trước ảnh shop</span>
                             }
                         </div>
                     </form>
@@ -102,7 +102,7 @@ function ModalAddNewProduct({ show, setShow, fetchListProduct }) {
                     <Button variant="secondary" onClick={handleClose}>
                         Đóng
                     </Button>
-                    <Button variant="primary" onClick={handleAddNewProduct}>
+                    <Button variant="primary" onClick={handleUpdateShop}>
                         Lưu
                     </Button>
                 </Modal.Footer>
@@ -111,4 +111,4 @@ function ModalAddNewProduct({ show, setShow, fetchListProduct }) {
     );
 }
 
-export default ModalAddNewProduct;
+export default ModalUpdateShop;

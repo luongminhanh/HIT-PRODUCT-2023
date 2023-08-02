@@ -70,7 +70,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                             <HorizontalCard
                                                                 key={productItem.id}
                                                                 image={productItem.image}
-                                                                productName={productItem.productName}
+                                                                productName={productItem.name}
                                                                 price={productItem.price}
                                                             />
                                                         ))
@@ -89,7 +89,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                             <Card
                                                                 key={productItem.id}
                                                                 image={productItem.image}
-                                                                productName={productItem.productName}
+                                                                productName={productItem.name}
                                                                 address={productItem.address}
                                                                 price={productItem.price}
                                                             />
@@ -113,7 +113,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         <HorizontalCard
                                                             key={productItem.id}
                                                             image={productItem.image}
-                                                            productName={productItem.productName}
+                                                            productName={productItem.name}
                                                             price={productItem.price}
                                                         />
                                                     ))
@@ -128,7 +128,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         <Card
                                                             key={productItem.id}
                                                             image={productItem.image}
-                                                            productName={productItem.productName}
+                                                            productName={productItem.name}
                                                             address={productItem.address}
                                                             price={productItem.price}
                                                         />
