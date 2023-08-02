@@ -46,9 +46,11 @@
         z-index: 20;
 
         h1 {
-            font-size: 60px;
-            line-height: 46px;
+            font-size: 80px;
+            line-height: 120px;
             text-align: center;
+            font-family: $appleFont;
+
         }
 
         h2 {
@@ -57,7 +59,8 @@
             color: $yellowColorLight;
             font-size: 36px;
             line-height: 45px;
-            text-shadow: 3px 0 4px #000
+            text-shadow: 3px 0 4px #000;
+            font-weight: 700;
         }
     }
 

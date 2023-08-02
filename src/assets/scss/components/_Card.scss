@@ -8,7 +8,7 @@
 
     overflow: hidden;
     border: 1px solid $colorE5E5E5;
-    border-radius: 30px;
+    border-radius: 30px !important;
     padding: 10px;
     background: #fff;
     font-family: $gilroyFont;
@@ -48,7 +48,7 @@
                 width: 140px;
                 height: 140px;
                 border-radius: 50%;
-                @include absBox(24%, null, null, 20%);
+                @include absBox(24%, null, null, 22%);
                 z-index: 3;
                 transition: all ease 2s;
 

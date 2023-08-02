@@ -2,7 +2,7 @@
 @import '../mixin';
 
 .horizontal-card {
-    width: 47%;
+    width: 48.5%;
     padding: 10px;
     border-radius: 30px;
     border: 1px solid #e5e5e5;
@@ -75,9 +75,10 @@
 
         p {
             color: #808080;
-            font-size: 15px;
+            font-size: 14px;
             // line-height: 2;
             margin: 16px 0 22px;
+            font-weight: 300;
         }
 
         h4 {
@@ -100,6 +101,8 @@
             font-family: $gilroyFont;
             margin: 0;
             line-height: 0;
+            font-weight: 700;
+
 
             &:hover {
                 color: $orangeColor;

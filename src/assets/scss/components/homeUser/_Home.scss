@@ -26,6 +26,12 @@
     background-color: rgba(240, 128, 128, 0.04);
     background-position: top left;
     background-size: 30%;
+    padding-bottom: 80px;
+
+    h1 {
+        margin: 20px 0;
+    }
+
 
     @include mobile() {
         .slick-list {
