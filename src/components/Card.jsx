@@ -28,7 +28,7 @@ const Card = ({
           <img src={star} alt="" />
         </div>
         <div>
-          <h4>{productName}</h4>
+          <h4>{name}</h4>
           <p>{address}</p>
           <div className="productItem">
             <div style={{ display: 'flex', alignItems: 'center ' }}>

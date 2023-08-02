@@ -9,10 +9,10 @@ import { postCreateNewProduct, putUpdateProduct } from '../../store/apiRequest';
 
 function ModalUpdateProduct({ show, setShow, dataProduct, fetchListProduct }) {
     const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
+    const [price, setPrice] = useState();
     const [description, setDescription] = useState("");
-    const [disCount, setDiscount] = useState("");
-    const [stock, setStock] = useState("");
+    const [disCount, setDiscount] = useState();
+    const [stock, setStock] = useState();
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
 
@@ -42,11 +42,11 @@ function ModalUpdateProduct({ show, setShow, dataProduct, fetchListProduct }) {
         dataProduct = {
             id: dataProduct.id,
             name: name,
-            price: price,
+            price: Number(price),
             description: description,
             image: image,
-            discount: disCount,
-            stock: stock
+            discount: Number(disCount),
+            stock: Number(stock)
         }
         console.log(dataProduct);
         putUpdateProduct(dataProduct);
@@ -83,12 +83,12 @@ function ModalUpdateProduct({ show, setShow, dataProduct, fetchListProduct }) {
                         <div className="col-md-6">
                             <label className="form-label">Discount</label>
                             <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
+                                onChange={(event) => setDiscount(event.target.value)} />
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Image</label>
                             <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
+                                onChange={(event) => setImage(event.target.value)} />
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Description</label>
@@ -98,7 +98,7 @@ function ModalUpdateProduct({ show, setShow, dataProduct, fetchListProduct }) {
                         <div className="col-md-6">
                             <label className="form-label">Stock</label>
                             <input type="text" className="form-control"
-                                onChange={(event) => setDescription(event.target.value)} />
+                                onChange={(event) => setStock(event.target.value)} />
                         </div>
                         <div className='col-md-12'>
                             <label className='form-label label-upload' htmlFor='labelUpload'>
