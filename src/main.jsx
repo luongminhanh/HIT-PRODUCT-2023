@@ -32,14 +32,19 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <Route path="user" element={<Register />} />
           </Route> */}
           <Route path="/" element={<Home />}>
-          <Route path='' element={<MainHome />} />
-          <Route path='order' element={<Order />} />
-          <Route path='orderhistory' element={<OrderHistory />} />
-          <Route path="search" element={<Search />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/infor" element={<UserInfor />} />
-          <Route path="/detail" element={<DetailProduct />} />
-        </Route>
+            <Route path='' element={<MainHome />} />
+            <Route path='order' element={<Order />} />
+            <Route path='orderhistory' element={<OrderHistory />} />
+            <Route path="search" element={<Search />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/infor" element={<UserInfor />} />
+            <Route path="/detail" element={<DetailProduct />} />
+
+          </Route>
+
+          <Route path="/register" element={<Register />} />
+          
+          <Route path='/login' element={<LogIn />} />
 
           <Route path="/admin" element={<Admin></Admin>}>
             <Route index element={<DashBoard />} />
