@@ -28,6 +28,7 @@ function App() {
   return (
 
     <div className="App">
+      {/* <Order/> */}
       <Routes>
         <Route path="/" element={<Home />}>
           <Route path='' element={<MainHome />} />

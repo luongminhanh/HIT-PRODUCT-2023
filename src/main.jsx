@@ -15,15 +15,31 @@ import AdminDataTable from './components/AdminDataTable.jsx'
 import ManageUsers from './components/manageUser/ManageUsers.jsx'
 import ManageProducts from './components/manageProducts/ManageProducts.jsx'
 import ManageOrders from './components/ManageOrders.jsx'
+import Home from './pages/Home.jsx';
+import MainHome from './components/homeUser/MainHome.jsx';
+import Order from './pages/Order.jsx';
+import OrderHistory from './pages/OrderHistory.jsx';
+import Search from './components/Search.jsx';
+import Cart from './pages/Cart.jsx';
+import UserInfor from './pages/UserInfor.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App></App>}>
+          {/* <Route path="/" element={<App></App>}>
             <Route index element={<LogIn />} />
             <Route path="user" element={<Register />} />
-          </Route>
+          </Route> */}
+          <Route path="/" element={<Home />}>
+          <Route path='' element={<MainHome />} />
+          <Route path='order' element={<Order />} />
+          <Route path='orderhistory' element={<OrderHistory />} />
+          <Route path="search" element={<Search />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/infor" element={<UserInfor />} />
+          <Route path="/detail" element={<DetailProduct />} />
+        </Route>
 
           <Route path="/admin" element={<Admin></Admin>}>
             <Route index element={<DashBoard />} />

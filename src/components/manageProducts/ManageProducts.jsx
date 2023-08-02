@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { getAllCustomers, getAllProducts } from '../../store/apiRequest';
 import ModalAddNewProduct from './ModalAddProduct';
 import TableProducts from './TableProducts';
+import ModalViewProduct from './ModalViewProduct';
 // import ModalUpdateUser from './ModalUpdateUser';
 // import ModalViewUser from './ModalViewUser';
 
@@ -70,9 +71,9 @@ const ManageProducts = () => {
                 dataUser={dataUser}
             />*/}
             <ModalViewProduct
-                show={showModalViewUser}
-                setShow={setShowModalViewUser}
-                dataUser={dataUser}
+                show={showModalViewProduct}
+                setShow={setShowModalViewProduct}
+                dataUser={dataProduct}
             /> 
             <TableProducts
                 listProduct={listProduct}
