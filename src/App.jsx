@@ -28,21 +28,20 @@ function App() {
   return (
 
     <div className="App">
-      {/* <Order/> */}
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Home />}>
           <Route path='' element={<MainHome />} />
           <Route path='order' element={<Order />} />
           <Route path='orderhistory' element={<OrderHistory />} />
           <Route path="search" element={<Search />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/infor" element={<UserInfor />} />
-          <Route path="/detail" element={<DetailProduct />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="infor" element={<UserInfor />} />
+          <Route path="detail" element={<DetailProduct />} />
         </Route>
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-      </Routes> */}
+      </Routes>
     </div>
   )
 }

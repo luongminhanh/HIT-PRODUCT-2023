@@ -24,6 +24,7 @@
     @include mobile() {
         padding: 0 10px;
     }
+
     &-left {
         height: 70px;
         @include flexbox-center-between;

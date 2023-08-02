@@ -36,7 +36,7 @@
 
 
                 p {
-                    @include absBox(18%, null, null, 18%);
+                    @include absBox(27%, null, null, 16%);
                     font-size: $text-18;
                     font-family: 'Norican', cursive;
 
@@ -51,29 +51,31 @@
             }
 
             &-title {
-                @include absBox(10%, 16%, null, null);
+                @include absBox(28%, 16%, null, null);
 
                 h3 {
                     font-family: 'Norican', cursive;
                     color: #fff;
-                    font-size: 42px;
-                    line-height: 45px;
-                    text-shadow: 3px 0 4px #000
+                    font-size: 42px !important;
+                    text-shadow: 3px 0 4px #000;
+                    font-weight: 600;
+                    line-height: 0;
                 }
 
                 h1 {
                     color: #ffcd02;
                     font-size: 120px;
                     text-transform: uppercase;
-                    line-height: 85px;
                     text-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+                    line-height: 240px;
+                    font-family: $appleFont;
                 }
 
                 button {
                     font-size: 14px;
                     font-weight: 700;
                     text-transform: uppercase;
-                    line-height: 1em;
+                    // line-height: 1em;
                     border-radius: 8px;
                     padding: 20px 45px;
                     background-color: #fff;
@@ -89,7 +91,7 @@
             }
 
             .img_thunk {
-                @include absBox(4%, 0, null, null);
+                @include absBox(-12%, 0, null, null);
                 transition: all ease 2s;
             }
 

@@ -16,7 +16,7 @@ const OrderHistory = () => {
                     </h1>
                 </div>
                 <div className="order-history-table">
-                    <table cellPadding=' 12px 16px' cellSpacing='0' border='1px solid #dedede'>
+                    <table cellPadding=' 12px 16px' cellSpacing='0'>
                         <thead>
                             <tr>
                                 <th>Đơn Hàng</th>
