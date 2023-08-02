@@ -20,7 +20,7 @@ import OrderHistory from './pages/OrderHistory.jsx';
 import Search from './components/Search.jsx';
 import Cart from './pages/Cart.jsx';
 import UserInfor from './pages/UserInfor.jsx';
-import ForgotPassword from './pages/forgotPassword.jsx';
+import ForgotPassword from './pages/ForgotPassword.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
