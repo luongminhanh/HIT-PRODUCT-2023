@@ -29,7 +29,7 @@ function App() {
 
     <div className="App">
       {/* <Order/> */}
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Home />}>
           <Route path='' element={<MainHome />} />
           <Route path='order' element={<Order />} />
@@ -42,7 +42,7 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-      </Routes>
+      </Routes> */}
     </div>
   )
 }
