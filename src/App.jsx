@@ -22,6 +22,11 @@ import Register from "./pages/Register";
 import UserInfor from "./pages/UserInfor";
 import ForgotPassword from "./pages/forgotPassword";
 import MainHome from './components/homeUser/MainHome';
+import DashBoard from './components/DashBoard';
+import ManageUsers from './components/manageUser/ManageUsers';
+import ManageProducts from './components/manageProducts/ManageProducts';
+import ManageOrders from './components/ManageOrders';
+
 function App() {
 
 
@@ -41,7 +46,14 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/admin" element={<Admin></Admin>}>
+          <Route index element={<DashBoard />} />
+          <Route path="/admin/users" element={<ManageUsers />} />
+          <Route path="/admin/products" element={<ManageProducts />} />
+          <Route path="/admin/orders" element={<ManageOrders />} />
+        </Route>
       </Routes>
+
     </div>
   )
 }
