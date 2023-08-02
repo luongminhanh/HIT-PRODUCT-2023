@@ -20,29 +20,40 @@ import Order from "./pages/Order";
 import OrderHistory from "./pages/OrderHistory";
 import Register from "./pages/Register";
 import UserInfor from "./pages/UserInfor";
-import ForgotPassword from "./pages/forgotPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 import MainHome from './components/homeUser/MainHome';
+import DashBoard from './components/DashBoard';
+import ManageUsers from './components/manageUser/ManageUsers';
+import ManageProducts from './components/manageProducts/ManageProducts';
+import ManageOrders from './components/ManageOrders';
+
 function App() {
 
 
   return (
 
     <div className="App">
-      {/* <Order/> */}
-      {/* <Routes>
+      <Routes>
         <Route path="/" element={<Home />}>
           <Route path='' element={<MainHome />} />
           <Route path='order' element={<Order />} />
           <Route path='orderhistory' element={<OrderHistory />} />
           <Route path="search" element={<Search />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/infor" element={<UserInfor />} />
-          <Route path="/detail" element={<DetailProduct />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="infor" element={<UserInfor />} />
+          <Route path="detail" element={<DetailProduct />} />
         </Route>
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-      </Routes> */}
+        <Route path="/admin" element={<Admin></Admin>}>
+          <Route index element={<DashBoard />} />
+          <Route path="/admin/users" element={<ManageUsers />} />
+          <Route path="/admin/products" element={<ManageProducts />} />
+          <Route path="/admin/orders" element={<ManageOrders />} />
+        </Route>
+      </Routes>
+
     </div>
   )
 }

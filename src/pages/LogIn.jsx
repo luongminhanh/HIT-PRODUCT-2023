@@ -43,7 +43,7 @@ const LogIn = () => {
                                 <div className="img">
                                     <img src={img} alt="" />
                                 </div>
-                                <h1>LOGIN</h1>
+                                <h1>LOGIN</h1> <br />
                                 <div className='login__form-group'>
                                     <label htmlFor="username">Username/Gmail</label> <br />
                                     <div className="login-inp">

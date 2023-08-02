@@ -5,7 +5,7 @@
     @include flexbox-center-between();
     background-color: white;
     min-height: 85vh;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
     margin: 0;
     align-items: start;
 }
@@ -21,6 +21,7 @@
             text-align: left;
             font-family: $appleFont;
             font-weight: 400;
+            margin: 40px 0;
 
             @include mobile() {
                 text-align: center;
@@ -43,6 +44,15 @@
             .fa-arrow-rotate-left {
                 font-size: 18px;
             }
+        }
+
+        td,
+        th {
+            border: 1px solid #ccc;
+        }
+
+        th {
+            border-bottom: 3px solid $orangeColor;
         }
     }
 

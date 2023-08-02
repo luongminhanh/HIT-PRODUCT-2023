@@ -14,6 +14,10 @@
     &-top {
         position: relative;
         z-index: 5;
+
+        h1 {
+            margin: 20px 0 30px;
+        }
     }
 
     &-center {
@@ -37,13 +41,15 @@
         &-content {
             position: absolute;
             right: 16%;
+            bottom: 9%;
 
             h3 {
                 font-family: 'Norican', cursive;
-                font-size: 42px;
+                font-size: 36px;
                 line-height: 45px;
                 text-shadow: 3px 0 4px #fff;
                 color: $orangeColor;
+                font-weight: 600;
             }
 
             h1 {
@@ -53,6 +59,7 @@
                 line-height: 85px;
                 color: $greenCokor;
                 // color: #ffcd02;
+                margin: 30px 0;
 
             }
 
