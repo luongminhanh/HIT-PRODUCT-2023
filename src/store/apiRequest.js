@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4ZTVjOTljZS1mMTkwLTQzNTMtOTJkMi1iMTg2ZWFiNmZlMWUiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MDk3MDE1OCwiaWF0IjoxNjkwOTY2NTU4LCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.s-CLxaWjfKfFTlpwqm_6uvfYXYeiAWVOccFUrQVVyaQ'
+const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4ZTVjOTljZS1mMTkwLTQzNTMtOTJkMi1iMTg2ZWFiNmZlMWUiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MTAzNjkwMCwiaWF0IjoxNjkxMDMzMzAwLCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.hswz_xLgZrUWVwp1EIfFEO1lc0lqxyIBAUADGW63W5w'
 
 
 export const getAllUsers = () => {
@@ -72,6 +72,15 @@ export const putUpdateUser = (data) => {
 
 export const getAllProducts = () => {
     return axios.get('http://localhost:8080/api/v1/product',
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}
+
+export const getAllProductsByShop = (shopId) => {
+    return axios.get('http://localhost:8080/api/v1/product/', shopId,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -256,4 +265,14 @@ export const putUpdateCategory = (category) => {
         .catch(error => {
             console.log(error)
         })
+}
+
+
+export const getDetailProducts = (id) => {
+    return axios.get('http://localhost:8080/api/v1/user/get-product-detail/' + id,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
 }

@@ -6,15 +6,35 @@ import Icon from '../components/Icon';
 import imgProduct from '../assets/images/productImage.jpg';
 import { useEffect, useState } from 'react';
 import FoodSuggestions from '../components/homeUser/FoodSuggestions';
-import { getAllProducts } from '../store/apiRequest';
+import { getAllProducts, getDetailProducts } from '../store/apiRequest';
+import { useParams } from 'react-router-dom';
 const firstExample = {
     size: 18,
     value: 3,
     edit: false
 };
 
-const DetailProduct = (product) => {
-    const [dataProduct, setDataProduct] = useState([]);
+const DetailProduct = () => {
+    const { idProduct } = useParams();
+    const [dataProduct, setDataProduct] = useState({});
+    const [listProduct, setListProduct] = useState([]);
+    const fetchDetailProduct = async () => {
+        const res = await getDetailProducts(idProduct);
+        if (res && res.data && res.data.data) {
+            setDataProduct(res.data.data);
+        }
+    }
+    const fetchListProduct = async () => {
+        const res = await getAllProducts(idProduct);
+        if (res && res.data && res.data.data) {
+            setListProduct(res.data.data.items);
+        }
+    }
+    useEffect(() => {
+        fetchDetailProduct();
+        fetchListProduct();
+    }, [dataProduct])
+    
     const handleClickAddToCart = () => {
         console.log("thêm sp vào giỏ");
     }
@@ -22,97 +42,20 @@ const DetailProduct = (product) => {
     const handleValueInput = (e) => {
         setValueInput(e.target.value);
     }
-    // const dataProduct = [
-    //     {
-    //         id: 1,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 2,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 3,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 4,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 5,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 6,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 7,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 8,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     }
-    //     ,
-    //     {
-    //         id: 9,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     }
-    // ]
-    const fetchListProduct = async () => {
-        const res = await getAllProducts();
-        if (res && res.data) {
-            console.log(res.data.data.items);
-            setDataProduct(res.data.data.items);
-        }
-    }
-
-    useEffect(() => {
-        fetchListProduct();
-    }, [])
-
+    
     return (
         <div className='detail detail-container'>
             <div>
                 <div className='detail-product'>
                     <div className='detail-product-image'>
-                        <img src={imgProduct} alt="" />
+                        <img src={dataProduct.productImageUrl} alt="" />
                     </div>
                     <div className='detail-product-infor'>
-                        <h3>Canh gà nấm mỡ</h3>
+                        <h3>{dataProduct.productName}</h3>
                         <span className='product-rating'><ReactStars {...firstExample} /></span>
-                        <span className='shop-address'>194 Bàu Cát, P. 11, Tân Bình, TP. Hồ Chí Minh</span> <br />
+                        <span className='shop-address'>{dataProduct.shopAddress}</span> <br />
                         <div className='detail-product-infor-price'>
-                            <span>$70.000VND</span>
+                            <span>{dataProduct.productPrice}VND</span>
                         </div>
                         <hr />
                         <div className='detail-product-infor-number'>
@@ -151,7 +94,7 @@ const DetailProduct = (product) => {
                         </div>
                         <hr />
                         <div className="detail-share">
-                            <p>Danh mục: <span> Đồ ăn nhanh</span></p>
+                            <p>Danh mục: <span>{dataProduct.categoryName}</span></p>
                             <p>
                                 Chia sẻ
                                 <Button text={<i className="fa-brands fa-facebook"></i>} />
@@ -160,7 +103,7 @@ const DetailProduct = (product) => {
                         </div>
                     </div>
                 </div>
-                <div className="detail-description">
+                {/* <div className="detail-description">
                     <div>
                         <div>
                             Mô Tả
@@ -183,11 +126,11 @@ const DetailProduct = (product) => {
                         </p>
                         <br />
                     </div>
-                </div> <hr />
+                </div> <hr /> */}
                 <div className="detail-similar">
                     <FoodSuggestions
                         title="Món Ăn Tương Tự"
-                        data={dataProduct.slice(0, 8)}
+                        data={listProduct}
                         color='#1e1d23'
                         isHorizontalCard={false}
                         isSlideShow={true}

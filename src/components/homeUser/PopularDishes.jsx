@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FoodSuggestions from './FoodSuggestions';
 import imgProduct from '../../assets/images/productImage.jpg';
 import imgPopularDishes from '../../assets/images/bg_4.png';
@@ -8,58 +8,60 @@ import listPD_2 from '../../assets/images/listPD_2.jpg';
 import listPD_3 from '../../assets/images/listPD_3.jpg';
 import listPD_4 from '../../assets/images/listPD_4.jpg';
 import video from '../../assets/videos/videoBanner.mp4';
+import { getAllProducts } from '../../store/apiRequest';
 
-const PopularDishes = () => {
-    const dataProduct = [
-        {
-            id: 1,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 2,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 3,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 4,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 5,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        },
-        {
-            id: 6,
-            image: imgProduct,
-            productName: "Nho Mỹ",
-            address: "790 Đường Láng, Đống Đa, Hà Nội",
-            price: "70.000"
-        }
-    ]
+const PopularDishes = ({data}) => {
+    // const dataProduct = [
+    //     {
+    //         id: 1,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 2,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 3,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 4,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 5,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     },
+    //     {
+    //         id: 6,
+    //         image: imgProduct,
+    //         productName: "Nho Mỹ",
+    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
+    //         price: "70.000"
+    //     }
+    // ]
+    console.log("popular", data);
     return (
         <>
             <div className='popular-dishes'>
                 <FoodSuggestions
                     title="Món ăn phổ biến"
-                    data={dataProduct.slice(0, 6)}
+                    data={data.slice(0, 6)}
                     color='#1e1d23'
                     className='popular-dishes-top'
                     isHorizontalCard={true}

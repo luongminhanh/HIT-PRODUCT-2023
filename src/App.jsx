@@ -25,7 +25,9 @@ import MainHome from './components/homeUser/MainHome';
 import DashBoard from './components/DashBoard';
 import ManageUsers from './components/manageUser/ManageUsers';
 import ManageProducts from './components/manageProducts/ManageProducts';
-import ManageOrders from './components/ManageOrders';
+import ManageOrders from './components/manageOrders/ManageOrders';
+import ManageCategories from './components/manageCategories/ManageCategories'
+import ManageShops from './components/manageShops/ManageShops'
 
 function App() {
 
@@ -41,7 +43,7 @@ function App() {
           <Route path="search" element={<Search />} />
           <Route path="cart" element={<Cart />} />
           <Route path="infor" element={<UserInfor />} />
-          <Route path="detail" element={<DetailProduct />} />
+          <Route path="product/:idProduct" element={<DetailProduct />} />
         </Route>
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Register />} />
@@ -51,6 +53,8 @@ function App() {
           <Route path="/admin/users" element={<ManageUsers />} />
           <Route path="/admin/products" element={<ManageProducts />} />
           <Route path="/admin/orders" element={<ManageOrders />} />
+          <Route path="/admin/categories" element={<ManageCategories />} />
+          <Route path="/admin/shops" element={<ManageShops />} />
         </Route>
       </Routes>
 
