@@ -32,27 +32,6 @@ const Register = () => {
           }}
           validationSchema={Schema}
           onSubmit={async (values) => {
-            // const res = axios.post("http://localhost:8080/api/v1/auth/register", {
-            //   username: values.username,
-            //   password: values.password,
-            //   repeatPassword: values.repeatPassword,
-            //   email: values.email //Second param will be your body
-            // },
-            //   {
-            //     headers: {
-            //       Authorization: ``,
-            //       'Content-Type': 'application/json'
-            //     }
-            //   })
-            // console.log(values)
-            // console.log(res);
-            // const params = JSON.stringify({
-            //   "username": values.username,
-            //   "password": values.password,
-            //   "repeatPassword": values.repeatPassword,
-            //   "email": values.email
-
-            // });
             axios.post("http://localhost:8080/api/v1/auth/register", 
               values
             )
