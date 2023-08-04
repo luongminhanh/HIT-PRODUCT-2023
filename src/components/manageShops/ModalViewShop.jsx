@@ -7,12 +7,11 @@ import { toast } from 'react-toastify';
 import _ from 'lodash';
 
 
-function ModalViewProduct({ show, setShow, dataProduct }) {
+function ModalViewShop({ show, setShow, dataShop }) {
     const [name, setName] = useState("");
-    const [price, setPrice] = useState("");
-    const [description, setDescription] = useState("");
-    const [disCount, setDiscount] = useState("");
-    const [stock, setStock] = useState("");
+    const [hotline, setHotline] = useState("");
+    const [timeOpen, setTimeOpen] = useState("");
+    const [timeClose, setTimeClose] = useState("");
     const [image, setImage] = useState("");
     const [previewImage, setPreviewImage] = useState("")
 
@@ -21,17 +20,16 @@ function ModalViewProduct({ show, setShow, dataProduct }) {
     }
 
     useEffect(() => {
-        if (!_.isEmpty(dataProduct)) {
-            setName(dataProduct.name);
-            setPrice(dataProduct.price);
-            setStock(dataProduct.stock);
-            setDescription(dataProduct.description);
-            setDiscount(dataProduct.disCount);
-            setImage(dataProduct.image);
-            setPreviewImage(dataProduct.previewImage);
+        if (!_.isEmpty(dataShop)) {
+            setName(dataShop.name);
+            setHotline(dataShop.hotline);
+            setTimeOpen(dataShop.timeOpen);
+            setTimeClose(dataShop.timeClose);
+            setImage(dataShop.image);
+            setPreviewImage(dataShop.previewImage);
             console.log(show);
         }
-    }, [dataProduct]);
+    }, [dataShop]);
 
     return (
         <>
@@ -44,7 +42,7 @@ function ModalViewProduct({ show, setShow, dataProduct }) {
             >
 
                 <Modal.Header closeButton>
-                    <Modal.Title>View Product</Modal.Title>
+                    <Modal.Title>View Shop</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
@@ -53,7 +51,7 @@ function ModalViewProduct({ show, setShow, dataProduct }) {
                             <input
                                 type="email"
                                 className="form-control"
-                                value={dataProduct.name}
+                                value={dataShop.name}
                                 disabled={true}
                             />
                         </div>
@@ -61,25 +59,25 @@ function ModalViewProduct({ show, setShow, dataProduct }) {
                             <label className="form-label">Price</label>
                             <input
                                 className="form-control"
-                                value={dataProduct.price}
+                                value={dataShop.hotline}
                                 disabled={true}
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Components</label>
+                            <label className="form-label">Time Open</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                value={dataProduct.description}
+                                value={dataShop.timeOpen}
                                 disabled={true}
                             />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Stock</label>
+                            <label className="form-label">Time Close</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                value={dataProduct.stock}
+                                value={dataShop.timeClose}
                                 disabled={true}
                             />
                         </div>
@@ -112,4 +110,4 @@ function ModalViewProduct({ show, setShow, dataProduct }) {
     );
 }
 
-export default ModalViewProduct;
+export default ModalViewShop;

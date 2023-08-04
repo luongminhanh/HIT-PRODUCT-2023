@@ -56,6 +56,7 @@ const Register = () => {
           }}
           validationSchema={Schema}
           onSubmit={async (values) => {
+
             try {
               await axios.post("http://localhost:8080/api/v1/auth/register", values)
               setIsSuccess(true);
@@ -76,6 +77,7 @@ const Register = () => {
                 setIsError(false);
               }, 8000)
             }
+
           }}
         >
           {({ errors }) => {

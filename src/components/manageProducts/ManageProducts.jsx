@@ -3,10 +3,12 @@ import '../../assets/scss/components/ManageUser.scss'
 import { useEffect, useState } from "react";
 // import ModalDeleteUser from './ModalDeleteUser';
 // import TableUsers from './TableUsers';
-import { getAllCustomers, getAllProducts } from '../../store/apiRequest';
 import ModalAddNewProduct from './ModalAddProduct';
 import TableProducts from './TableProducts';
 import ModalViewProduct from './ModalViewProduct';
+import ModalUpdateProduct from './ModalUpdateProduct';
+import ModalDeleteProduct from './ModalDeleteProduct';
+import { getAllProducts } from '../../store/apiRequest';
 // import ModalUpdateUser from './ModalUpdateUser';
 // import ModalViewUser from './ModalViewUser';
 
@@ -20,19 +22,19 @@ const ManageProducts = () => {
     const [showModalDeleteProduct, setShowModalDeleteProduct] = useState(false);
     const [dataDeleteProduct, setDataDeleteProduct] = useState({});
 
-    const handleClickBtnUpdate = (user) => {
+    const handleClickBtnUpdate = (product) => {
         setShowModalUpdateProduct(true);
-        setDataProduct(user);
+        setDataProduct(product);
     }
 
-    const handleClickViewUser = (user) => {
+    const handleClickViewProduct = (product) => {
         setShowModalViewProduct(true);
-        setDataProduct(user);
+        setDataProduct(product);
     }
 
-    const handleClickBtnDelete = (user) => {
+    const handleClickBtnDelete = (productId) => {
         setShowModalDeleteProduct(true);
-        setDataDeleteProduct(user);
+        setDataDeleteProduct(productId);
     }
 
     const fetchListProduct = async () => {
@@ -58,27 +60,27 @@ const ManageProducts = () => {
                 setShow={setShowModalAddNewProduct}
                 fetchListProduct={fetchListProduct}
             />
-            {/*<ModalDeleteUser
-                show={showModalDeleteUser}
-                setShow={setShowModalDeleteUser}
-                fetchListUser={fetchListUser}
-                userId={dataDeleteUser}
+            <ModalDeleteProduct
+                show={showModalDeleteProduct}
+                setShow={setShowModalDeleteProduct}
+                fetchListProduct={fetchListProduct}
+                productId={dataDeleteProduct}
             />
-            <ModalUpdateUser
-                show={showModalUpdateUser}
-                setShow={setShowModalUpdateUser}
-                fetchListUser={fetchListUser}
-                dataUser={dataUser}
-            />*/}
+            <ModalUpdateProduct
+                show={showModalUpdateProduct}
+                setShow={setShowModalUpdateProduct}
+                fetchListProduct={fetchListProduct}
+                dataProduct={dataProduct}
+            />
             <ModalViewProduct
                 show={showModalViewProduct}
                 setShow={setShowModalViewProduct}
-                dataUser={dataProduct}
+                dataProduct={dataProduct}
             /> 
             <TableProducts
                 listProduct={listProduct}
                 handleClickBtnUpdate={handleClickBtnUpdate}
-                handleClickViewUser={handleClickViewUser}
+                handleClickViewProduct={handleClickViewProduct}
                 handleClickBtnDelete={handleClickBtnDelete}
             />
         </div>

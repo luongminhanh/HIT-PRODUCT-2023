@@ -45,6 +45,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
             }
         ]
     };
+    console.log(data, "food suggest");
     const navigate = useNavigate();
     return (
         <div className={className}>
@@ -69,11 +70,14 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         data.map(productItem => (
                                                             <HorizontalCard
                                                                 key={productItem.id}
+                                                                id={productItem.id}
                                                                 image={productItem.image}
                                                                 productName={productItem.productName}
+                                                                address={productItem.address}
                                                                 price={productItem.price}
                                                             />
-                                                        ))
+                                                        )
+                                                        )
                                                     }
                                                 </Slider>
 
@@ -88,6 +92,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         data.map(productItem => (
                                                             <Card
                                                                 key={productItem.id}
+                                                                id={productItem.id}
                                                                 image={productItem.image}
                                                                 productName={productItem.productName}
                                                                 address={productItem.address}
@@ -112,8 +117,10 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     data.map(productItem => (
                                                         <HorizontalCard
                                                             key={productItem.id}
+                                                            id={productItem.id}
                                                             image={productItem.image}
                                                             productName={productItem.productName}
+                                                            address={productItem.address}
                                                             price={productItem.price}
                                                         />
                                                     ))
@@ -127,6 +134,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     data.map(productItem => (
                                                         <Card
                                                             key={productItem.id}
+                                                            id={productItem.id}
                                                             image={productItem.image}
                                                             productName={productItem.productName}
                                                             address={productItem.address}
