@@ -1,4 +1,4 @@
-import img from "../assets/images/imgUser.jpg"
+import img from "../assets/images/user.png"
 import '../assets/scss/components/UserInfor.scss'
 import Button from "../components/Button"
 
