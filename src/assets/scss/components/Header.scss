@@ -59,7 +59,7 @@
             }
         }
 
-        .header-right-login button {
+        .header-right-login .header-right-login-btn {
             background-color: $whiteText;
             color: $blackText;
             border: 1px solid $orangeColor !important;
@@ -154,5 +154,97 @@
 @include tablet() {
     .header {
         width: 90%;
+    }
+}
+
+.img-user {
+    >div:nth-child(1) {
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        >img {
+            width: 28px;
+            height: 28px;
+        }
+
+        >p {
+            margin: 0;
+            margin-left: 8px;
+        }
+    }
+
+    position: relative;
+    transition: all ease 2s;
+
+    &:hover {
+        .list-menu {
+
+            display: block;
+        }
+    }
+}
+
+.list-menu {
+    transition: all ease 2s;
+    display: none;
+    position: absolute;
+    height: 150px;
+    width: 200px;
+    // left: 0;
+    right: 0;
+    // top: 44px;
+    top: 60px;
+    background-color: $whiteText;
+    // border-radius: 0 0 20px 20px;
+    border-top: 6px solid $orangeColor;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+
+    &::before {
+        content: ' ';
+        transition: all ease 2s;
+        height: 0;
+        width: 0;
+        position: absolute;
+        top: -19px;
+        // left: 46%;
+        right: 20px;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 14px solid $orangeColor;
+    }
+
+
+    &-button {
+        background-color: #fff;
+        border: 1px solid #fff !important;
+        color: $blackText;
+        width: 100%;
+        text-align: left;
+        border-radius: 0;
+
+        &:hover {
+            background-color: $orangeColor;
+            color: #fff;
+            border: 1px solid $orangeColor !important;
+
+        }
+    }
+
+    &-button:nth-child(4) {
+        &:hover {
+            color: #fff;
+            border: 1px solid red !important;
+            background-color: red;
+        }
+    }
+
+    &-hr {
+        margin: 0rem 0;
+        color: inherit;
+        border: 0;
+        border-top: var(--bs-border-width) solid;
+        opacity: .25;
     }
 }

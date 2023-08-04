@@ -27,7 +27,7 @@ const Banner = () => {
                     <div className="search line" >
                         <div className='search-position' >
                             <Button text={<i className="fa-solid fa-crosshairs" onClick={() => getLocation()}></i>}></Button>
-                            <input type="text" placeholder='Nhập vị trí của bạn...' />
+                            <input type="text" placeholder='Tìm kiếm theo tên món ăn hoặc vị trí...' />
                         </div>
                         <Button text={<i className='fas fa-search' />} onClick={() => navigate('/search')}></Button>
                     </div>

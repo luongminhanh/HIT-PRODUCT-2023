@@ -2,13 +2,17 @@ import { ErrorMessage, Field, Formik } from 'formik';
 import * as Yup from 'yup';
 import React, { useState } from 'react';
 import img from '../assets/images/loginImage.png';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Alert from '../components/Alert';
 const ForgotPassword = () => {
+    const navigate = useNavigate();
+    const [isError, setIsError] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     return (
         <div className='login'>
             <div className='login__center'>
-                <div className='login-close'>
+                <div className='login-close' onClick={() => navigate('/login')}>
                     <i className="fa-sharp fa-solid fa-xmark"></i>
                 </div>
                 <div className='login__form'>
@@ -26,6 +30,22 @@ const ForgotPassword = () => {
                                     .email('This is not an email')
                             })
                         }
+                        onSubmit={async (value) => {
+                            try {
+                                await axios.post('http://localhost:8080/api/v1/auth/forget-password', value)
+                                setIsError(false)
+                                setIsSuccess(true);
+                                setTimeout(() => {
+                                    navigate('/login')
+                                }, 2000)
+                            } catch (error) {
+                                setIsError(true);
+                                setTimeout(() => {
+                                    setIsError(false);
+                                }, 8000)
+                                setIsSuccess(false);
+                            }
+                        }}
                     >
                         {({
                             values,
@@ -37,7 +57,7 @@ const ForgotPassword = () => {
                                 <div className="img">
                                     <img src={img} alt="" />
                                 </div>
-                                <h1 style={{ fontSize: '32px' }}>Forgot Password</h1>
+                                <h1 style={{ fontSize: '28px' }}>Forgot Password</h1> <br />
                                 <div className='login__form-group'>
                                     <label htmlFor="username">Username</label> <br />
                                     <div className="login-inp">
@@ -52,12 +72,13 @@ const ForgotPassword = () => {
                                     </div>
                                 </div>
                                 <div className='login__form-group' style={{ marginTop: 36 }}>
-                                    <label htmlFor="email">Email</label> <br />
+                                    <label htmlFor="email">Gmail</label> <br />
                                     <div className="login-inp login-pass">
                                         <div>
                                             <Field
                                                 name="email"
                                                 className="field"
+                                                size="28"
                                             />
                                         </div>
                                     </div>
@@ -65,13 +86,21 @@ const ForgotPassword = () => {
                                         <ErrorMessage name='email'></ErrorMessage>
                                     </div>
                                 </div> <br />
-                                <button className='login-btn'>Submit</button>
-                                <br /><br /> <br />
+                                <button className='login-btn' type='submit'>Submit</button>
+                                <br /> <br />
                             </form>
                         )}
                     </Formik>
                 </div>
             </div>
+            {
+                isError &&
+                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc gmail' className='error'></Alert>
+            }
+            {
+                isSuccess &&
+                <Alert title='Thành công!' describe='Chúng tôi đã gửi mật khẩu mới đến gmail của bạn, vui lòng check gmail.' className='success'></Alert>
+            }
         </div>
     );
 };
