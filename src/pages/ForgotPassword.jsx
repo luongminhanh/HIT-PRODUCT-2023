@@ -37,7 +37,7 @@ const ForgotPassword = () => {
                                 setIsSuccess(true);
                                 setTimeout(() => {
                                     navigate('/login')
-                                }, 2000)
+                                }, 16000)
                             } catch (error) {
                                 setIsError(true);
                                 setTimeout(() => {
