@@ -1,17 +1,17 @@
 import { Modal } from "react-bootstrap"
-import { deleteProduct } from "../../store/apiRequest";
+import { deleteCategory } from "../../store/apiRequest";
 import { useEffect } from "react";
 
-const ModalDeleteProduct = ({ show, setShow, fetchListProduct, productId }) => {
+const ModalDeleteCategory = ({ show, setShow, fetchListCategory, categoryId }) => {
 
     const handleClose = () => setShow(false);
-    const handleSubmitDeleteUser = async () => {
-        deleteProduct(productId);
-        await fetchListProduct();
+    const handleSubmitDeleteCategory = async () => {
+        deleteCategory(categoryId);
+        await fetchListCategory();
         handleClose();
     }
     useEffect(() => {
-        fetchListProduct()
+        fetchListCategory()
     }, [])
     return (
         <div>
@@ -22,12 +22,12 @@ const ModalDeleteProduct = ({ show, setShow, fetchListProduct, productId }) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Xác nhận</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Bạn có chắc muốn xóa sản phẩm này?</Modal.Body>
+                <Modal.Body>Bạn có chắc muốn xóa người dùng này?</Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={handleClose}>
                         Hủy
                     </button>
-                    <button className="btn btn-primary" onClick={handleSubmitDeleteUser}>
+                    <button className="btn btn-primary" onClick={handleSubmitDeleteCategory}>
                         Xác nhận
                     </button>
                 </Modal.Footer>
@@ -36,4 +36,4 @@ const ModalDeleteProduct = ({ show, setShow, fetchListProduct, productId }) => {
     )
 }
 
-export default ModalDeleteProduct
+export default ModalDeleteCategory
