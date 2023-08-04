@@ -6,8 +6,9 @@
     left: 50%;
     transform: translateX(-50%);
     padding: 8px 12px;
-    width: 600px;
-    animation: topdown 1.25s ease 1;
+    max-width: 600px;
+    min-width: 40%;
+    animation: topdown 0.75s ease 1;
     background-color: transparent !important;
     transition: all ease 1.25s;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -35,7 +36,7 @@
 
 @keyframes topdown {
     0% {
-        top: -20%;
+        top: -10%;
 
     }
 

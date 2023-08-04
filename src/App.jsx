@@ -28,6 +28,8 @@ import ManageProducts from './components/manageProducts/ManageProducts';
 import ManageOrders from './components/manageOrders/ManageOrders';
 import ManageCategories from './components/manageCategories/ManageCategories'
 import ManageShops from './components/manageShops/ManageShops'
+import NotFound from './pages/NotFound';
+
 
 
 function App() {
@@ -57,6 +59,7 @@ function App() {
           <Route path="/admin/categories" element={<ManageCategories />} />
           <Route path="/admin/shops" element={<ManageShops />} />
         </Route>
+        <Route path='*' element={<NotFound />}></Route>
       </Routes>
 
     </div>
