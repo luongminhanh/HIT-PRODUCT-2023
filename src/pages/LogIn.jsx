@@ -45,6 +45,7 @@ const LogIn = () => {
                                     setTimeout(() => {
                                         navigate('/')
                                     }, 2000)
+                                    localStorage.clear();
                                     localStorage.setItem("accessToken", result.data.data.accessToken)
                                 }
                             } catch (error) {

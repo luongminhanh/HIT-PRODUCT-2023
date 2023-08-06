@@ -1,10 +1,12 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit'
-import authSlice from './authSlice'
+import  counterSlice  from './countItemsOfCart'
+import cartSlice from './cartSlice'
 
 
 
 const reducer = combineReducers({
-    auth: authSlice
+    counter: counterSlice,
+    cart: cartSlice
 })
 
 const store = configureStore({

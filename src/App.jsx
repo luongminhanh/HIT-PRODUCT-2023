@@ -29,6 +29,8 @@ import ManageOrders from './components/manageOrders/ManageOrders';
 import ManageCategories from './components/manageCategories/ManageCategories'
 import ManageShops from './components/manageShops/ManageShops'
 import NotFound from './pages/NotFound';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 
@@ -38,16 +40,17 @@ function App() {
   return (
 
     <div className="App">
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />}>
           <Route path='' element={<MainHome />} />
           <Route path='order' element={<Order />} />
           <Route path='orderhistory' element={<OrderHistory />} />
-          <Route path="search" element={<Search />} />
-          <Route path="cart" element={<Cart />} />
+          <Route path="search" element={<Search />} />         
           <Route path="infor" element={<UserInfor />} />
           <Route path="product/:idProduct" element={<DetailProduct />} />
         </Route>
+        <Route path="cart" element={<Cart />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
@@ -61,7 +64,8 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
-
+ {/* <TestCount/> */}
+{/*<TestCount2/> */}
     </div>
   )
 }

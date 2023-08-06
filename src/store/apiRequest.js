@@ -1,10 +1,19 @@
 import axios from "axios"
+import { toast } from "react-toastify";
 
-const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4ZTVjOTljZS1mMTkwLTQzNTMtOTJkMi1iMTg2ZWFiNmZlMWUiLCJhdXRoIjoiUk9MRV9VU0VSIiwidHlwZSI6ImFjY2VzcyIsImV4cCI6MTY5MTE1NjUyMCwiaWF0IjoxNjkxMTUyOTIwLCJ1c2VybmFtZSI6Im1pbmgxMjIzNDUifQ.i0XbQTU5bJ6wedynYS1WwNJm2r8omj13WOA2lTUt2pc'
-
+const accessToken = localStorage.accessToken;
 
 export const getAllUsers = () => {
     return axios.get('http://localhost:8080/api/v1/user',
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}
+
+export const getCurrentUserLogin = (use) => {
+    return axios.get('http://localhost:8080/api/v1/user/current',
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -274,5 +283,99 @@ export const getDetailProducts = (id) => {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
+        });
+}
+
+export const postAddToCart = (productId, quantity) => {
+    const data = {
+        cartId: localStorage.getItem("cartId"),
+        productId: productId,
+        quantity: quantity
+    }
+    axios.post("http://localhost:8080/api/v1/cart/" + data.cartId + "/products?productId=" + data.productId + "&quality=" + data.quantity,
+        data,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(response => {
+            console.log("ok", response);
+            toast.info('Thêm vào giỏ hàng thành công!', {
+                position: "top-right",
+                autoClose: 2000
+            });
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const putUpdateCart = (cart) => {
+    axios.put("http://localhost:8080/api/v1/shop/" + cart.id,
+        cart,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(response => {
+            console.log("ok", response);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
+
+export const getProductInCart = (cartId) => {
+    return axios.get('http://localhost:8080/api/v1/cart/' + cartId,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}
+
+export const deleteProductFromCart = (cartId, productId) => {
+    const data = {
+        cartId: cartId,
+        productId: productId,
+        quantity: 0
+    }
+    axios.put('http://localhost:8080/api/v1/cart/' + cartId + '/products/' + productId + '?quantity=0',
+        data,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        })
+        .then(res => {
+            console.log("Xoa thanh cong");
+            window.location.reload();
+        }).catch(err => {
+            alert(err)
+        });
+}
+
+export const updateProductInCart = (cartId, productId, quantity) => {
+    const data = {
+        cartId: cartId,
+        productId: productId,
+        quantity: quantity
+    }
+    axios.put('http://localhost:8080/api/v1/cart/' + cartId + '/products/' + productId + '?quantity=' + quantity,
+        data,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        })
+        .then(res => {
+            console.log("Xoa thanh cong");
+            window.location.reload();
+        }).catch(err => {
+            alert(err)
         });
 }

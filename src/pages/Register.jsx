@@ -66,6 +66,7 @@ const Register = () => {
                 password: values.password
               }
               const result = await axios.post('http://localhost:8080/api/v1/auth/login', loginUser);
+              localStorage.clear();
               localStorage.setItem("accessToken", result.data.data.accessToken)
               setTimeout(() => {
                 navigate('/')

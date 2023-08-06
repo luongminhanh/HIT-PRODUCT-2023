@@ -45,7 +45,6 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
             }
         ]
     };
-    console.log(data, "food suggest");
     const navigate = useNavigate();
     return (
         <div className={className}>

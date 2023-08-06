@@ -5,7 +5,7 @@
 
     // width: 21%;
     // width: 100%;
-
+    min-height: 486px;
     overflow: hidden;
     border: 1px solid $colorE5E5E5;
     border-radius: 30px !important;
@@ -15,7 +15,6 @@
     transition: all ease .35s;
     padding-bottom: 24px;
     max-width: 280px;
-    min-height: 200px;
     margin: 40px 0 0;
 }
 
@@ -48,6 +47,7 @@
                 width: 140px;
                 height: 140px;
                 border-radius: 50%;
+                object-fit: cover;
                 @include absBox(24%, null, null, 22%);
                 z-index: 3;
                 transition: all ease 2s;
@@ -82,7 +82,7 @@
         margin-top: 16px;
 
         span {
-            line-height: 0;
+            line-height: 36px;
             padding: 50px 0;
             font-size: $text-24;
             color: $color1e1d23;
@@ -159,3 +159,4 @@
         }
     }
 }
+

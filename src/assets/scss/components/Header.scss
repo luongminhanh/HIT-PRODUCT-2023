@@ -58,6 +58,20 @@
                 transition: transform 0.5s cubic-bezier(0.5, 1.6, 0.4, 0.7);
             }
         }
+        .header-right-cart {
+            position: relative;
+            .number-of-items-in-cart {
+                position: absolute;
+                top: -17px;
+                right: -15px;
+                // left: 30px;
+                padding: 0 6px;
+                border-radius: 50%;
+                background-color: #F06C25;
+                color: white;
+            }
+        }
+        
 
         .header-right-login .header-right-login-btn {
             background-color: $whiteText;
