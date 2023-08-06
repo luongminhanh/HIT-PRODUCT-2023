@@ -13,8 +13,11 @@
         h1 {
             @include styleTitleH1();
             font-family: $appleFont;
+            font-size: 35px;
             text-align: left;
             margin-bottom: 30px;
+            margin-top: 30px;
+            text-align: center;
         }
     }
 }
@@ -40,6 +43,8 @@
 
         img {
             width: 60px;
+            height: 50px;
+            object-fit: cover;
         }
 
         th {
@@ -56,6 +61,7 @@
             padding: 8px;
             text-align: center;
             font-size: 16px;
+            border: none;
         }
 
         .cart-product-name {
@@ -64,22 +70,26 @@
         }
 
         button {
-            background-color: $whiteText;
-            transition: all ease 1s;
-
-            i {
-                transition: all ease .25s;
-                font-size: 14px;
-            }
+            // background-color: $whiteText;
+            background-color: white;
+            color: black;
+            
 
             &:hover {
-                background-color: $orangeColor;
-
+                background-color: orangered;
+                transition: all 0.2s;
+                color: white;
+                border-radius: 50%;
                 i {
                     color: $whiteText;
                 }
             }
 
+            i {
+                transition: all ease .25s;
+                font-size: 14px;
+                color: black;
+            }
         }
 
         .cart-product-price {
@@ -210,4 +220,9 @@
             }
         }
     }
+}
+
+.cart-items-quantity {
+    display: flex;
+    justify-content: center;
 }

@@ -21,7 +21,7 @@ const TableShops = ({ listShop, handleClickBtnUpdate, handleClickViewShop, handl
                         listShop.map((item, index) => {
                             return (
                                 <tr key={`table-shops-${index}`}>
-                                    <td>{item.id}</td>
+                                    <td>{item.shopId}</td>
                                     <td>{item.name}</td>
                                     <td>{item.hotline}</td>
                                     <td>{item.timeOpen}</td>
