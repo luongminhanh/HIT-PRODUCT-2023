@@ -6,6 +6,8 @@ import img from '../assets/images/loginImage.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from '../components/Alert';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../store/cartSlice';
 
 const LogIn = () => {
     const [isShow, setIsShow] = useState(false)
@@ -16,6 +18,8 @@ const LogIn = () => {
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     return (
         <div className='login'>
             <div className='login__center'>
@@ -46,6 +50,7 @@ const LogIn = () => {
                                         navigate('/')
                                     }, 2000)
                                     localStorage.clear();
+                                    dispatch(clearCart());
                                     localStorage.setItem("accessToken", result.data.data.accessToken)
                                 }
                             } catch (error) {

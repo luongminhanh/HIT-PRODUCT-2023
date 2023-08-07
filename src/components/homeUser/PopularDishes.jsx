@@ -11,51 +11,6 @@ import video from '../../assets/videos/videoBanner.mp4';
 import { getAllProducts } from '../../store/apiRequest';
 
 const PopularDishes = ({data}) => {
-    // const dataProduct = [
-    //     {
-    //         id: 1,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 2,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 3,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 4,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 5,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     },
-    //     {
-    //         id: 6,
-    //         image: imgProduct,
-    //         productName: "Nho Mỹ",
-    //         address: "790 Đường Láng, Đống Đa, Hà Nội",
-    //         price: "70.000"
-    //     }
-    // ]
-    console.log("popular", data);
     return (
         <>
             <div className='popular-dishes'>

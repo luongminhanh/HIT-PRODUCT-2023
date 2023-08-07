@@ -34,7 +34,6 @@ const HorizontalCard = ({
     }
 
     const handleAddToCart = async () => {
-        dispatch(increment());
         dispatch(addToCart(product));
         const res = await postAddToCart(id, 1);
         console.log(res);
