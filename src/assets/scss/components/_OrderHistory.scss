@@ -18,10 +18,10 @@
     &-title {
         h1 {
             @include styleTitleH1();
-            text-align: left;
+            text-align: left !important;
             font-family: $appleFont;
             font-weight: 400;
-            margin: 40px 0;
+            margin: 40px 0 !important;
 
             @include mobile() {
                 text-align: center;

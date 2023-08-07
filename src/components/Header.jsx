@@ -49,7 +49,7 @@ const Header = () => {
                                         </div>
                                         <div className="list-menu">
                                             <Button className="list-menu-button" onClick={() => navigate('/infor')} text='Tài Khoản Của Tôi'></Button>
-                                            <Button className="list-menu-button" onClick={() => navigate('/orderhistory')} text='Đơn Mua'></Button> <hr className='list-menu-hr' />
+                                            <Button className="list-menu-button" onClick={() => navigate('/purchaseorder')} text='Đơn Mua'></Button> <hr className='list-menu-hr' />
                                             <Button className="list-menu-button" onClick={handleLogout} text='Đăng Xuất'></Button>
                                         </div>
                                     </div>
