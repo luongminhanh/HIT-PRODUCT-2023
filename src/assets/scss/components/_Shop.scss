@@ -1,0 +1,73 @@
+@import '../mixin';
+@import '../vari';
+
+.shop {
+    width: 100%;
+
+    &-banner {
+        position: relative;
+
+        img {
+            width: 100% !important;
+            height: 200px;
+        }
+
+        .text-abs-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            h1 {
+                text-transform: uppercase;
+                white-space: nowrap
+            }
+
+            p {
+                text-align: center;
+                margin: 20px 0;
+                color: #808080;
+                font-size: 16px;
+                white-space: nowrap;
+            }
+        }
+    }
+
+    &-filter {
+        width: $pageSize;
+        display: flex;
+        justify-content: space-between;
+        margin: 40px auto;
+
+        i {
+            color: #fff;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+    }
+
+    .NoneButton {
+        .showMore {
+            display: none;
+        }
+
+        h1 {
+            display: none;
+        }
+    }
+}
+
+@include mobile() {
+    .shop-filter {
+        width: 360px;
+        margin: 40px auto;
+    }
+}
+
+@include tablet() {
+    .shop-filter {
+        width: 90%;
+        margin: 40px auto;
+
+    }
+}

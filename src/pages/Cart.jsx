@@ -14,57 +14,6 @@ const Cart = () => {
     const handleChangeValueInput = (e) => {
         setNumbersProduct(e.target.value);
     }
-    const dataProducts = [
-        {
-            id: 1,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-        {
-            id: 2,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-        {
-            id: 3,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-        {
-            id: 4,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-        {
-            id: 5,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-        {
-            id: 6,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-        {
-            id: 7,
-            img: imgProducts,
-            productsName: 'Hamboger',
-            number: numbersProduct,
-            price: '480.000'
-        },
-    ]
     // const findCartId = async () => {
     //     const resCus = await getAllCustomers();
     //     // console.log(resCus.data.data.items);
@@ -123,21 +72,25 @@ const Cart = () => {
                             <tbody>
                                 {
                                     dataProductInCart && dataProductInCart.length
-                                    && dataProductInCart.map((item) => (
-                                        <tr key={item.productId}>
-                                            <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item.productId)} /></td>
-                                            <td><img src={item.productImageUrl} alt="" /></td>
-                                            <td className='cart-product-name'>{item.productName}</td>
-                                            <td>{(item.price).toLocaleString('vi-VN')}đ</td>
-                                            <td className='cart-items-quantity'>
-                                                <button onClick={() => handleUpdateProduct(item.productId, item.quantity - 1)}>-</button>
-                                                <input type="text" required value={item.quantity} onChange={handleChangeValueInput} />
-                                                <button onClick={() => handleUpdateProduct(item.productId, item.quantity + 1)}>+</button>
+                                        ? dataProductInCart.map((item) => (
+                                            <tr key={item.productId}>
+                                                <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item.productId)} /></td>
+                                                <td><img src={item.productImageUrl} alt="" /></td>
+                                                <td className='cart-product-name'>{item.productName}</td>
+                                                <td>{(item.price).toLocaleString('vi-VN')}đ</td>
+                                                <td className='cart-items-quantity'>
+                                                    <button onClick={() => handleUpdateProduct(item.productId, item.quantity - 1)}>-</button>
+                                                    <input type="text" required value={item.quantity} onChange={handleChangeValueInput} />
+                                                    <button onClick={() => handleUpdateProduct(item.productId, item.quantity + 1)}>+</button>
 
-                                            </td>
-                                            <td className='cart-product-price'>{(item.price * item.quantity).toLocaleString('vi-VN')}đ</td>
+                                                </td>
+                                                <td className='cart-product-price'>{(item.price * item.quantity).toLocaleString('vi-VN')}đ</td>
+                                            </tr>
+                                        ))
+                                        :
+                                        <tr>
+                                            <td colSpan={6}>Trống</td>
                                         </tr>
-                                    ))
                                 }
                             </tbody>
                         </table>

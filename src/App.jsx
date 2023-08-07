@@ -31,12 +31,13 @@ import ManageShops from './components/manageShops/ManageShops'
 import NotFound from './pages/NotFound';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
+import PurchaseOrder from './pages/PurchaseOrder';
+import Shop from './pages/Shop';
+import MyOrder from './pages/MyOrder';
 
 
 
 function App() {
-
-
   return (
 
     <div className="App">
@@ -45,9 +46,15 @@ function App() {
         <Route path="/" element={<Home />}>
           <Route path='' element={<MainHome />} />
           <Route path='order' element={<Order />} />
-          <Route path='orderhistory' element={<OrderHistory />} />
-          <Route path="search" element={<Search />} />         
+          <Route path="search" element={<Search />} />
           <Route path="infor" element={<UserInfor />} />
+          <Route path="/purchaseorder" element={<PurchaseOrder />} >
+            <Route index element={<MyOrder />} />
+            <Route path='/purchaseorder/myorder' element={<MyOrder />} />
+            <Route path='/purchaseorder/orderhistory' element={<OrderHistory />} />
+            <Route path="/purchaseorder/infor" element={<UserInfor />} />
+          </Route>
+          <Route path="shop" element={<Shop />} />
           <Route path="product/:idProduct" element={<DetailProduct />} />
         </Route>
         <Route path="cart" element={<Cart />} />
@@ -64,8 +71,8 @@ function App() {
         </Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
- {/* <TestCount/> */}
-{/*<TestCount2/> */}
+      {/* <TestCount/> */}
+      {/*<TestCount2/> */}
     </div>
   )
 }
