@@ -387,3 +387,13 @@ export const updateProductInCart = (cartId, productId, quantity) => {
             alert(err)
         });
 }
+
+export const searchProduct = (search) => {
+    return axios.get(`http://localhost:8080/api/v1/user/find-product-info?keyword=${search}&sortBy=productName&pageNum=2&pageSize=12`
+    ,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}

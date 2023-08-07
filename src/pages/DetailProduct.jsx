@@ -55,7 +55,7 @@ const DetailProduct = () => {
             <div>
                 <div className='detail-product'>
                     <div className='detail-product-image'>
-                        <img src={dataProduct.productImageUrl} alt="" />
+                        <img src={dataProduct.productImageUrl ? dataProduct.productImageUrl : dataProduct.image} alt="" />
                     </div>
                     <div className='detail-product-infor'>
                         <h3>{dataProduct.productName}</h3>

@@ -68,12 +68,12 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         &&
                                                         data.map(productItem => (
                                                             <HorizontalCard
-                                                                key={productItem.id}
-                                                                id={productItem.id}
-                                                                image={productItem.image}
+                                                                key={productItem.id ? productItem.id : productItem.productId}
+                                                                id={productItem.id ? productItem.id : productItem.productId}
+                                                                image={productItem.image ? productItem.image : productItem.productImageUrl}
                                                                 productName={productItem.productName}
-                                                                address={productItem.address}
-                                                                price={productItem.price}
+                                                                address={productItem.address ? productItem.address : productItem.shopAddress}
+                                                                price={productItem.price ? productItem.price : productItem.productPrice}
                                                             />
                                                         )
                                                         )
@@ -90,12 +90,12 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         &&
                                                         data.map(productItem => (
                                                             <Card
-                                                                key={productItem.id}
-                                                                id={productItem.id}
-                                                                image={productItem.image}
-                                                                productName={productItem.productName}
-                                                                address={productItem.address}
-                                                                price={productItem.price}
+                                                            key={productItem.id ? productItem.id : productItem.productId}
+                                                            id={productItem.id ? productItem.id : productItem.productId}
+                                                            image={productItem.image ? productItem.image : productItem.productImageUrl}
+                                                            productName={productItem.productName}
+                                                            address={productItem.address ? productItem.address : productItem.shopAddress}
+                                                            price={productItem.price ? productItem.price : productItem.productPrice}
                                                             />
                                                         ))
                                                     }
@@ -115,12 +115,12 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     &&
                                                     data.map(productItem => (
                                                         <HorizontalCard
-                                                            key={productItem.id}
-                                                            id={productItem.id}
-                                                            image={productItem.image}
-                                                            productName={productItem.productName}
-                                                            address={productItem.address}
-                                                            price={productItem.price}
+                                                        key={productItem.id ? productItem.id : productItem.productId}
+                                                        id={productItem.id ? productItem.id : productItem.productId}
+                                                        image={productItem.image ? productItem.image : productItem.productImageUrl}
+                                                        productName={productItem.productName}
+                                                        address={productItem.address ? productItem.address : productItem.shopAddress}
+                                                        price={productItem.price ? productItem.price : productItem.productPrice}
                                                         />
                                                     ))
                                                 }
@@ -132,12 +132,12 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     &&
                                                     data.map(productItem => (
                                                         <Card
-                                                            key={productItem.id}
-                                                            id={productItem.id}
-                                                            image={productItem.image}
-                                                            productName={productItem.productName}
-                                                            address={productItem.address}
-                                                            price={productItem.price}
+                                                        key={productItem.id ? productItem.id : productItem.productId}
+                                                        id={productItem.id ? productItem.id : productItem.productId}
+                                                        image={productItem.image ? productItem.image : productItem.productImageUrl}
+                                                        productName={productItem.productName}
+                                                        address={productItem.address ? productItem.address : productItem.shopAddress}
+                                                        price={productItem.price ? productItem.price : productItem.productPrice}
                                                         />
                                                     ))
                                                 }

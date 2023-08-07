@@ -21,8 +21,7 @@ const Header = () => {
         navigate("/")
     }
     useEffect(() => {
-        dispatch(getTotals());
-        
+        dispatch(getTotals());      
     }, [cart])
     return (
         <>
