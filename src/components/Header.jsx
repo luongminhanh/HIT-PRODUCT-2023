@@ -7,24 +7,22 @@ import userImage from '../assets/images/user.png';
 // import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getProductInCart } from '../store/apiRequest';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTotals } from '../store/cartSlice';
 
 
 const Header = () => {
-    const [numberOfProductsInCart, setNumberOfProductInCart] = useState(0);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const cart = useSelector(state => state.cart);
     const accessToken = localStorage.getItem("accessToken");
     const handleLogout = () => {
         localStorage.clear();
         navigate("/")
     }
-    // const count = useSelector((state) => state.counter.value);
-    const fetchNumberOfProductsInCart = async () => {
-        const res = await getProductInCart(localStorage.getItem("cartId"));
-        setNumberOfProductInCart(res.data.data.length);
-    }
     useEffect(() => {
-        fetchNumberOfProductsInCart();
-    }, [numberOfProductsInCart])
+        dispatch(getTotals());      
+    }, [cart])
     return (
         <>
             {
@@ -39,7 +37,7 @@ const Header = () => {
                                     <Button className="pad0" text={<Icon className='fas fa-search' />} />
                                 </div>
                                 <div className='header-right-cart'>
-                                    <div className='number-of-items-in-cart'>{numberOfProductsInCart}</div>
+                                    <div className='number-of-items-in-cart'>{cart.cartTotalQuantity}</div>
                                     <Button className="pad0" onClick={() => navigate('/cart')} text={<Icon className='fa-solid fa-cart-shopping' />} />
                                 </div>
                                 <div className='header-right-login'>

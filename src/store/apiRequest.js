@@ -338,6 +338,16 @@ export const getProductInCart = (cartId) => {
         });
 }
 
+export const getArrayProductInCart = async (cartId) => {
+    const res =  await axios.get('http://localhost:8080/api/v1/cart/' + cartId,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+    return res.data.data
+}
+
 export const deleteProductFromCart = (cartId, productId) => {
     const data = {
         cartId: cartId,
@@ -353,7 +363,6 @@ export const deleteProductFromCart = (cartId, productId) => {
         })
         .then(res => {
             console.log("Xoa thanh cong");
-            window.location.reload();
         }).catch(err => {
             alert(err)
         });
@@ -373,9 +382,18 @@ export const updateProductInCart = (cartId, productId, quantity) => {
             }
         })
         .then(res => {
-            console.log("Xoa thanh cong");
-            window.location.reload();
+            console.log(res, "update product");
         }).catch(err => {
             alert(err)
+        });
+}
+
+export const searchProduct = (search) => {
+    return axios.get(`http://localhost:8080/api/v1/user/find-product-info?keyword=${search}&sortBy=productName&pageNum=2&pageSize=12`
+    ,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
         });
 }

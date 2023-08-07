@@ -39,8 +39,8 @@ const DetailProduct = () => {
         fetchDetailProduct();
     }, [idProduct])
 
-    const handleAddToCart = async () => {
-        dispatch(increment());
+    const handleAddToCart = async (product) => {
+        dispatch(addToCart(product));
         const res = await postAddToCart(dataProduct.productId, 1);
         dispatch(addToCart(dataProduct));
         console.log(res);
@@ -55,7 +55,7 @@ const DetailProduct = () => {
             <div>
                 <div className='detail-product'>
                     <div className='detail-product-image'>
-                        <img src={dataProduct.productImageUrl} alt="" />
+                        <img src={dataProduct.productImageUrl ? dataProduct.productImageUrl : dataProduct.image} alt="" />
                     </div>
                     <div className='detail-product-infor'>
                         <h3>{dataProduct.productName}</h3>
@@ -85,7 +85,7 @@ const DetailProduct = () => {
                             <Button
                                 className='detail-product-add-to-cart'
                                 text="Thêm vào giỏ hàng"
-                                onClick={() => handleAddToCart()} />
+                                onClick={() => handleAddToCart(dataProduct)} />
                             <Button
                                 className='detail-product-add-to-buy'
                                 text='Đặt hàng'
