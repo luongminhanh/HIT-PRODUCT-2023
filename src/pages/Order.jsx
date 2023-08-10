@@ -1,8 +1,38 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
+import { getCurrentUserLogin, getCustomer, getProductInCart, postCreateBill } from '../store/apiRequest';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Order = () => {
+    const [dataUser, setDataUser] = useState({});
+    const [dataCustomer, setDataCustomer] = useState({});
+    const [dataProductInCart, setDataProductInCart] = useState([]);
+    const [shipPrice, setShipPrice] = useState(35000);
+    const cart = useSelector((state) => state.cart);
+    const getCurrentCustomer = async () => {
+        const res = await getCurrentUserLogin();
+        setDataUser(res.data.data);
+        const resCus = await getCustomer(localStorage.getItem("cartId"));
+        setDataCustomer(resCus.data.data);
+    }
+
+    const getProductsInCart = async (cartId) => {
+        const res = await getProductInCart(cartId);
+        setDataProductInCart(res.data.data);
+        console.log("heree", dataProductInCart);
+    }
+
+    const handlePayBill = async () => {
+        alert('Đã thanh toán');
+        const res = await postCreateBill(1, 1);
+        console.log(res);
+    }
+
+    useEffect(() => {
+        getCurrentCustomer();
+        getProductsInCart(localStorage.getItem("cartId"));
+    }, []);
     return (
         <div className='order order-container'>
             <div>
@@ -15,25 +45,25 @@ const Order = () => {
                             <div className="form-item">
                                 <div>
                                     <label htmlFor="">Họ tên người nhận <span>*</span></label> <br />
-                                    <input type="text" placeholder='Nguyễn Thị Trang' />
+                                    <input type="text" placeholder={dataCustomer.fullName} />
                                 </div>
                             </div>
                             <div className="form-item">
                                 <div>
                                     <label htmlFor="">Số điện thoại <span>*</span></label> <br />
-                                    <input type="text" placeholder='0123456789' />
+                                    <input type="text" placeholder={dataCustomer.phoneNumber} />
                                 </div>
                             </div>
                             <div className="form-item">
                                 <div>
                                     <label htmlFor="">Gmail <span>*</span></label> <br />
-                                    <input type="text" placeholder='abc@gmail.com' />
+                                    <input type="text" placeholder={dataUser.email} />
                                 </div>
                             </div>
                             <div className="form-item">
                                 <div>
                                     <label htmlFor="">Địa chỉ cụ thể <span>*</span></label> <br />
-                                    <input type="text" placeholder='Số 258, Trường Đại học Công Nghiệp Hà Nội, Cơ sở 1' />
+                                    <input type="text" placeholder={dataCustomer.address} />
                                 </div>
                             </div>
                         </div>
@@ -51,14 +81,26 @@ const Order = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    {cart.cartItems && cart.cartItems.length > 0 && (
+                                        <React.Fragment>
+                                            {cart.cartItems.map((item) => (
+                                                <tr key={item.productId}>
+                                                    <td className='products-name'>
+                                                        {item.productName} <span className='attention'>x {item.quantity}</span>
+                                                    </td>
+                                                    <td>{(item.price * item.quantity).toLocaleString('vi-VN')}</td>
+                                                </tr>
+                                            ))}
+                                        </React.Fragment>
+                                    )}
+                                    {/* <tr>
                                         <td className='products-name'>
                                             Bánh mì trứng <span className='attention'>x 5</span>
                                         </td>
                                         <td>
                                             120.000.000VND
                                         </td>
-                                    </tr>
+                                    </tr> */}
                                 </tbody>
                             </table>
                         </div>
@@ -73,11 +115,11 @@ const Order = () => {
                             <thead>
                                 <tr>
                                     <th>Tổng tiền hàng:</th>
-                                    <td>120.000.000VND</td>
+                                    <td>{cart.cartTotalAmount.toLocaleString('vi-VN')}đ</td>
                                 </tr>
                                 <tr>
                                     <th>Phí vận chuyển:</th>
-                                    <td>120.000.000VND</td>
+                                    <td>{shipPrice.toLocaleString('vi-VN')}đ</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,13 +131,13 @@ const Order = () => {
                                 <tr style={{ fontSize: 20 }}>
                                     <th>Tổng tiền: </th>
                                     <th className='pay-money'>
-                                        120.0000.000VND
+                                        {(cart.cartTotalAmount + shipPrice).toLocaleString('vi-VN')}
                                     </th>
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
                                         <div>
-                                            <Button text='THANH TOÁN' />
+                                            <Button text='THANH TOÁN' onClick={() => handlePayBill()}/>
                                         </div>
                                     </td>
                                 </tr>

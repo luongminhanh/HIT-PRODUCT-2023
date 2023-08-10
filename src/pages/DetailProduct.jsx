@@ -1,49 +1,45 @@
 import '../assets/scss/components/DetailProduct.scss'
 import ReactStars from "react-rating-stars-component";
-import Food from '../components/Food'
 import Button from '../components/Button';
 import { useEffect, useState } from 'react';
 import FoodSuggestions from '../components/homeUser/FoodSuggestions';
-import { getAllProducts, getDetailProducts, postAddToCart } from '../store/apiRequest';
+import { getDetailProducts, postAddToCart, searchProduct } from '../store/apiRequest';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
-import { increment } from '../store/countItemsOfCart';
 const firstExample = {
     size: 18,
-    value: 3,
+    value: 4,
     edit: false
 };
 
 const DetailProduct = () => {
-    const { idProduct } = useParams();
+    const { idShop, idProduct } = useParams();
     const [dataProduct, setDataProduct] = useState({});
     const [listProduct, setListProduct] = useState([]);
+    const search = "";
     const dispatch = useDispatch()
     const fetchDetailProduct = async () => {
-        const res = await getDetailProducts(idProduct);
+        const res = await getDetailProducts(idProduct, idShop);
         if (res && res.data && res.data.data) {
             setDataProduct(res.data.data);
         }
     }
     const fetchListProduct = async () => {
-        const res = await getAllProducts(idProduct);
-        if (res && res.data && res.data.data) {
-            setListProduct(res.data.data.items);
-        }
+        const res = await searchProduct(encodeURIComponent(search));
+        setListProduct(res.data.data.items);
+
     }
     useEffect(() => {
         fetchListProduct();
     }, [])
     useEffect(() => {
         fetchDetailProduct();
-    }, [idProduct])
+    }, [idProduct, idShop])
 
     const handleAddToCart = async (product) => {
         dispatch(addToCart(product));
-        const res = await postAddToCart(dataProduct.productId, 1);
-        dispatch(addToCart(dataProduct));
-        console.log(res);
+        const res = await postAddToCart(dataProduct.productId, 1, idShop);
     }
     const [valueInput, setValueInput] = useState(1);
     const handleValueInput = (e) => {
@@ -89,7 +85,6 @@ const DetailProduct = () => {
                             <Button
                                 className='detail-product-add-to-buy'
                                 text='Đặt hàng'
-                            // onClick={handleClickAddToCart} 
                             />
                         </div> <br />
                         <hr />
@@ -113,7 +108,7 @@ const DetailProduct = () => {
                 </div>
                 <div className="detail-description">
                     <div>
-                        <div>
+                        <div className='title-description'>
                             Mô Tả
                         </div>
                         <p>
@@ -138,6 +133,16 @@ const DetailProduct = () => {
                             Khi bạn thưởng thức mỳ trộn full topping, mỗi miếng mỳ mềm mịn sẽ mang đến một trải nghiệm đa vị tuyệt vời. Vị ngọt tự nhiên của thịt gà, vị thơm của xúc xích, vị giòn của đậu phụ
                         </p>
                         <br />
+
+                        <div className="embed-responsive aspect-video">
+                            <iframe src='https://www.youtube.com/embed/I_n1IQggIQ4'
+                            width="300px"
+                            height="600px"
+                                frameBorder='0'
+                                allow='autoplay; encrypted-media'
+                                allowfullscreen
+                                title='video'
+                            />                        </div>
                     </div>
                 </div> <hr />
                 <div className="detail-similar">

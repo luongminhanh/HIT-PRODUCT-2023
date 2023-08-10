@@ -1,59 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../components/Button';
-import imgProducts from '../assets/images/productImage.jpg';
 import Header from '../components/Header';
-import { deleteProductFromCart, getProductInCart, updateProductInCart } from '../store/apiRequest';
-import { addToCart, decreaseCart, decreaseProductCart, getTotals, removeFromCart } from '../store/cartSlice';
+import { getProductInCart, updateProductInCart } from '../store/apiRequest';
+import { addToCart, decreaseCart, decreaseProductCart, getTotals } from '../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-    const [numbersProduct, setNumbersProduct] = useState(4);
+    const navigate = useNavigate();
     const [cartId, setCartId] = useState(0);
     const [dataProductInCart, setDataProductInCart] = useState([]);
-    const [totalMoney, setTotalMoney] = useState(0);
     const dispatch = useDispatch();
-    const cart = useSelector(state => state.cart);
-
-    const handleChangeValueInput = (e) => {
-        setNumbersProduct(e.target.value);
-    }
+    const cart = useSelector(state => state.cart); 
 
     const getProductsInCart = async (cartId) => {
-        const res = await getProductInCart(cartId);
-        // console.log("cart: ", res.data.data.length);
+        const res = await getProductInCart(cartId); 
         setDataProductInCart(res.data.data);
     }
 
-    const handleRemoveProductFromCart = async (product, productId) => {
-        // dispatch(removeFromCart(productId));
+    const handleRemoveProductFromCart = async (product, productId, shopId) => {
         dispatch(decreaseProductCart(product));
-        const res = await updateProductInCart(cartId, productId, 0);
+        const res = await updateProductInCart(cartId, productId, 0, shopId);
     }
 
-    const handleDecreaseProduct = async (product, productId, quantity) => {
+    const handleDecreaseProduct = async (product, productId, quantity, shopId) => {
         dispatch(decreaseCart(product));
-        const res = await updateProductInCart(cartId, productId, quantity);
+        console.log(product);
+        const res = await updateProductInCart(cartId, productId, quantity, shopId);
     }
 
-    const handleIncreaseProduct = async (product, productId, quantity) => {
+    const handleIncreaseProduct = async (product, productId, quantity, shopId) => {
         dispatch(addToCart(product));
-        const res = await updateProductInCart(cartId, productId, quantity);
+        const res = await updateProductInCart(cartId, productId, quantity, shopId);
+        toast.success("Increase quantity of products successfully!", {
+            position: "top-right"
+        })
     }
 
     useEffect(() => {
-        getProductsInCart(cartId);
+        getProductsInCart(cartId);    
         setCartId(localStorage.getItem("cartId"));
     }, [cartId])
 
     useEffect(() => {
-        const total = dataProductInCart.reduce((accumulator, currentProduct) =>
-            accumulator + currentProduct.price * currentProduct.quantity, 0);
-        setTotalMoney(total);
-    }, [dataProductInCart]);
-
-    useEffect(() => {
         dispatch(getTotals())
     }, [dispatch])
+
     return (
         <div>
             <Header />
@@ -77,14 +70,14 @@ const Cart = () => {
                                     dataProductInCart && dataProductInCart.length > 0 ?
                                         cart.cartItems.map((item) => (
                                             <tr key={item.productId}>
-                                                <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item, item.productId)} /></td>
+                                                <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item, item.productId, item.shopId)} /></td>
                                                 <td><img src={item.productImageUrl} alt="" /></td>
                                                 <td className='cart-product-name'>{item.productName}</td>
                                                 <td>{(item.price) ? (item.price) : (item.productPrice)}đ</td>
                                                 <td className='cart-items-quantity'>
-                                                    <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1)}>-</button>
-                                                    <input type="text" required value={item.quantity} onChange={handleChangeValueInput} />
-                                                    <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1)}>+</button>
+                                                    <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1, item.shopId)}>-</button>
+                                                    <input type="text" required value={item.quantity} />
+                                                    <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1, item.shopId)}>+</button>
                                                 </td>
                                                 <td className='cart-product-price'>{(item.price ? item.price * item.quantity : item.productPrice * item.quantity).toLocaleString('vi-VN')}đ</td>
                                             </tr>
@@ -104,7 +97,7 @@ const Cart = () => {
                                 Tổng tiền: <span>{cart.cartTotalAmount.toLocaleString('vi-VN')}đ</span>
                             </p>
                             <div>
-                                <Button text='Thanh toán' />
+                                <Button text='Thanh toán' onClick={() => navigate("/order")}/>
                             </div>
                         </div>
                     </div>

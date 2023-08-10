@@ -5,8 +5,7 @@ import { deleteProductFromCart, getArrayProductInCart, getProductInCart } from "
 export const fetchCartItems = createAsyncThunk(
     'cart/fetchCartItems',
     async () => {
-        const response = await getProductInCart(1);
-        console.log("response fetch items: ", response.data.data)
+        const response = await getProductInCart(localStorage.getItem("cartId"));
         const data = await response.data.data;
         return data;
     }
@@ -74,8 +73,6 @@ const cartSlice = createSlice({
             localStorage.setItem('cartItems', JSON.stringify(state.cartItems));
         },
         decreaseProductCart(state, action) {
-
-
             const nextCartItems = state.cartItems.filter(
                 (item) => item.productId !== action.payload.productId
             )
@@ -119,7 +116,6 @@ const cartSlice = createSlice({
         clearCart(state, action) {
             state.cartItems = [];
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-            toast.error("Cart cleared", { position: "bottom-left" });
         },
     },
     extraReducers: (builder) => {

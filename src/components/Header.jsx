@@ -4,25 +4,30 @@ import '../assets/scss/components/Header.scss';
 import Button from './Button';
 import Icon from './Icon';
 import userImage from '../assets/images/user.png';
-// import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { getProductInCart } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTotals } from '../store/cartSlice';
+import { getCurrentUserLogin } from '../store/apiRequest';
 
 
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [username, setUsername] = useState("");
     const cart = useSelector(state => state.cart);
     const accessToken = localStorage.getItem("accessToken");
-    const username = localStorage.getItem("username");
     const handleLogout = () => {
         localStorage.clear();
         navigate("/")
     }
+    const getCurrentCustomer = async () => {
+        const res = await getCurrentUserLogin();
+        setUsername(res.data.data.username);
+    }
     useEffect(() => {
-        dispatch(getTotals());
+        dispatch(getTotals());   
+        getCurrentCustomer(); 
+
     }, [cart])
     return (
         <>

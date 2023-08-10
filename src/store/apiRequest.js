@@ -2,10 +2,11 @@ import axios from "axios"
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const accessToken = localStorage.accessToken;
+const accessToken = localStorage.getItem("accessToken");
+export const api = `http://207.148.118.106:8286/api/v1`;
 
 export const getAllUsers = () => {
-    return axios.get('http://localhost:8080/api/v1/user',
+    return axios.get(`${api}/user`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -13,8 +14,17 @@ export const getAllUsers = () => {
         });
 }
 
-export const getCurrentUserLogin = (use) => {
-    return axios.get('http://localhost:8080/api/v1/user/current',
+export const getCurrentUserLogin = () => {
+    return axios.get(`${api}/user/current`,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+}
+
+export const getCustomer = (id) => {
+    return axios.get(`${api}/customer/${id}`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -23,7 +33,7 @@ export const getCurrentUserLogin = (use) => {
 }
 
 export const getAllCustomers = () => {
-    return axios.get('http://localhost:8080/api/v1/customer',
+    return axios.get(`${api}/customer`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -38,11 +48,11 @@ export const postCreateNewUser = (email, password, username) => {
         repeatPassword: password,
         username: username
     };
-    axios.post("http://localhost:8080/api/v1/auth/register",
+    axios.post(`${api}/auth/register`,
         userData
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -50,13 +60,13 @@ export const postCreateNewUser = (email, password, username) => {
 }
 
 export const deleteUser = (userId) => {
-    axios.delete('http://localhost:8080/api/v1/customer/' + userId, {
+    axios.delete(`${api}/customer/` + userId, {
         headers: {
             'Authorization': 'Bearer ' + accessToken
         }
     })
         .then(res => {
-            console.log("Xoa thanh cong");
+            console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
             alert(err)
@@ -64,7 +74,7 @@ export const deleteUser = (userId) => {
 }
 
 export const putUpdateUser = (data) => {
-    axios.put('http://localhost:8080/api/v1/customer/' + data.id,
+    axios.put(`${api}/customer/` + data.id,
         data,
         {
             headers: {
@@ -74,14 +84,14 @@ export const putUpdateUser = (data) => {
     )
         .then(res => {
             // window.location.reload();
-            console.log("ok");
+            console.log(`ok`);
         }).catch(err => {
             alert(err)
         });
 }
 
 export const getAllProducts = () => {
-    return axios.get('http://localhost:8080/api/v1/product',
+    return axios.get(`${api}/product`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -90,7 +100,7 @@ export const getAllProducts = () => {
 }
 
 export const getAllProductsByShop = (shopId) => {
-    return axios.get('http://localhost:8080/api/v1/product/', shopId,
+    return axios.get(`${api}/product/`, shopId,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -107,7 +117,7 @@ export const postCreateNewProduct = (name, price, description, image, discount, 
         discount: discount,
         stock: stock
     };
-    axios.put("http://localhost:8080/api/v1/product",
+    axios.put(`${api}/product`,
         product,
         {
             headers: {
@@ -116,7 +126,7 @@ export const postCreateNewProduct = (name, price, description, image, discount, 
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -124,13 +134,13 @@ export const postCreateNewProduct = (name, price, description, image, discount, 
 }
 
 export const deleteProduct = (productId) => {
-    axios.delete('http://localhost:8080/api/v1/product/' + productId, {
+    axios.delete(`${api}/product/` + productId, {
         headers: {
             'Authorization': 'Bearer ' + accessToken
         }
     })
         .then(res => {
-            console.log("Xoa thanh cong");
+            console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
             alert(err)
@@ -138,7 +148,7 @@ export const deleteProduct = (productId) => {
 }
 
 export const putUpdateProduct = (product) => {
-    axios.put("http://localhost:8080/api/v1/product/" + product.id,
+    axios.put(`${api}/product/` + product.id,
         product,
         {
             headers: {
@@ -147,7 +157,7 @@ export const putUpdateProduct = (product) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -155,7 +165,7 @@ export const putUpdateProduct = (product) => {
 }
 
 export const getAllShops = () => {
-    return axios.get('http://localhost:8080/api/v1/shop',
+    return axios.get(`${api}/shop`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -170,7 +180,7 @@ export const postCreateNewShop = (name, hotline, timeOpen, timeClose) => {
         timeOpen: timeOpen,
         timeClose: timeClose
     };
-    axios.post("http://localhost:8080/api/v1/shop",
+    axios.post(`${api}/shop`,
         shop,
         {
             headers: {
@@ -179,7 +189,7 @@ export const postCreateNewShop = (name, hotline, timeOpen, timeClose) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -187,13 +197,13 @@ export const postCreateNewShop = (name, hotline, timeOpen, timeClose) => {
 }
 
 export const deleteShop = (shopId) => {
-    axios.delete('http://localhost:8080/api/v1/shop/' + shopId, {
+    axios.delete(`${api}/shop/` + shopId, {
         headers: {
             'Authorization': 'Bearer ' + accessToken
         }
     })
         .then(res => {
-            console.log("Xoa thanh cong");
+            console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
             alert(err)
@@ -201,7 +211,7 @@ export const deleteShop = (shopId) => {
 }
 
 export const putUpdateShop = (shop) => {
-    axios.put("http://localhost:8080/api/v1/shop/" + shop.id,
+    axios.put(`${api}/shop/` + shop.id,
         shop,
         {
             headers: {
@@ -210,7 +220,7 @@ export const putUpdateShop = (shop) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -218,7 +228,7 @@ export const putUpdateShop = (shop) => {
 }
 
 export const getAllCategories = () => {
-    return axios.get('http://localhost:8080/api/v1/category',
+    return axios.get(`${api}/category`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -230,7 +240,7 @@ export const postCreateNewCategory = (name, hotline, timeOpen, timeClose) => {
     const category = {
         name: name
     };
-    axios.post("http://localhost:8080/api/v1/category",
+    axios.post(`${api}/category`,
         category,
         {
             headers: {
@@ -239,7 +249,7 @@ export const postCreateNewCategory = (name, hotline, timeOpen, timeClose) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -247,13 +257,13 @@ export const postCreateNewCategory = (name, hotline, timeOpen, timeClose) => {
 }
 
 export const deleteCategory = (categoryId) => {
-    axios.delete('http://localhost:8080/api/v1/category/' + categoryId, {
+    axios.delete(`${api}/category/${categoryId}`, {
         headers: {
             'Authorization': 'Bearer ' + accessToken
         }
     })
         .then(res => {
-            console.log("Xoa thanh cong");
+            console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
             alert(err)
@@ -261,7 +271,7 @@ export const deleteCategory = (categoryId) => {
 }
 
 export const putUpdateCategory = (category) => {
-    axios.put("http://localhost:8080/api/v1/category/" + category.id,
+    axios.put(`${api}/category/${category.id}`,
         category,
         {
             headers: {
@@ -270,7 +280,7 @@ export const putUpdateCategory = (category) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -278,8 +288,8 @@ export const putUpdateCategory = (category) => {
 }
 
 
-export const getDetailProducts = (id) => {
-    return axios.get('http://localhost:8080/api/v1/user/get-product-detail/' + id,
+export const getDetailProducts = (id, shopId) => {
+    return axios.get(`${api}/user/get-product-detail/${id}/shop/${shopId}`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -287,13 +297,14 @@ export const getDetailProducts = (id) => {
         });
 }
 
-export const postAddToCart = (productId, quantity) => {
+export const postAddToCart = (productId, quantity, shopId) => {
     const data = {
-        cartId: localStorage.getItem("cartId"),
+        cartId: localStorage.getItem(`cartId`),
         productId: productId,
-        quantity: quantity
+        quantity: quantity,
+        shopId: shopId
     }
-    axios.post("http://localhost:8080/api/v1/cart/" + data.cartId + "/products?productId=" + data.productId + "&quality=" + data.quantity,
+    axios.post(`${api}/cart/${data.cartId}/products?productId=${data.productId}&quality=${data.quantity}&shopId=${data.shopId}`,
         data,
         {
             headers: {
@@ -302,9 +313,9 @@ export const postAddToCart = (productId, quantity) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
             toast.info('Thêm vào giỏ hàng thành công!', {
-                position: "top-right",
+                position: `top-right`,
                 autoClose: 2000
             });
         })
@@ -314,7 +325,7 @@ export const postAddToCart = (productId, quantity) => {
 }
 
 export const putUpdateCart = (cart) => {
-    axios.put("http://localhost:8080/api/v1/shop/" + cart.id,
+    axios.put(`${api}/shop/${cart.id}`,
         cart,
         {
             headers: {
@@ -323,7 +334,7 @@ export const putUpdateCart = (cart) => {
         }
     )
         .then(response => {
-            console.log("ok", response);
+            console.log(`ok`, response);
         })
         .catch(error => {
             console.log(error)
@@ -331,7 +342,7 @@ export const putUpdateCart = (cart) => {
 }
 
 export const getProductInCart = (cartId) => {
-    return axios.get('http://localhost:8080/api/v1/cart/' + cartId,
+    return axios.get(`${api}/cart/${cartId}`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -340,7 +351,7 @@ export const getProductInCart = (cartId) => {
 }
 
 export const getArrayProductInCart = async (cartId) => {
-    const res = await axios.get('http://localhost:8080/api/v1/cart/' + cartId,
+    const res = await axios.get(`${api}/cart/${cartId}`,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -353,9 +364,10 @@ export const deleteProductFromCart = (cartId, productId) => {
     const data = {
         cartId: cartId,
         productId: productId,
-        quantity: 0
+        quantity: 0,
+        shopId: shopId
     }
-    axios.put('http://localhost:8080/api/v1/cart/' + cartId + '/products/' + productId + '?quantity=0',
+    axios.put(`${api}/cart/${cartId}/products/${productId}?quantity=0`,
         data,
         {
             headers: {
@@ -363,19 +375,20 @@ export const deleteProductFromCart = (cartId, productId) => {
             }
         })
         .then(res => {
-            console.log("Xoa thanh cong");
+            console.log(`Xoa thanh cong`);
         }).catch(err => {
             alert(err)
         });
 }
 
-export const updateProductInCart = (cartId, productId, quantity) => {
+export const updateProductInCart = (cartId, productId, quantity, shopId) => {
     const data = {
         cartId: cartId,
         productId: productId,
-        quantity: quantity
+        quantity: quantity,
+        shopId: shopId
     }
-    axios.put('http://localhost:8080/api/v1/cart/' + cartId + '/products/' + productId + '?quantity=' + quantity,
+    axios.put(`${api}/cart/${cartId}/products/${productId}?quantity=${quantity}&shopId=${data.shopId}`,
         data,
         {
             headers: {
@@ -383,19 +396,54 @@ export const updateProductInCart = (cartId, productId, quantity) => {
             }
         })
         .then(res => {
-            console.log(res, "update product");
+            console.log(res, `update product`);
         }).catch(err => {
             alert(err)
         });
 }
 
 export const searchProduct = (search) => {
-    return axios.get(`http://localhost:8080/api/v1/user/find-product-info?keyword=${search}&sortBy=productName&pageNum=2&pageSize=12`
+    return axios.get(`${api}/user/find-product-info?keyword=${search}&sortBy=productName&pageNum=2&pageSize=12`
         ,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         });
+}
+
+export const postCreateBill = (customerId, billId) => {
+    const data = {
+        "billId": billId,
+        "customerId": customerId
+    }
+    axios.post(`${api}/customer/${customerId}/bill/${billId}`,
+        data,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+}
+
+export const getAllBills = () => {
+    const res = axios.get(`${api}/bill`,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+    return res
+}
+
+export const getStatisticShops = () => {
+    const res = axios.get(`${api}/bill/statistic/shop`,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        });
+    return res
 }
 

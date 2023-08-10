@@ -14,14 +14,13 @@ const Search = () => {
     const [dataSearch, setDataSearch] = useState([]);
     const fetchSearchProducts = async () => {
         const res = await searchProduct(encodeURIComponent(search));
-        console.log(res.data.data.items, "dataa search");
         setDataSearch(res.data.data.items);
     }
 
     const handleSearchFood = async () => {
         fetchSearchProducts();
     }
-    
+
     useEffect(() => {
         fetchSearchProducts();
     }, [])
@@ -29,12 +28,16 @@ const Search = () => {
         <div>
             <div className='search search-container flex flex-column'>
                 <div className='search-products'>
-                    <input
-                    className='input-search-product'
-                    placeholder='Nhập tên món ăn.......'
-                    onChange={(e) => setSearch(e.target.value)}
-                    ></input>
-                    <button className='btn btn-primary' onClick={()=>handleSearchFood()}>Tìm kiếm</button>
+                    <form 
+                    className='form-search-products'
+                    onSubmit={(e) => { e.preventDefault(); handleSearchFood()}}>
+                        <input
+                            className='input-search-product'
+                            placeholder='Nhập tên món ăn.......'
+                            onChange={(e) => setSearch(e.target.value)}
+                        ></input>
+                        <button className='btn btn-primary button-search-product' onClick={() => handleSearchFood()}>Tìm kiếm</button>
+                    </form>
                 </div>
                 <div className='list-products-search'>
                     {/* <FoodSuggestions
@@ -45,14 +48,14 @@ const Search = () => {
                         isSlideShow={false}
                     /> */}
                     {dataSearch.map((item) => {
-                        if (!item._id || item === null){
-                            return <CardSearch 
-                            key={item.productId} 
-                            id={item.productId} 
-                            image={item.productImageUrl} 
-                            productName={item.productName} 
-                            shopAddress={item.shopAddress} 
-                            price={item.productPrice}/>
+                        if (!item._id || item === null) {
+                            return <CardSearch
+                                key={item.productId}
+                                id={item.productId}
+                                image={item.productImageUrl}
+                                productName={item.productName}
+                                shopAddress={item.shopAddress}
+                                price={item.productPrice} />
                         }
                     })}
                     {/* <div className="order-history-paging">

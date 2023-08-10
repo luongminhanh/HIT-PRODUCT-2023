@@ -27,8 +27,10 @@
     margin: 0 auto;
 
     @include tablet() {
-        width: 960px;
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     @include mobile() {
@@ -53,7 +55,7 @@
         overflow: hidden;
 
         @include tablet() {
-            width: 50%;
+            width: 90%;
         }
 
         @include mobile() {
@@ -221,9 +223,17 @@ li {
         width: $pageSize;
         margin: 0 auto;
 
-        >div {
+        .title-description {
             background-color: #ffc222;
-            width: max-content;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            width: 200px;
+        }
+
+        >div {
+            //background-color: #ffc222;
+            // width: max-content;
             padding: 10px 36px;
             margin: 0 auto 24px;
             font-family: $appleFont;
@@ -314,5 +324,24 @@ li {
                 }
             }
         }
+    }
+}
+
+.aspect-video {
+    display: flex;
+    justify-content: center;
+    margin: 0 !important;
+    width: 100%;
+}
+
+iframe {
+    width: 80%;
+
+    @include tablet() {
+        width: 100% !important;
+    }
+
+    @include mobile() {
+        width: 100% !important;
     }
 }

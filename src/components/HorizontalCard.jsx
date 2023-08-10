@@ -12,45 +12,44 @@ import { addToCart } from '../store/cartSlice';
 
 const HorizontalCard = ({
     id,
+    shopId,
     image,
     productName,
-    address,
+    shopAddress,
     price }) => {
 
     const [product, setProduct] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const fetchDetailProduct = async () => {
-        const res = await getDetailProducts(id);
+        const res = await getDetailProducts(id, shopId);
         if (res && res.data && res.data.data) {
             setProduct(res.data.data);
         }
     }
-    const handleClickCardProduct = async (id) => {
-        navigate(`/product/${id}`);
+    const handleClickCardProduct = async (id, shopId) => {
+        navigate(`/shop/${shopId}/product/${id}`);
         window.scrollTo(0, 0);
-        const res = await fetchDetailProduct(id);
-        console.log(res);
+        const res = await fetchDetailProduct(id, shopId);
     }
 
     const handleAddToCart = async () => {
         dispatch(addToCart(product));
-        const res = await postAddToCart(id, 1);
-        console.log(res);
+        const res = await postAddToCart(id, 1, shopId);
     }
 
     useEffect(() => {
-        fetchDetailProduct(id);
+        fetchDetailProduct();
     }, [product.productId])
     return (
-        <div className='horizontal-card' onClick={() => handleClickCardProduct(id)}>
+        <div className='horizontal-card' onClick={() => handleClickCardProduct(id, shopId)}>
             <div>
                 <div className="horizontal-card-img">
-                    <img src={product.productImageUrl} alt="" />
+                    <img src={image} alt="" />
                 </div>
                 <div className="horizontal-card-content">
                     <div>
-                        <span>{product.productName}</span>
+                        <span>{productName}</span>
                         <div className='card-icon'>
                             <img src={star} alt="" />
                             <img src={star} alt="" />
@@ -58,8 +57,8 @@ const HorizontalCard = ({
                             <img src={star} alt="" />
                             <img src={star} alt="" />
                         </div>
-                        <p>{product.shopAddress}</p>
-                        <h5>{product.productPrice}VND</h5>
+                        <p>{shopAddress}</p>
+                        <h5>{price}VND</h5>
                     </div>
                     <div>
                         <Button className="orderBtn" text={<i className='fa-solid fa-cart-shopping' />} onClick={() => handleAddToCart()} />

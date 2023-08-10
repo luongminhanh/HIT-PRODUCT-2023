@@ -11,6 +11,7 @@ import { addToCart } from '../store/cartSlice'
 
 const Card = ({
   id,
+  shopId,
   image,
   productName,
   address,
