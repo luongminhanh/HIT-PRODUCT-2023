@@ -58,16 +58,17 @@ const Register = () => {
           onSubmit={async (values) => {
 
             try {
-              await axios.post("http://localhost:8080/api/v1/auth/register", values)
+              await axios.post("http://207.148.118.106:8286/api/v1/auth/register", values)
               setIsSuccess(true);
               setIsError(false);
               let loginUser = {
                 username: values.username,
                 password: values.password
               }
-              const result = await axios.post('http://localhost:8080/api/v1/auth/login', loginUser);
+              const result = await axios.post('http://207.148.118.106:8286/api/v1/auth/login', loginUser);
               localStorage.clear();
-              localStorage.setItem("accessToken", result.data.data.accessToken)
+              localStorage.setItem("accessToken", result.data.data.accessToken);
+              localStorage.setItem("username", loginUser.username)
               setTimeout(() => {
                 navigate('/')
               }, 2000)

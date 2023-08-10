@@ -40,11 +40,15 @@
                 border-radius: 50%;
                 background-color: $whiteText;
                 margin: 0 auto;
+                padding-top: 12%;
 
                 img {
-                    @include absBox(20%, null, null, 5%);
-                    width: 94%;
+                    // @include absBox(20%, null, null, 5%);
+                    width: 94px;
+                    // height: 89px;
                     transition: all 0.4s;
+                    display: block;
+                    margin: 0 auto;
                 }
 
 
@@ -54,12 +58,13 @@
                 padding: $pad20-0;
 
                 h4 {
-                    font-size: 16px;
+                    font-size: 14px;
                     color: $color1e1d23;
                     line-height: 30px;
                     opacity: 0.95;
                     font-family: $appleFont;
                     font-weight: 700;
+                    text-transform: uppercase;
                 }
 
                 p {
