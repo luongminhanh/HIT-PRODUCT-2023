@@ -16,12 +16,13 @@ const Header = () => {
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart);
     const accessToken = localStorage.getItem("accessToken");
+    const username = localStorage.getItem("username");
     const handleLogout = () => {
         localStorage.clear();
         navigate("/")
     }
     useEffect(() => {
-        dispatch(getTotals());      
+        dispatch(getTotals());
     }, [cart])
     return (
         <>
@@ -44,7 +45,7 @@ const Header = () => {
                                     <div className="img-user">
                                         <div >
                                             <img src={userImage} alt="" />
-                                            <p>trang123</p>
+                                            <p>{username}</p>
                                         </div>
                                         <div className="list-menu">
                                             <Button className="list-menu-button" onClick={() => navigate('/infor')} text='Tài Khoản Của Tôi'></Button>

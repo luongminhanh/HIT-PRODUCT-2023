@@ -1,4 +1,5 @@
 import axios from "axios"
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const accessToken = localStorage.accessToken;
@@ -339,7 +340,7 @@ export const getProductInCart = (cartId) => {
 }
 
 export const getArrayProductInCart = async (cartId) => {
-    const res =  await axios.get('http://localhost:8080/api/v1/cart/' + cartId,
+    const res = await axios.get('http://localhost:8080/api/v1/cart/' + cartId,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -390,10 +391,11 @@ export const updateProductInCart = (cartId, productId, quantity) => {
 
 export const searchProduct = (search) => {
     return axios.get(`http://localhost:8080/api/v1/user/find-product-info?keyword=${search}&sortBy=productName&pageNum=2&pageSize=12`
-    ,
+        ,
         {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
         });
 }
+

@@ -42,7 +42,7 @@ const LogIn = () => {
                         }
                         onSubmit={async (values) => {
                             try {
-                                const result = await axios.post('http://localhost:8080/api/v1/auth/login', values);
+                                const result = await axios.post('http://207.148.118.106:8286/api/v1/auth/login', values);
                                 if (result.status == 200) {
                                     setIsError(false)
                                     setIsSuccess(true);
@@ -51,7 +51,8 @@ const LogIn = () => {
                                     }, 2000)
                                     localStorage.clear();
                                     dispatch(clearCart());
-                                    localStorage.setItem("accessToken", result.data.data.accessToken)
+                                    localStorage.setItem("accessToken", result.data.data.accessToken);
+                                    localStorage.setItem("username", values.username);
                                 }
                             } catch (error) {
                                 setIsError(true);
@@ -112,7 +113,7 @@ const LogIn = () => {
             </div>
             {
                 isError &&
-                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc mật khẩu' className='error'></Alert>
+                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc mật khẩu hoặc bạn chưa đăng ký tài khoản.' className='error'></Alert>
             }
             {
                 isSuccess &&

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import imgProducts from '../assets/images/productImage.jpg';
 import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { deleteProductFromCart, getProductInCart, updateProductInCart } from '../store/apiRequest';
 import { addToCart, decreaseCart, decreaseProductCart, getTotals, removeFromCart } from '../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +16,7 @@ const Cart = () => {
 
     const handleChangeValueInput = (e) => {
         setNumbersProduct(e.target.value);
-    }  
+    }
 
     const getProductsInCart = async (cartId) => {
         const res = await getProductInCart(cartId);
@@ -75,23 +74,25 @@ const Cart = () => {
                             </thead>
                             <tbody>
                                 {
-                                    dataProductInCart && dataProductInCart.length >  0? 
-                                     cart.cartItems.map((item) => (
-                                        <tr key={item.productId}>
-                                            <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item, item.productId)} /></td>
-                                            <td><img src={item.productImageUrl} alt="" /></td>
-                                            <td className='cart-product-name'>{item.productName}</td>
-                                            <td>{(item.price) ? (item.price) : (item.productPrice)}đ</td>
-                                            <td className='cart-items-quantity'>
-                                                <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1)}>-</button>
-                                                <input type="text" required value={item.quantity} onChange={handleChangeValueInput} />
-                                                <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1)}>+</button>
-                                            </td>
-                                            <td className='cart-product-price'>{(item.price ? item.price * item.quantity : item.productPrice * item.quantity).toLocaleString('vi-VN')}đ</td>
+                                    dataProductInCart && dataProductInCart.length > 0 ?
+                                        cart.cartItems.map((item) => (
+                                            <tr key={item.productId}>
+                                                <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item, item.productId)} /></td>
+                                                <td><img src={item.productImageUrl} alt="" /></td>
+                                                <td className='cart-product-name'>{item.productName}</td>
+                                                <td>{(item.price) ? (item.price) : (item.productPrice)}đ</td>
+                                                <td className='cart-items-quantity'>
+                                                    <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1)}>-</button>
+                                                    <input type="text" required value={item.quantity} onChange={handleChangeValueInput} />
+                                                    <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1)}>+</button>
+                                                </td>
+                                                <td className='cart-product-price'>{(item.price ? item.price * item.quantity : item.productPrice * item.quantity).toLocaleString('vi-VN')}đ</td>
+                                            </tr>
+                                        ))
+                                        :
+                                        <tr>
+                                            <td colSpan={6}>Chưa có sản phẩm nào trong giỏ hàng</td>
                                         </tr>
-                                    ))
-                                    :
-                                    "Chưa có sản phẩm nào trong giỏ hàng"
                                 }
                             </tbody>
                         </table>
