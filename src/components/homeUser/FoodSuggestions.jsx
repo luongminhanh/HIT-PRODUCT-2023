@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from '../Card';
+import CardSearch from '../CardSearch'
 import Button from '../Button';
 import Slider from "react-slick";
 import HorizontalCard from '../HorizontalCard';
@@ -68,11 +69,12 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         &&
                                                         data.map(productItem => (
                                                             <HorizontalCard
+                                                                shopId={productItem.shopId}
                                                                 key={productItem.id ? productItem.id : productItem.productId}
                                                                 id={productItem.id ? productItem.id : productItem.productId}
                                                                 image={productItem.image ? productItem.image : productItem.productImageUrl}
                                                                 productName={productItem.productName}
-                                                                address={productItem.address ? productItem.address : productItem.shopAddress}
+                                                                shopAddress={productItem.address ? productItem.address : productItem.shopAddress}
                                                                 price={productItem.price ? productItem.price : productItem.productPrice}
                                                             />
                                                         )
@@ -89,13 +91,14 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         data && data.length > 0
                                                         &&
                                                         data.map(productItem => (
-                                                            <Card
-                                                            key={productItem.id ? productItem.id : productItem.productId}
-                                                            id={productItem.id ? productItem.id : productItem.productId}
-                                                            image={productItem.image ? productItem.image : productItem.productImageUrl}
-                                                            productName={productItem.productName}
-                                                            address={productItem.address ? productItem.address : productItem.shopAddress}
-                                                            price={productItem.price ? productItem.price : productItem.productPrice}
+                                                            <CardSearch
+                                                                shopId={productItem.shopId}
+                                                                key={productItem.id ? productItem.id : productItem.productId}
+                                                                id={productItem.id ? productItem.id : productItem.productId}
+                                                                image={productItem.image ? productItem.image : productItem.productImageUrl}
+                                                                productName={productItem.productName}
+                                                                shopAddress={productItem.address ? productItem.address : productItem.shopAddress}
+                                                                price={productItem.price ? productItem.price : productItem.productPrice}
                                                             />
                                                         ))
                                                     }
@@ -115,12 +118,13 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     &&
                                                     data.map(productItem => (
                                                         <HorizontalCard
-                                                        key={productItem.id ? productItem.id : productItem.productId}
-                                                        id={productItem.id ? productItem.id : productItem.productId}
-                                                        image={productItem.image ? productItem.image : productItem.productImageUrl}
-                                                        productName={productItem.productName}
-                                                        address={productItem.address ? productItem.address : productItem.shopAddress}
-                                                        price={productItem.price ? productItem.price : productItem.productPrice}
+                                                            shopId={productItem.shopId}
+                                                            key={productItem.id ? productItem.id : productItem.productId}
+                                                            id={productItem.id ? productItem.id : productItem.productId}
+                                                            image={productItem.image ? productItem.image : productItem.productImageUrl}
+                                                            productName={productItem.productName}
+                                                            shopAddress={productItem.address ? productItem.address : productItem.shopAddress}
+                                                            price={productItem.price ? productItem.price : productItem.productPrice}
                                                         />
                                                     ))
                                                 }
@@ -131,13 +135,14 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     data && data.length > 0
                                                     &&
                                                     data.map(productItem => (
-                                                        <Card
-                                                        key={productItem.id ? productItem.id : productItem.productId}
-                                                        id={productItem.id ? productItem.id : productItem.productId}
-                                                        image={productItem.image ? productItem.image : productItem.productImageUrl}
-                                                        productName={productItem.productName}
-                                                        address={productItem.address ? productItem.address : productItem.shopAddress}
-                                                        price={productItem.price ? productItem.price : productItem.productPrice}
+                                                        <CardSearch
+                                                            shopId={productItem.shopId}
+                                                            key={productItem.id ? productItem.id : productItem.productId}
+                                                            id={productItem.id ? productItem.id : productItem.productId}
+                                                            image={productItem.image ? productItem.image : productItem.productImageUrl}
+                                                            productName={productItem.productName}
+                                                            shopAddress={productItem.address ? productItem.address : productItem.shopAddress}
+                                                            price={productItem.price ? productItem.price : productItem.productPrice}
                                                         />
                                                     ))
                                                 }

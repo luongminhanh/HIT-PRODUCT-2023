@@ -1,61 +1,83 @@
-import momo from "../../assets/images/momo.png"
-import AdminDataTable from "../AdminDataTable";
 import '../../assets/scss/components/ManageUser.scss'
+import { useEffect, useState } from "react";
+// import ModalAddNewOrder from './ModalAddOrder';
+import TableOrders from './TableOrders';
+import ModalViewOrder from './ModalViewOrder';
+// import ModalUpdateOrder from './ModalUpdateOrder';
+// import ModalDeleteOrder from './ModalDeleteOrder';
+import { getAllBills } from '../../store/apiRequest';
 
-const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    {
-        field: 'avatar',
-        headerName: 'Ảnh',
-        width: 150,
-        renderCell: (params) => {
-            return <img src={params.row.img || momo} alt="st" />
-        }
-    },
-    {
-        field: 'firstName',
-        headerName: 'Họ',
-        width: 150,
-        editable: true,
-    },
-    {
-        field: 'lastName',
-        headerName: 'Tên',
-        width: 150,
-        editable: true,
-    },
-    {
-        field: 'age',
-        headerName: 'Tuổi',
-        width: 110,
-        editable: true,
-    },
-    {
-        field: 'phone',
-        headerName: 'Điện thoại',
-        width: 200,
-        editable: true,
-    },
 
-];
-const rows = [
-    { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, phone: '012342983' },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42, phone: '012342983' },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45, phone: '012342983' },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16, phone: '012342983' },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null, phone: '012342983' },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150, phone: '012342983' },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44, phone: '012342983' },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36, phone: '012342983' },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65, phone: '012342983' },
-];
 const ManageOrders = () => {
+    const [showModalAddNewOrder, setShowModalAddNewOrder] = useState(false);
+    const [listOrder, setListOrder] = useState([]);
+    const [showModalUpdateOrder, setShowModalUpdateOrder] = useState(false);
+    const [dataOrder, setDataOrder] = useState({});
+    const [showModalViewOrder, setShowModalViewOrder] = useState(false);
+    const [showModalDeleteOrder, setShowModalDeleteOrder] = useState(false);
+    const [dataDeleteOrder, setDataDeleteOrder] = useState({});
+
+    const handleClickBtnUpdate = (Order) => {
+        setShowModalUpdateOrder(true);
+        setDataOrder(Order);
+    }
+
+    const handleClickViewOrder = (Order) => {
+        setShowModalViewOrder(true);
+        setDataOrder(Order);
+    }
+
+    const handleClickBtnDelete = (OrderId) => {
+        setShowModalDeleteOrder(true);
+        setDataDeleteOrder(OrderId);
+    }
+
+    const fetchListOrder = async () => {
+        const res = await getAllBills();
+        if (res && res.data) {
+            console.log(res.data.data.items);
+            setListOrder(res.data.data.items);
+        }
+    }
+
+    useEffect(() => {
+        fetchListOrder();
+    }, [])
+
     return (
         <div className="manage-users">
             <div className="info">
-                <h1>Quản lý đơn hàng</h1>
+                <h1>Quản lý danh mục</h1>
+                <button className="btn btn-primary" onClick={() => setShowModalAddNewOrder(true)}>Thêm mới</button>
             </div>
-            <AdminDataTable slug="orders" columns={columns} rows={rows} />
+              {/* <ModalAddNewOrder
+                show={showModalAddNewOrder}
+                setShow={setShowModalAddNewOrder}
+                fetchListOrder={fetchListOrder}
+            />
+            <ModalDeleteOrder
+                show={showModalDeleteOrder}
+                setShow={setShowModalDeleteOrder}
+                fetchListOrder={fetchListOrder}
+                OrderId={dataDeleteOrder}
+            />  */}
+             {/* <ModalUpdateOrder
+                show={showModalUpdateOrder}
+                setShow={setShowModalUpdateOrder}
+                fetchListOrder={fetchListOrder}
+                dataOrder={dataOrder}
+            /> */}
+            <ModalViewOrder
+                show={showModalViewOrder}
+                setShow={setShowModalViewOrder}
+                dataOrder={dataOrder} 
+            />  
+            <TableOrders
+                listOrder={listOrder}
+                handleClickBtnUpdate={handleClickBtnUpdate}
+                handleClickViewOrder={handleClickViewOrder}
+                handleClickBtnDelete={handleClickBtnDelete}
+            />
         </div>
     )
 }

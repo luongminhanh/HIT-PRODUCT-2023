@@ -14,13 +14,9 @@ const Home = () => {
   const cart = useSelector((state) => state.cart);
 
   const findCartId = async () => {
-    const resCus = await getAllCustomers();
-    // console.log("resCus", resCus.data.data.items);
     const resCur = await getCurrentUserLogin();
-    console.log('resCur', resCur.data.data.username);
-    const currentUserId = resCus.data.data.items.find(obj => obj.fullName === resCur.data.data.username);
-    localStorage.setItem("cartId", currentUserId.id);
-    setCartId(currentUserId.id);
+    localStorage.setItem("cartId", resCur.data.data.customerId);
+    setCartId(resCur.data.data.customerId);
   }
 
   const fetchItemInCart = async () => {
@@ -32,15 +28,17 @@ const Home = () => {
 
   useEffect(() => {
     findCartId();
+    console.log("hello");
+  }, [cartId]);
+
+  useEffect(() => {    
     fetchItemInCart();
-    dispatch(fetchCartItems())
-    console.log("quantity: ", cart.cartItems)
-  }, [cartId])
+    dispatch(fetchCartItems());
+  }, [])
 
   return (
     <div>
       <Header />
-      {/* <MainHome /> */}
       <Outlet />
       <Footer />
     </div >

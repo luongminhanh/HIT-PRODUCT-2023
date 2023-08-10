@@ -11,6 +11,7 @@ import { addToCart } from '../store/cartSlice'
 
 const CardSearch = ({
   id,
+  shopId,
   image,
   productName,
   shopAddress,
@@ -19,8 +20,8 @@ const CardSearch = ({
   const dispatch = useDispatch();
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
-  const fetchDetailProduct = async (id) => {
-    const res = await getDetailProducts(id);
+  const fetchDetailProduct = async () => {
+    const res = await getDetailProducts(id, shopId);
     if (res && res.data && res.data.data) {
       setProduct(res.data.data);
     }
@@ -28,21 +29,19 @@ const CardSearch = ({
   const handleAddToCart = async () => {
     dispatch(increment());
     dispatch(addToCart(product));
-    const res = await postAddToCart(id, 1);
-    console.log(res);
+    const res = await postAddToCart(id, 1, shopId);
   }
-  const handleClickCardProduct = async (id) => {
-    navigate(`/product/${id}`);
+  const handleClickCardProduct = async (id, shopId) => {
+    navigate(`/shop/${shopId}/product/${id}`);
     window.scrollTo(0, 0);
-    const res = await fetchDetailProduct(id); 
-    console.log(res);
+    const res = await fetchDetailProduct(id, shopId); 
   }
   useEffect(() => {
-    fetchDetailProduct(id); 
+    fetchDetailProduct(); 
   }, [product.productId])
 
   return (
-    <div className='card w-25' onClick={() => handleClickCardProduct(id)}>
+    <div className='card' onClick={() => handleClickCardProduct(id, shopId)}>
       <div className="box">Đang hoạt động</div>
       <div className='imgProduct'>
         <div>

@@ -10,6 +10,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Alert from '../components/Alert';
+import { api } from '../store/apiRequest';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../store/cartSlice';
 
 const Schema = Yup.object({
   password: Yup.string()
@@ -29,7 +32,8 @@ const Register = () => {
   const [isError, setIsError] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [isShowPassWord, setIsShowPassWord] = useState(false)
-  const [isShowReatPassword, setIsShowReatPassword] = useState(false)
+  const [isShowReatPassword, setIsShowReatPassword] = useState(false);
+  const dispatch = useDispatch();
   const handleShowPassword = () => {
     if (isShowPassWord) setIsShowPassWord(false)
     else setIsShowPassWord(true)
@@ -58,18 +62,19 @@ const Register = () => {
           onSubmit={async (values) => {
 
             try {
-              await axios.post("http://localhost:8080/api/v1/auth/register", values)
+              await axios.post(`${api}/auth/register`, values)
               setIsSuccess(true);
               setIsError(false);
               let loginUser = {
                 username: values.username,
                 password: values.password
               }
-              const result = await axios.post('http://localhost:8080/api/v1/auth/login', loginUser);
+              const result = await axios.post(`${api}/auth/login`, loginUser);
               localStorage.clear();
+              dispatch(clearCart());
               localStorage.setItem("accessToken", result.data.data.accessToken)
               setTimeout(() => {
-                navigate('/')
+                 navigate('/');
               }, 2000)
             } catch (error) {
               console.log(error);

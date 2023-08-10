@@ -6,19 +6,43 @@ import {
 } from "@ant-design/icons";
 import '../assets/scss/components/DashBoard.scss'
 import { Space } from "antd";
-import { useEffect, useState } from "react";
 import DashBoardCard from "./DashBoardCard";
 import { dataProducts, dataRevenue, dataUser } from "../data";
 import BarChartBox from "./BarChartBox";
 import PieChartBox from "./PieChartBox";
 import AreaChartBox from "./AreaChartBox";
+import { useEffect, useState } from "react";
+import { getAllBills, getAllCustomers, getStatisticShops } from "../store/apiRequest";
 
 function Dashboard() {
+  const [quantityOfBills, setQuantityOfBills] = useState(0);
+  const [quantityOfCustomers, setQuantityOfCustomers] = useState(0);
+  const [revenue, setRevenue] = useState(0);
+
+  const handleGetAllBills = async () => {
+    const res = await getAllBills();
+    console.log("bill", res);
+    setQuantityOfBills(res?.data?.data?.items.length);
+  }
+  const handleGetAllCustomers = async () => {
+    const res = await getAllCustomers();
+    setQuantityOfCustomers(res.data.data.items.length);
+  }
+  const handleGetStatisticOfShops = async () => {
+    const res = await getStatisticShops();
+    const rev = res.data.data.reduce((total, obj) => total + obj.revenue, 0)
+    setRevenue(rev);
+    console.log(res.data.data, "doanh thu rev");
+  }
+  useEffect(() => {
+    handleGetAllBills();
+    handleGetAllCustomers();
+    handleGetStatisticOfShops();
+  }, [])
   return (
     <div className="admin-dashboard">
       <div className="dashboard-sum">
         <Space size={20} direction="vertical">
-          {/* <Typography.Title level={4}>Trang chủ</Typography.Title> */}
           <Space direction="horizontal"
             style={{
               display: "flex",
@@ -38,7 +62,7 @@ function Dashboard() {
                 />
               }
               title={"Số đơn đặt hàng"}
-              value="500"
+              value={quantityOfBills}
               data={dataUser}
             />
             <DashBoardCard
@@ -70,7 +94,7 @@ function Dashboard() {
                 />
               }
               title={"Tổng số khách hàng"}
-              value="1500"
+              value={quantityOfCustomers}
               data={dataUser}
             />
             <DashBoardCard
@@ -86,7 +110,7 @@ function Dashboard() {
                 />
               }
               title={"Doanh thu"}
-              value="151269999"
+              value={revenue}
               data={dataRevenue}
             />
 

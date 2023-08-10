@@ -1,13 +1,13 @@
 import { ErrorMessage, Field, Formik } from 'formik';
 import * as Yup from 'yup';
-import React, { useState } from 'react';
-//import imageLogin from '../assets/images/imageLogin.jpg';
 import img from '../assets/images/loginImage.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Alert from '../components/Alert';
 import { useDispatch } from 'react-redux';
 import { clearCart } from '../store/cartSlice';
+import { api } from '../store/apiRequest';
+import { useState } from 'react';
 
 const LogIn = () => {
     const [isShow, setIsShow] = useState(false)
@@ -42,12 +42,12 @@ const LogIn = () => {
                         }
                         onSubmit={async (values) => {
                             try {
-                                const result = await axios.post('http://localhost:8080/api/v1/auth/login', values);
+                                const result = await axios.post(`${api}/auth/login`, values);
                                 if (result.status == 200) {
                                     setIsError(false)
                                     setIsSuccess(true);
                                     setTimeout(() => {
-                                        navigate('/')
+                                        navigate("/");                                       
                                     }, 2000)
                                     localStorage.clear();
                                     dispatch(clearCart());
@@ -63,10 +63,7 @@ const LogIn = () => {
                         }}
                     >
                         {({
-                            values,
                             handleSubmit,
-                            isSubmitting,
-                            /* and other goodies */
                         }) => (
                             <form action="" onSubmit={handleSubmit}>
                                 <div className="img">
