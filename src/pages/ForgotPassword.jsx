@@ -32,7 +32,7 @@ const ForgotPassword = () => {
                         }
                         onSubmit={async (value) => {
                             try {
-                                await axios.post('http://localhost:8080/api/v1/auth/forget-password', value)
+                                await axios.post('http://207.148.118.106:8286/api/v1/auth/forget-password', value)
                                 setIsError(false)
                                 setIsSuccess(true);
                                 setTimeout(() => {
@@ -95,7 +95,7 @@ const ForgotPassword = () => {
             </div>
             {
                 isError &&
-                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc gmail' className='error'></Alert>
+                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc gmail hoặc bạn chưa đăng ký tài khoản.' className='error'></Alert>
             }
             {
                 isSuccess &&

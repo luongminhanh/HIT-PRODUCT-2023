@@ -51,7 +51,8 @@ const LogIn = () => {
                                     }, 2000)
                                     localStorage.clear();
                                     dispatch(clearCart());
-                                    localStorage.setItem("accessToken", result.data.data.accessToken)
+                                    localStorage.setItem("accessToken", result.data.data.accessToken);
+                                    localStorage.setItem("username", values.username);
                                 }
                             } catch (error) {
                                 setIsError(true);
@@ -109,7 +110,7 @@ const LogIn = () => {
             </div>
             {
                 isError &&
-                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc mật khẩu' className='error'></Alert>
+                <Alert title='Lỗi!' describe='Sai tên đăng nhập hoặc mật khẩu hoặc bạn chưa đăng ký tài khoản.' className='error'></Alert>
             }
             {
                 isSuccess &&

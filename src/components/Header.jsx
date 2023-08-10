@@ -27,6 +27,7 @@ const Header = () => {
     useEffect(() => {
         dispatch(getTotals());   
         getCurrentCustomer(); 
+
     }, [cart])
     return (
         <>
