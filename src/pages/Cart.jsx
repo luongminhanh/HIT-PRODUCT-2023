@@ -70,14 +70,14 @@ const Cart = () => {
                                     dataProductInCart && dataProductInCart.length > 0 ?
                                         cart.cartItems.map((item) => (
                                             <tr key={item.productId}>
-                                                <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item, item.productId)} /></td>
+                                                <td><Button text={<i className="fa-solid fa-trash-can"></i>} onClick={() => handleRemoveProductFromCart(item, item.productId, item.shopId)} /></td>
                                                 <td><img src={item.productImageUrl} alt="" /></td>
                                                 <td className='cart-product-name'>{item.productName}</td>
                                                 <td>{(item.price) ? (item.price) : (item.productPrice)}đ</td>
                                                 <td className='cart-items-quantity'>
-                                                    <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1)}>-</button>
+                                                    <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1, item.shopId)}>-</button>
                                                     <input type="text" required value={item.quantity} />
-                                                    <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1)}>+</button>
+                                                    <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1, item.shopId)}>+</button>
                                                 </td>
                                                 <td className='cart-product-price'>{(item.price ? item.price * item.quantity : item.productPrice * item.quantity).toLocaleString('vi-VN')}đ</td>
                                             </tr>

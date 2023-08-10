@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-const accessToken = localStorage.accessToken;
+const accessToken = localStorage.getItem("accessToken");
 export const api = `http://207.148.118.106:8286/api/v1`;
 
 export const getAllUsers = () => {
