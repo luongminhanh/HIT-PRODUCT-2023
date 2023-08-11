@@ -47,12 +47,13 @@ const LogIn = () => {
                                     setIsError(false)
                                     setIsSuccess(true);
                                     setTimeout(() => {
-                                        navigate("/");                                       
+                                        navigate("/");                                                                             
                                     }, 2000)
                                     localStorage.clear();
-                                    dispatch(clearCart());
+                                    dispatch(clearCart());                                    
                                     localStorage.setItem("accessToken", result.data.data.accessToken);
                                     localStorage.setItem("username", values.username);
+                                    // localStorage.setItem("accessToken", result.data.data.accessToken);
                                 }
                             } catch (error) {
                                 setIsError(true);

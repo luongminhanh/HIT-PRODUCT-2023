@@ -39,8 +39,8 @@ const Cart = () => {
     }
 
     useEffect(() => {
-        getProductsInCart(cartId);    
         setCartId(localStorage.getItem("cartId"));
+        getProductsInCart(cartId);            
     }, [cartId])
 
     useEffect(() => {
