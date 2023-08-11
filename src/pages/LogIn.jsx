@@ -20,6 +20,13 @@ const LogIn = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    // const findCartId = async () => {
+    //     const resCur = await getCurrentUserLogin();
+    //     console.log(resCur.data.data.customerId,"here");
+    //     localStorage.setItem("cartId", resCur.data.data.customerId);
+    //     setCartId(resCur.data.data.customerId);
+    //   }
+
     return (
         <div className='login'>
             <div className='login__center'>
@@ -46,9 +53,9 @@ const LogIn = () => {
                                 if (result.status == 200) {
                                     setIsError(false)
                                     setIsSuccess(true);
-                                    setTimeout(() => {
+                                    // setTimeout(() => {
                                         navigate("/");                                                                             
-                                    }, 2000)
+                                    // }, 2000)
                                     localStorage.clear();
                                     dispatch(clearCart());                                    
                                     localStorage.setItem("accessToken", result.data.data.accessToken);

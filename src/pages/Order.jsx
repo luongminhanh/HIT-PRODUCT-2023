@@ -25,7 +25,7 @@ const Order = () => {
 
     const handlePayBill = async () => {
         alert('Đã thanh toán');
-        const res = await postCreateBill(1, 1);
+        // const res = await get;
         console.log(res);
     }
 

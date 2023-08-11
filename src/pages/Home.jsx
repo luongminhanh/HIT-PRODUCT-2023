@@ -10,11 +10,13 @@ import { fetchCartItems } from '../store/cartSlice';
 const Home = () => {
   const [cartItem, setCartItem] = useState({});
   const [cartId, setCartId] = useState(0);
+   const [username, setUsername] = useState("");
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
   const findCartId = async () => {
     const resCur = await getCurrentUserLogin();
+    console.log(resCur.data.data.customerId,"here");
     localStorage.setItem("cartId", resCur.data.data.customerId);
     setCartId(resCur.data.data.customerId);
   }
@@ -28,14 +30,23 @@ const Home = () => {
   useEffect(() => {
     findCartId();
     console.log("hello");
-    
-  }, []);
+  }, [cartId]);
 
-  useEffect(() => {    
+  const getCurrentCustomer = async () => {
+    const res = await getCurrentUserLogin();
+    setUsername(localStorage.getItem("username"));
+    console.log("user đang login", res.data.data);
+    setCartId(res.data.data.customerId);
+    console.log(cartId, "cartId nè");
+}
+
+  useEffect(() => {     
+    getCurrentCustomer(); 
     fetchItemInCart();
     dispatch(fetchCartItems());
+    localStorage.setItem("cartId", cartId);
     // window.location.reload();
-  }, [])
+  }, [cartId])
 
   return (
     <div>
