@@ -17,6 +17,8 @@ const Home = () => {
     const resCur = await getCurrentUserLogin();
     localStorage.setItem("cartId", resCur.data.data.customerId);
     setCartId(resCur.data.data.customerId);
+    console.log(resCur);
+
   }
 
   const fetchItemInCart = async () => {
@@ -28,10 +30,10 @@ const Home = () => {
 
   useEffect(() => {
     findCartId();
-    console.log("hello");
+    // console.log("hello");
   }, [cartId]);
 
-  useEffect(() => {    
+  useEffect(() => {
     fetchItemInCart();
     dispatch(fetchCartItems());
   }, [])

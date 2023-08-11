@@ -35,11 +35,11 @@ const Card = ({
   const handleClickCardProduct = async (id) => {
     navigate(`/product/${id}`);
     window.scrollTo(0, 0);
-    const res = await fetchDetailProduct(id); 
+    const res = await fetchDetailProduct(id);
     console.log(res);
   }
   useEffect(() => {
-    fetchDetailProduct(id); 
+    fetchDetailProduct(id);
   }, [product.productId])
 
   return (
@@ -51,19 +51,13 @@ const Card = ({
         </div>
       </div>
       <div className="card-content">
-        {/* <div className='card-icon'>
-          <img src={star} alt="" />
-          <img src={star} alt="" />
-          <img src={star} alt="" />
-          <img src={star} alt="" />
-          <img src={star} alt="" />
-        </div> */}
         <div>
-          <span>{product.productName}</span>
+          <div className="card-content-nameproduct">
+            <span>{product.productName}</span>
+          </div>
           <p>{product.shopAddress}</p>
           <div className="productItem">
             <div style={{ display: 'flex', alignItems: 'center ' }}>
-              {/* <img src={money} alt="" /> */}
               <h3>{product.productPrice} VND</h3>
             </div>
             <div>

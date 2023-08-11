@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Loading from '../Loading';
 import axios from 'axios';
 import Error from '../Error';
-// import comtam from '../../assets/images/buncha.png'
+import { api } from '../../store/apiRequest';
 const Category = () => {
     const settings = {
         dots: false,
@@ -50,11 +50,9 @@ const Category = () => {
     useEffect(() => {
         (async () => {
             try {
-                const result = await axios.get('http://207.148.118.106:8286/api/v1/category?pageNum=1');
-                setDataListCategory(result.data.data.items);
+                const result = await axios.get("http://207.148.118.106:8286/api/v1/category");
+                setDataListCategory(result.data.data);
                 setIsLoading(false);
-                console.log(result.data.data.items);
-
             } catch (error) {
                 console.log(error);
                 setIsLoading(false);
@@ -72,14 +70,13 @@ const Category = () => {
                         <Slider {...settings}>
                             {
                                 dataListCategory ? dataListCategory.map((category) => (
-                                    <div className='categoryItem' key={category.id}>
+                                    <div className='categoryItem' key={category.categoryId}>
                                         <div className='categoryImage'>
                                             <img src={category.image} alt="" />
-                                            {/* <img src={comtam} alt="" /> */}
                                         </div>
                                         <div className='categoryContent'>
                                             <h4>{category.name}</h4>
-                                            <p>{category.numbersProduct} sản phẩm</p>
+                                            <p>{category.quantity} sản phẩm</p>
                                         </div>
                                     </div>
 

@@ -43,12 +43,14 @@ const LogIn = () => {
                         onSubmit={async (values) => {
                             try {
                                 const result = await axios.post(`${api}/auth/login`, values);
+
                                 if (result.status == 200) {
                                     setIsError(false)
                                     setIsSuccess(true);
                                     setTimeout(() => {
-                                        navigate("/");                                       
+                                        navigate("/");
                                     }, 2000)
+                                    console.log("ok");
                                     localStorage.clear();
                                     dispatch(clearCart());
                                     localStorage.setItem("accessToken", result.data.data.accessToken);

@@ -13,20 +13,15 @@ import { getCurrentUserLogin } from '../store/apiRequest';
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [username, setUsername] = useState("");
     const cart = useSelector(state => state.cart);
     const accessToken = localStorage.getItem("accessToken");
+    const username = localStorage.getItem("username")
     const handleLogout = () => {
         localStorage.clear();
         navigate("/")
     }
-    const getCurrentCustomer = async () => {
-        const res = await getCurrentUserLogin();
-        setUsername(res.data.data.username);
-    }
     useEffect(() => {
-        dispatch(getTotals());   
-        getCurrentCustomer(); 
+        dispatch(getTotals());
 
     }, [cart])
     return (
