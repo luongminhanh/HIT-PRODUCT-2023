@@ -6,7 +6,7 @@ export const fetchCartItems = createAsyncThunk(
     'cart/fetchCartItems',
     async () => {
         const response = await getProductInCart(localStorage.getItem("cartId"));
-        const data = await response.data.data;
+        const data = response.data.data;
         return data;
     }
 );
@@ -114,6 +114,7 @@ const cartSlice = createSlice({
             state.cartTotalAmount = total;
         },
         clearCart(state, action) {
+            state.cartId = localStorage.getItem("cartId");
             state.cartItems = [];
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         },
@@ -123,7 +124,11 @@ const cartSlice = createSlice({
             .addCase(fetchCartItems.fulfilled, (state, action) => {
                 state.cartItems = action.payload;
                 state.cartTotalQuanTity = action.payload.length
-            });
+            // })
+            // .addCase(fetchCartItems.rejected, (state, action) => {
+            //     // Xử lý khi bị reject
+            //     window.location.reload();
+              });
     },
 })
 

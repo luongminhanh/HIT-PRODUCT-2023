@@ -22,18 +22,19 @@ const Home = () => {
   const fetchItemInCart = async () => {
     const res = await getProductInCart(localStorage.getItem("cartId"));
     setCartItem(res.data.data);
-    cart.cartItems = res.data.data;
     localStorage.setItem("cartItems", JSON.stringify(res.data.data));
   }
 
   useEffect(() => {
     findCartId();
     console.log("hello");
-  }, [cartId]);
+    
+  }, []);
 
   useEffect(() => {    
     fetchItemInCart();
     dispatch(fetchCartItems());
+    // window.location.reload();
   }, [])
 
   return (
