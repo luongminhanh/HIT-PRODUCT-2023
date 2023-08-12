@@ -4,6 +4,7 @@ import Button from '../components/Button';
 import { getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Order = () => {
     const [dataUser, setDataUser] = useState({});
@@ -18,6 +19,7 @@ const Order = () => {
         setDataUser(res.data.data);
         const resCus = await getCustomer(localStorage.getItem("cartId"));
         setDataCustomer(resCus.data.data);
+        console.log(resCus.data.data)
     }
 
     const getProductsInCart = async (cartId) => {
@@ -26,12 +28,19 @@ const Order = () => {
         console.log("heree", dataProductInCart);
     }
 
-    const handlePayBill = async () => {        
+    const handlePayBill = async () => {     
+        if (dataCustomer.address == null || dataCustomer.phoneNumber == null)
+        toast.info("Phải cập nhật địa chỉ và số điện thoại trong mục tài khoản của tôi", {
+            position: `top-right`,
+            autoClose: 2000
+        });
+        else {   
         const res = await placeOrder(localStorage.cartId);
         console.log(res.data.data[0].billId);
         setBillId(res.data.data[0].billId);
         postCreateBill(localStorage.cartId, res.data.data[0].billId);
-        navigate("/purchaseorder")
+        navigate("/purchaseorder");
+        }
     }
 
     useEffect(() => {
@@ -68,7 +77,7 @@ const Order = () => {
                             <div className="form-item">
                                 <div>
                                     <label htmlFor="">Địa chỉ cụ thể <span>*</span></label> <br />
-                                    <input type="text" placeholder={dataCustomer.address} />
+                                    <input type="text" placeholder={dataCustomer?.address?.addressName} />
                                 </div>
                             </div>
                         </div>

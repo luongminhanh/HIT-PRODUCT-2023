@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import { useEffect, useState } from 'react';
 import FoodSuggestions from '../components/homeUser/FoodSuggestions';
 import { getDetailProducts, postAddToCart, searchProduct } from '../store/apiRequest';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 const firstExample = {

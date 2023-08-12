@@ -5,10 +5,9 @@ import { historyBillsOfCurrentCustomer } from '../store/apiRequest';
 import { useNavigate } from 'react-router-dom';
 
 const OrderHistory = () => {
-    const navigate = useNavigate();
     const [dataHistoryBuy, setDataHistoryBuy] = useState([]);
     const handleGetHistoryOrders = async () => {
-        const res = await historyBillsOfCurrentCustomer(1);
+        const res = await historyBillsOfCurrentCustomer(localStorage.cartId);
         console.log(res.data.data, "hiện tại History");
         setDataHistoryBuy(res.data.data);
     }
