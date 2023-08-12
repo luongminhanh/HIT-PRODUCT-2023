@@ -11,7 +11,7 @@ const TableUser = ({ listUser, handleClickBtnUpdate, handleClickViewUser, handle
                         <th scope="col">ID</th>
                         <th scope="col">Full Name</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">Created Date</th>
+                        <th scope="col">Address</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -23,7 +23,7 @@ const TableUser = ({ listUser, handleClickBtnUpdate, handleClickViewUser, handle
                                     <td>{item.id}</td>
                                     <td>{item.fullName}</td>
                                     <td>{item.phoneNumber}</td>
-                                    <td>{item.createdDate}</td>
+                                    <td width="500px">{item?.address?.addressName}</td>
                                     <td>
                                         <button 
                                         className='btn btn-success'

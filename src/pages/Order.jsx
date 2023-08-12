@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
-import { getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
+import { billOfCurrentCustomer, getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -48,6 +48,18 @@ const Order = () => {
         getCurrentCustomer();
         getProductsInCart(localStorage.getItem("cartId"));
     }, []);
+
+    const [dataBillBuy, setDataBillBuy] = useState([]);
+    const handleGetOrders = async () => {
+        const res = await placeOrder(localStorage.cartId);
+        console.log(res.data.data, "hiện tại bill");
+        setDataBillBuy(res.data.data[0]);
+    }
+
+    useEffect(() => {
+        handleGetOrders();
+    }, [])
+
     return (
         <>
             {
@@ -164,9 +176,95 @@ const Order = () => {
                                 </div>
                             </div>
                         </div>
-                    </div> : <Loading />
-            }
-        </>
+                    </div>
+                    <div className="order-infor-products">
+                        <div className='order-infor-products-title'>
+                            <h3>SẢN PHẨM BẠN ĐẶT</h3>
+                        </div>
+                        <div className="order-infor-products-form">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th>Tổng giá</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cart.cartItems && cart.cartItems.length > 0 && (
+                                        <React.Fragment>
+                                            {cart.cartItems.map((item) => (
+                                                <tr key={item.productId}>
+                                                    <td className='products-name'>
+                                                        {item.productName} <span className='attention'>x {item.quantity}</span>
+                                                    </td>
+                                                    <td>{(item.price * item.quantity).toLocaleString('vi-VN')}</td>
+                                                </tr>
+                                            ))}
+                                        </React.Fragment>
+                                    )}
+                                    {/* <tr>
+                                        <td className='products-name'>
+                                            Bánh mì trứng <span className='attention'>x 5</span>
+                                        </td>
+                                        <td>
+                                            120.000.000VND
+                                        </td>
+                                    </tr> */}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div className="order-pay">
+                    <div className="order-pay-title">
+                        <h3>THANH TOÁN</h3>
+                    </div>
+                    <div className="order-pay-infor">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tổng tiền hàng:</th>
+                                    <td>{cart.cartTotalAmount.toLocaleString('vi-VN')}đ</td>
+                                </tr>
+                                <tr>
+                                    <th>Phí vận chuyển: </th>
+                                    <td>{parseInt(dataBillBuy?.feeShip).toLocaleString('vi-VN')}đ</td>
+                                </tr>
+                                <tr>
+                                    <th>Thời gian giao dự kiến: </th>
+                                    <td>{new Date(dataBillBuy?.timeShip).toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <th>Khoảng cách : </th>
+                                    <td>{parseInt(dataBillBuy?.distance).toLocaleString('vi-VN')}km</td>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <hr />
+                                    </td>
+                                </tr>
+                                <tr style={{ fontSize: 20 }}>
+                                    <th>Tổng tiền: </th>
+                                    <th className='pay-money'>
+                                        {parseInt(dataBillBuy?.payment).toLocaleString('vi-VN')}đ
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <div>
+                                            <Button text='MUA HÀNG' onClick={() => { handlePayBill(); navigate("/infor") }} />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     );
 };
 

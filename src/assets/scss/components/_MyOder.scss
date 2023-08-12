@@ -1,5 +1,5 @@
 .myorder {
-    width: 1200px;
+    width: 50%;
     margin: 0px auto;
     min-height: 100vh;
 
@@ -58,6 +58,7 @@
                 border: 1px solid $orangeColor;
                 padding: 4px 16px;
                 font-size: 14px;
+                width: 100px;
             }
         }
     }
@@ -65,7 +66,7 @@
     .myorder-detail-cancel {
         display: flex;
         justify-content: end;
-
+        
         button {
             padding: 12px 16px;
             border: none;

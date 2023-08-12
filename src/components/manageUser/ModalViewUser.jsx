@@ -41,12 +41,12 @@ function ModalViewUser({ show, setShow, dataUser }) {
             setCreatedDate(dataUser.createdDate);
             setLastModifiedDate(dataUser.lastModifiedDate);
             setFullName(dataUser.fullName);
-            setAddress(dataUser.address);
+            setAddress(dataUser.address.addressName);
             setJob(dataUser.dob);
             setPhoneNumber(dataUser.phoneNumber);
             console.log(show);
         }
-    }, [dataUser]);
+    }, []);
 
     return (
         <>
@@ -86,7 +86,7 @@ function ModalViewUser({ show, setShow, dataUser }) {
                             <input
                                 type="text"
                                 className="form-control"
-                                value={createdDate}
+                                value={dataUser.createdDate}
                                 disabled={true}
                             // onChange={(event) => setPassword(event.target.value)} 
                             />

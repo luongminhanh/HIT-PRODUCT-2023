@@ -8,10 +8,10 @@ const TableOrders = ({ listOrder, handleClickBtnUpdate, handleClickViewOrder, ha
             <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Created Date</th>
-                        <th scope="col">LastModified Date</th>
+                        <th scope="col">Tên khách hàng</th>
+                        <th scope="col">Giá tiền</th>
+                        <th scope="col">Ngày tạo đơn</th>
+                        <th scope="col">Tình trạng</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -20,10 +20,10 @@ const TableOrders = ({ listOrder, handleClickBtnUpdate, handleClickViewOrder, ha
                         listOrder.map((item, index) => {
                             return (
                                 <tr key={`table-Orders-${index}`}>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.createdDate}</td>
-                                    <td>{item.lastModifiedDate}</td>
+                                    <td>{item.bill.nameCustomer}</td>
+                                    <td>{parseInt(item.bill.payment)}đ</td>
+                                    <td>{item.bill.createdDate}</td>
+                                    <td>{item.bill.status}</td>
                                     <td>
                                         <button 
                                         className='btn btn-success'
