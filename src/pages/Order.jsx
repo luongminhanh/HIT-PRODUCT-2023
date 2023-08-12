@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
 import { getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Order = () => {
     const [dataUser, setDataUser] = useState({});
@@ -10,6 +11,7 @@ const Order = () => {
     const [dataProductInCart, setDataProductInCart] = useState([]);
     const [shipPrice, setShipPrice] = useState(35000);
     const [billId, setBillId] = useState(0);
+    const navigate = useNavigate();
     const cart = useSelector((state) => state.cart);
     const getCurrentCustomer = async () => {
         const res = await getCurrentUserLogin();
@@ -25,11 +27,11 @@ const Order = () => {
     }
 
     const handlePayBill = async () => {        
-        const res = await placeOrder();
+        const res = await placeOrder(localStorage.cartId);
         console.log(res.data.data[0].billId);
         setBillId(res.data.data[0].billId);
-        postCreateBill(localStorage.getItem("cartId"), res.data.data[0].billId);
-        alert('Hoàn tất mua hàng');
+        postCreateBill(localStorage.cartId, res.data.data[0].billId);
+        navigate("/purchaseorder")
     }
 
     useEffect(() => {

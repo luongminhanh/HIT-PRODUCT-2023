@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import userImage from '../assets/images/user.png';
+import { billOfCurrentCustomer, placeOrder } from '../store/apiRequest';
 
 const PurchaseOrder = () => {
+
     return (
         <div className='purchaseorder'>
             <div className="purchaseorder-menu">
@@ -11,7 +13,7 @@ const PurchaseOrder = () => {
                     <div>
                         <p>trang123</p>
                         <NavLink to="/purchaseorder/infor" >
-                            <i class="fa-solid fa-pen"></i>
+                            <i className="fa-solid fa-pen"></i>
                             Sửa hồ sơ
                         </NavLink>
 
