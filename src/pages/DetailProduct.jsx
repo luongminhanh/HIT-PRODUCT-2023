@@ -142,8 +142,8 @@ const DetailProduct = () => {
 
                         <div className="embed-responsive aspect-video">
                             <iframe src='https://www.youtube.com/embed/I_n1IQggIQ4'
-                            width="300px"
-                            height="600px"
+                                width="300px"
+                                height="600px"
                                 frameBorder='0'
                                 allow='autoplay; encrypted-media'
                                 allowfullscreen

@@ -10,6 +10,11 @@
     margin: 0;
     align-items: start;
 
+    .err-message {
+        color: red;
+        position: absolute;
+    }
+
 }
 
 .userinfor {
@@ -53,10 +58,10 @@
         border-radius: 0.625rem;
 
         &--picture {
-            width: 150px;
-            height: 150px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            margin: 28px auto;
+            margin: 28px auto 28px;
             overflow: hidden;
             transition: all ease 2s;
 
@@ -73,11 +78,11 @@
             h3 {
                 text-align: center;
                 font-family: $appleFont;
-                font-size: 25px;
+                font-size: 24px;
                 font-weight: 600;
                 // color: #1e1d23;
                 color: $orangeColor;
-                margin-bottom: 20px;
+                margin-bottom: 28px;
 
             }
         }
@@ -93,20 +98,24 @@
             &--new,
             &--confirm {
                 display: flex;
-                align-items: center;
+                align-items: start;
 
                 margin-bottom: 20px;
+                padding-right: 48px;
 
                 i {
                     font-weight: 900;
                     margin-right: 6px;
                     font-size: 15px;
                     color: $orangeColor;
+                    margin-top: 5px;
                 }
 
                 span {
                     font-family: $appleFont;
-                    font-size: $text-18;
+                    font-size: 15px;
+                    line-height: 28px;
+                    // color: #808080;
                 }
 
             }
@@ -114,8 +123,6 @@
             @include mobile() {
                 margin-left: 33px;
             }
-
-
 
         }
 
@@ -168,6 +175,17 @@
             margin-top: 40px;
             align-items: center;
 
+            >div {
+                width: 31%;
+
+                >span {
+                    color: #808080;
+                    // margin-bottom: 20px;
+                    padding-bottom: 12px;
+                    display: block;
+                }
+            }
+
             @include mobile() {
                 flex-direction: column;
             }
@@ -176,22 +194,30 @@
 
 
         .inp {
-            // border-radius: 5px;
-            border-bottom: 1px solid #000;
+            border-radius: 4px;
+
+            border: 1px solid #ccc !important;
 
             input {
                 outline: none;
-                padding: 16px 24px 8px 8px;
+                padding: 12px 24px 12px 8px;
                 border: none;
-                font-size: $text-16;
+                width: 100%;
+                font-size: 15px;
+                border-radius: 4px;
+
             }
         }
 
         .changeInforItemGroup_address {
             display: block;
 
-            .inp {
+            .userinfor__changeInfor--address {
                 width: 100%;
+            }
+
+            .inp {
+                width: 100% !important;
 
                 input {
                     width: 100%;
@@ -242,4 +268,77 @@
             margin: 40px 0 !important;
         }
     }
+}
+
+.select-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.select-container select {
+    // padding: 8px;
+    padding: 12px 13px 12px 4px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    position: relative !important;
+
+
+
+}
+
+.select-container select:focus,
+.inp input:focus {
+    outline: none;
+    border: 1px solid #6c63ff;
+    box-shadow: 0 0 0 2px rgba(108, 99, 255, 0.2);
+}
+
+.select-container select::placeholder {
+    color: #999;
+}
+
+.userinfor__changeInfor--birth .inp {
+    border: none !important;
+}
+
+.userinfor__changeInfor--address .inp {
+    display: flex;
+
+    button {
+        background-color: #fafafa;
+    }
+
+    i {
+        color: red;
+    }
+
+    button:hover {
+
+        i {
+            color: $greenCokor;
+        }
+    }
+
+}
+
+.password {
+    display: flex;
+    align-items: center;
+    padding-right: 12px;
+
+    i {
+        font-size: 14px;
+    }
+
+    input:focus {
+        outline: none;
+        border: none;
+        box-shadow: none;
+    }
+}
+
+.select {
+    position: relative;
 }

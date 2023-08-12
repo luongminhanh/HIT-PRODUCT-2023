@@ -48,6 +48,9 @@ const LogIn = () => {
                             })
                         }
                         onSubmit={async (values) => {
+                            // let admin = {
+                            //     username
+                            // }
                             try {
                                 const result = await axios.post(`${api}/auth/login`, values);
 
@@ -56,7 +59,7 @@ const LogIn = () => {
                                     setIsSuccess(true);
                                     if (result.data.data.authorities[0].authority === "ROLE_USER")
                                         navigate("/");
-                                    else navigate("admin")
+                                    else navigate("/admin")
                                     localStorage.clear();
                                     dispatch(clearCart());
                                     localStorage.clear();
@@ -89,6 +92,7 @@ const LogIn = () => {
                                             type="text"
                                             name="username"
                                             className="field"
+                                            autocomplete="on"
                                         />
                                     </div>
                                     <div className='err-message'>
@@ -103,6 +107,7 @@ const LogIn = () => {
                                                 type={isShow ? "text" : "password"}
                                                 name="password"
                                                 className="field"
+                                                autocomplete="on"
                                             />
                                         </div>
                                         <i onClick={handleShowPassword} className={`fa-sharp fa-solid ${isShow ? 'fa-eye' : 'fa-eye-slash'} `}></i>
