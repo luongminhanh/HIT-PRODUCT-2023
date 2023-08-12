@@ -18,7 +18,8 @@ const Header = () => {
     const username = localStorage.getItem("username")
     const handleLogout = () => {
         localStorage.clear();
-        navigate("/")
+        navigate("/");
+        localStorage.clear();
     }
     useEffect(() => {
         dispatch(getTotals());
@@ -45,7 +46,7 @@ const Header = () => {
                                     <div className="img-user">
                                         <div >
                                             <img src={userImage} alt="" />
-                                            <p>{username}</p>
+                                            <p>{localStorage.getItem("username")}</p>
                                         </div>
                                         <div className="list-menu">
                                             <Button className="list-menu-button" onClick={() => navigate('/infor')} text='Tài Khoản Của Tôi'></Button>
