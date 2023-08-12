@@ -76,7 +76,7 @@ const Cart = () => {
                                                 <td>{(item.price) ? (item.price) : (item.productPrice)}đ</td>
                                                 <td className='cart-items-quantity'>
                                                     <button onClick={() => handleDecreaseProduct(item, item.productId, item.quantity - 1, item.shopId)}>-</button>
-                                                    <input type="text" required value={item.quantity} />
+                                                    <input type="text" value={item.quantity} />
                                                     <button onClick={() => handleIncreaseProduct(item, item.productId, item.quantity + 1, item.shopId)}>+</button>
                                                 </td>
                                                 <td className='cart-product-price'>{(item.price ? item.price * item.quantity : item.productPrice * item.quantity).toLocaleString('vi-VN')}đ</td>

@@ -18,6 +18,7 @@ function Dashboard() {
   const [quantityOfBills, setQuantityOfBills] = useState(0);
   const [quantityOfCustomers, setQuantityOfCustomers] = useState(0);
   const [revenue, setRevenue] = useState(0);
+  const [dataShops, setDataShops] = useState([]);
 
   const handleGetAllBills = async () => {
     const res = await getAllBills();
@@ -30,6 +31,7 @@ function Dashboard() {
   }
   const handleGetStatisticOfShops = async () => {
     const res = await getStatisticShops();
+    setDataShops(res.data.data);
     const rev = res.data.data.reduce((total, obj) => total + obj.revenue, 0)
     setRevenue(rev);
     console.log(res.data.data, "doanh thu rev");
@@ -65,7 +67,7 @@ function Dashboard() {
               value={quantityOfBills}
               data={dataUser}
             />
-            <DashBoardCard
+            {/* <DashBoardCard
               icon={
                 <ShoppingOutlined
                   style={{
@@ -80,7 +82,7 @@ function Dashboard() {
               title={"Số hàng tồn kho"}
               value='12354'
               data={dataProducts}
-            />
+            /> */}
             <DashBoardCard
               icon={
                 <UserOutlined
@@ -119,7 +121,7 @@ function Dashboard() {
       </div>
       <div className="dashboard-main-charts">
         <div className="dashboard-barchart">
-          <BarChartBox />
+          <BarChartBox dataShops={dataShops}/>
         </div>
         <div className="dashboard-areachart">
           <AreaChartBox />
