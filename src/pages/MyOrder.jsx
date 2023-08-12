@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import imgProduct from '../assets/images/listPD_3.jpg';
-import { billOfCurrentCustomer } from '../store/apiRequest';
+import { billOfCurrentCustomer, cancelProduct } from '../store/apiRequest';
+import axios from 'axios';
 const MyOrder = () => {
     const navigate = useNavigate();
     const [dataBillBuy, setDataBillBuy] = useState([]);
     const handleGetOrders = async () => {
-        const res = await billOfCurrentCustomer(1);
+        const res = await billOfCurrentCustomer(6);
         console.log(res.data.data, "hiện tại bill");
         setDataBillBuy(res.data.data);
     }
@@ -15,7 +15,20 @@ const MyOrder = () => {
     useEffect(() => {
         handleGetOrders();
     }, [])
-
+    const handleCancelProduct = async (id) => {
+        let checkConfirm = confirm("Bạn có chắc chắn muốn hủy đơn hàng này🤨");
+        if (checkConfirm) {
+            try {
+                await cancelProduct(id)
+                console.log("Hủy rồi nha");
+                await handleGetOrders();
+            } catch (error) {
+                console.log(error);
+                console.log("Lỗi rồi");
+            }
+        }
+    }
+    console.log(dataBillBuy);
     return (
         <div className='myorder' >
             <h1>Đơn hàng của tui</h1>
@@ -44,12 +57,12 @@ const MyOrder = () => {
                                 </div>
                             </div>
                             <div style={{ color: "#F06C25", fontWeight: 600, fontSize: 20 }}>
-                                {item.bill.payment}
+                                {item.bill.payment}VND
                             </div>
                         </div>
                         <hr />
                         <div className='myorder-detail-cancel'>
-                            <Button>Hủy Hàng</Button>
+                            <Button onClick={() => handleCancelProduct(item.bill.id)}>Hủy Hàng</Button>
                         </div>
                     </div>
                 </React.Fragment>

@@ -420,12 +420,12 @@ export const searchProduct = (search) => {
 }
 
 export const placeOrder = (customerId) => {
-    return axios.get(`http://207.148.118.106:8286/api/v1/customer/${customerId}/bill` ,
-    {
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
-        }
-    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+    return axios.get(`http://207.148.118.106:8286/api/v1/customer/${customerId}/bill`,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
+            }
+        }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
 }
 
 export const postCreateBill = (customerId, billId) => {
@@ -455,20 +455,20 @@ export const getAllBills = () => {
 
 export const billOfCurrentCustomer = (customerId) => {
     return axios.get(`${api}/billbuy/customer/${customerId}`,
-    {
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
-        }
-    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+        {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
+            }
+        }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
 }
 
 export const historyBillsOfCurrentCustomer = (customerId) => {
     return axios.get(`${api}/billhistory/customer/${customerId}`,
-     {
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
-        }
-    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+        {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
+            }
+        }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
 }
 
 export const getStatisticShops = () => {
@@ -479,5 +479,22 @@ export const getStatisticShops = () => {
             }
         });
     return res
+}
+
+export const cancelProduct = (id) => {
+    axios.put(`${api}/bill/cancel-order/${id}`,
+        id,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(res => {
+            // window.location.reload();
+            console.log(`ok`);
+        }).catch(err => {
+            alert(err)
+        });
 }
 

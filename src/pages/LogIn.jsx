@@ -89,6 +89,7 @@ const LogIn = () => {
                                             type="text"
                                             name="username"
                                             className="field"
+                                            autocomplete="on"
                                         />
                                     </div>
                                     <div className='err-message'>
@@ -103,6 +104,7 @@ const LogIn = () => {
                                                 type={isShow ? "text" : "password"}
                                                 name="password"
                                                 className="field"
+                                                autocomplete="on"
                                             />
                                         </div>
                                         <i onClick={handleShowPassword} className={`fa-sharp fa-solid ${isShow ? 'fa-eye' : 'fa-eye-slash'} `}></i>

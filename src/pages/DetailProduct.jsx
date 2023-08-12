@@ -4,7 +4,7 @@ import Button from '../components/Button';
 import { useEffect, useState } from 'react';
 import FoodSuggestions from '../components/homeUser/FoodSuggestions';
 import { getDetailProducts, postAddToCart, searchProduct } from '../store/apiRequest';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 const firstExample = {
@@ -142,8 +142,8 @@ const DetailProduct = () => {
 
                         <div className="embed-responsive aspect-video">
                             <iframe src='https://www.youtube.com/embed/I_n1IQggIQ4'
-                            width="300px"
-                            height="600px"
+                                width="300px"
+                                height="600px"
                                 frameBorder='0'
                                 allow='autoplay; encrypted-media'
                                 allowfullscreen
