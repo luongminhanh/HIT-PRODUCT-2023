@@ -32,13 +32,17 @@ const initialState = {
     cartId: localStorage.getItem("cartId"),
     cartItems: [],
     cartTotalQuanTity: 0,
-    cartTotalAmount: 0
+    cartTotalAmount: 0,
+    // cartId: null
 }
 
 const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
+        setCartId1(state, action) {
+            state.cartId = action.payload;
+        },
         addToCart(state, action) {
             const itemIndex = state.cartItems.findIndex(
                 (item) => item.productId === action.payload.productId
@@ -124,14 +128,14 @@ const cartSlice = createSlice({
             .addCase(fetchCartItems.fulfilled, (state, action) => {
                 state.cartItems = action.payload;
                 state.cartTotalQuanTity = action.payload.length
-            // })
-            // .addCase(fetchCartItems.rejected, (state, action) => {
-            //     // Xử lý khi bị reject
-            //     window.location.reload();
-              });
+                // })
+                // .addCase(fetchCartItems.rejected, (state, action) => {
+                //     // Xử lý khi bị reject
+                //     window.location.reload();
+            });
     },
 })
 
-export const { removeFromCart, decreaseProductCart, addToCart, decreaseCart, clearCart, getTotals } = cartSlice.actions;
+export const { setCartId1, removeFromCart, decreaseProductCart, addToCart, decreaseCart, clearCart, getTotals } = cartSlice.actions;
 
 export default cartSlice.reducer

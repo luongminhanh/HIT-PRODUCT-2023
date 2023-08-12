@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
-import { getCurrentUserLogin, getCustomer, getProductInCart, postCreateBill } from '../store/apiRequest';
+import { getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Order = () => {
@@ -9,6 +9,7 @@ const Order = () => {
     const [dataCustomer, setDataCustomer] = useState({});
     const [dataProductInCart, setDataProductInCart] = useState([]);
     const [shipPrice, setShipPrice] = useState(35000);
+    const [billId, setBillId] = useState(0);
     const cart = useSelector((state) => state.cart);
     const getCurrentCustomer = async () => {
         const res = await getCurrentUserLogin();
@@ -23,10 +24,12 @@ const Order = () => {
         console.log("heree", dataProductInCart);
     }
 
-    const handlePayBill = async () => {
-        alert('Đã thanh toán');
-        // const res = await get;
-        console.log(res);
+    const handlePayBill = async () => {        
+        const res = await placeOrder();
+        console.log(res.data.data[0].billId);
+        setBillId(res.data.data[0].billId);
+        postCreateBill(localStorage.getItem("cartId"), res.data.data[0].billId);
+        alert('Hoàn tất mua hàng');
     }
 
     useEffect(() => {
@@ -137,7 +140,7 @@ const Order = () => {
                                 <tr>
                                     <td colSpan={2}>
                                         <div>
-                                            <Button text='THANH TOÁN' onClick={() => handlePayBill()}/>
+                                            <Button text='MUA HÀNG' onClick={() => handlePayBill()}/>
                                         </div>
                                     </td>
                                 </tr>

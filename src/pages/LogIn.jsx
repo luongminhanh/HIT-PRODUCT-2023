@@ -54,15 +54,14 @@ const LogIn = () => {
                                 if (result.status == 200) {
                                     setIsError(false)
                                     setIsSuccess(true);
-
-                                    // setTimeout(() => {
-                                    navigate("/");
-                                    // }, 2000)
+                                    if (result.data.data.authorities[0].authority === "ROLE_USER")
+                                        navigate("/");
+                                    else navigate("admin")
                                     localStorage.clear();
                                     dispatch(clearCart());
+                                    localStorage.clear();
                                     localStorage.setItem("accessToken", result.data.data.accessToken);
                                     localStorage.setItem("username", values.username);
-                                    // localStorage.setItem("accessToken", result.data.data.accessToken);
                                 }
                             } catch (error) {
                                 setIsError(true);

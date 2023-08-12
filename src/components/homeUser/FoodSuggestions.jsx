@@ -70,7 +70,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         data.map(productItem => (
                                                             <HorizontalCard
                                                                 shopId={productItem.shopId}
-                                                                key={productItem.id ? productItem.id : productItem.productId}
+                                                                key={productItem.id ? `${productItem.id}--${productItem.shopId}` : `${productItem.productId}--${productItem.shopId}`}
                                                                 id={productItem.id ? productItem.id : productItem.productId}
                                                                 image={productItem.image ? productItem.image : productItem.productImageUrl}
                                                                 productName={productItem.productName}
@@ -93,7 +93,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                         data.map(productItem => (
                                                             <CardSearch
                                                                 shopId={productItem.shopId}
-                                                                key={productItem.id ? productItem.id : productItem.productId}
+                                                                key={productItem.id ? `${productItem.id}--${productItem.shopId}` : `${productItem.productId}--${productItem.shopId}`}
                                                                 id={productItem.id ? productItem.id : productItem.productId}
                                                                 image={productItem.image ? productItem.image : productItem.productImageUrl}
                                                                 productName={productItem.productName}
@@ -119,7 +119,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     data.map(productItem => (
                                                         <HorizontalCard
                                                             shopId={productItem.shopId}
-                                                            key={productItem.id ? productItem.id : productItem.productId}
+                                                            key={productItem.id ? `${productItem.id}--${productItem.shopId}` : `${productItem.productId}--${productItem.shopId}`}
                                                             id={productItem.id ? productItem.id : productItem.productId}
                                                             image={productItem.image ? productItem.image : productItem.productImageUrl}
                                                             productName={productItem.productName}
@@ -137,7 +137,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                                                     data.map(productItem => (
                                                         <CardSearch
                                                             shopId={productItem.shopId}
-                                                            key={productItem.id ? productItem.id : productItem.productId}
+                                                            key={productItem.id ? `${productItem.id}--${productItem.shopId}` : `${productItem.productId}--${productItem.shopId}`}
                                                             id={productItem.id ? productItem.id : productItem.productId}
                                                             image={productItem.image ? productItem.image : productItem.productImageUrl}
                                                             productName={productItem.productName}

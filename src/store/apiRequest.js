@@ -2,6 +2,7 @@ import axios from "axios"
 import { toast } from "react-toastify";
 
 const accessToken = localStorage.getItem("accessToken");
+// console.log("hello here", accessToken);
 export const api = `http://207.148.118.106:8286/api/v1`;
 
 export const getAllUsers = () => {
@@ -17,7 +18,7 @@ export const getCurrentUserLogin = () => {
     return axios.get(`${api}/user/current`,
         {
             headers: {
-                'Authorization': 'Bearer ' + accessToken
+                'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
             }
         });
 }
@@ -47,9 +48,7 @@ export const postCreateNewUser = (email, password, username) => {
         repeatPassword: password,
         username: username
     };
-    axios.post(`${api}/auth/register`,
-        userData
-    )
+    axios.post(`${api}/auth/register`, userData)
         .then(response => {
             console.log(`ok`, response);
         })
@@ -307,7 +306,7 @@ export const postAddToCart = (productId, quantity, shopId) => {
         data,
         {
             headers: {
-                'Authorization': 'Bearer ' + accessToken
+                'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
             }
         }
     )
@@ -319,7 +318,11 @@ export const postAddToCart = (productId, quantity, shopId) => {
             });
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
+            toast.info('Đăng nhập để thêm vào giỏ hàng', {
+                position: `top-right`,
+                autoClose: 2000
+            });
         })
 }
 
@@ -336,7 +339,11 @@ export const putUpdateCart = (cart) => {
             console.log(`ok`, response);
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
+            toast.info('Có lỗi xảy ra', {
+                position: `top-right`,
+                autoClose: 2000
+            });
         })
 }
 
@@ -406,9 +413,19 @@ export const searchProduct = (search) => {
         ,
         {
             headers: {
-                'Authorization': 'Bearer ' + accessToken
+                'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
             }
-        });
+        })
+        .catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+}
+
+export const placeOrder = () => {
+    return axios.get(`http://207.148.118.106:8286/api/v1/customer/1/bill` ,
+    {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
+        }
+    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
 }
 
 export const postCreateBill = (customerId, billId) => {
@@ -432,7 +449,7 @@ export const getAllBills = () => {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
-        });
+        }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));;
     return res
 }
 
