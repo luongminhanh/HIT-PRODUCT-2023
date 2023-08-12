@@ -36,7 +36,7 @@ const Header = () => {
                             </div>
                             <div className='header-right'>
                                 <div className='header-right-search'>
-                                    <Button className="pad0" text={<Icon className='fas fa-search' />} />
+                                    <Button onClick={() => {navigate('/search'); setTimeout(() => window.scrollTo(0, 0), 2000)}} className="pad0" text={<Icon className='fas fa-search' />} />
                                 </div>
                                 <div className='header-right-cart'>
                                     <div className='number-of-items-in-cart'>{cart.cartTotalQuantity}</div>

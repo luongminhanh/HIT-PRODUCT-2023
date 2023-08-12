@@ -132,8 +132,8 @@ const Order = () => {
                                     <td>{cart.cartTotalAmount.toLocaleString('vi-VN')}đ</td>
                                 </tr>
                                 <tr>
-                                    <th>Phí vận chuyển:</th>
-                                    <td>{shipPrice.toLocaleString('vi-VN')}đ</td>
+                                    <th>Phí vận chuyển (tạm tính):</th>
+                                    <td>{cart.cartTotalAmount.toLocaleString('vi-VN') > 0 ? shipPrice.toLocaleString('vi-VN') : 0}đ</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -145,13 +145,13 @@ const Order = () => {
                                 <tr style={{ fontSize: 20 }}>
                                     <th>Tổng tiền: </th>
                                     <th className='pay-money'>
-                                        {(cart.cartTotalAmount + shipPrice).toLocaleString('vi-VN')}
+                                        {cart.cartTotalAmount > 0 ? (cart.cartTotalAmount + shipPrice).toLocaleString('vi-VN') : 0}đ 
                                     </th>
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
                                         <div>
-                                            <Button text='MUA HÀNG' onClick={() => handlePayBill()}/>
+                                            <Button text='MUA HÀNG' onClick={() => {handlePayBill(); navigate("/infor")}}/>
                                         </div>
                                     </td>
                                 </tr>

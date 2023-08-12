@@ -27,7 +27,7 @@ const Advertisement = () => {
                         <div className='home-advertisement-content-title'>
                             <h3>Hot Fresh</h3>
                             <h1>HOTDOG</h1>
-                            <Button onClick={() => navigate('/order')} text='Đặt hàng ngay' />
+                            <Button onClick={() => {navigate('/order'); window.scrollTo(0, 0)}} text='Đặt hàng ngay' />
                             <div className="img_thunk">
                                 <img src={thunk_1} alt="" />
                                 <img src={thunk_2} alt="" />

@@ -9,8 +9,10 @@ import listPD_3 from '../../assets/images/listPD_3.jpg';
 import listPD_4 from '../../assets/images/listPD_4.jpg';
 import video from '../../assets/videos/videoBanner.mp4';
 import { getAllProducts } from '../../store/apiRequest';
+import { useNavigate } from 'react-router';
 
 const PopularDishes = ({data}) => {
+    const navigate = useNavigate();
     return (
         <>
             <div className='popular-dishes'>
@@ -29,7 +31,7 @@ const PopularDishes = ({data}) => {
                     <div className="popular-dishes-center-content">
                         <h3>HitFood</h3>
                         <h1>Làm đúng. Làm <br /> ngon.  Dành riêng  <br />cho bạn.</h1>
-                        <Button text='ORDER NOW' />
+                        <Button text='ORDER NOW' onClick={() => {navigate('/search'); setTimeout(() => window.scrollTo(0, 0), 2000)}}/>
                     </div>
                 </div>
             </div>
