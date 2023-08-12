@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import imgProduct from '../assets/images/listPD_3.jpg';
-import { billOfCurrentCustomer } from '../store/apiRequest';
-// import { data } from 'jquery';
+import { billOfCurrentCustomer, cancelProduct } from '../store/apiRequest';
+import axios from 'axios';
+
 const MyOrder = () => {
     const navigate = useNavigate();
     const [dataBillBuy, setDataBillBuy] = useState([]);
@@ -18,7 +19,20 @@ const MyOrder = () => {
     useEffect(() => {
         handleGetOrders();
     }, [])
-
+    const handleCancelProduct = async (id) => {
+        let checkConfirm = confirm("Bạn có chắc chắn muốn hủy đơn hàng này🤨");
+        if (checkConfirm) {
+            try {
+                await cancelProduct(id)
+                console.log("Hủy rồi nha");
+                handleGetOrders();
+            } catch (error) {
+                console.log(error);
+                console.log("Lỗi rồi");
+            }
+        }
+    }
+    console.log(dataBillBuy);
     return (
         <div className='myorder' >
             {console.log(dataBillBuy, "hhhhhhhhhhhelo")}
@@ -58,14 +72,11 @@ const MyOrder = () => {
                                         </div>
                                     </div>
                                     <br></br>
-
-
                                 </>
-
                             ))}
                         <hr />
                         <div className='myorder-detail-cancel'>
-                            <Button>Hủy Hàng</Button>
+                            <Button onClick={() => handleCancelProduct(item.bill.id)}>Hủy Hàng</Button>
                         </div>
                     </div>
                 </div>

@@ -92,24 +92,30 @@ const Register = () => {
                 longitude: position.longitude
               }
               await axios.post(`${api}/auth/register`, values, { params: positionUser })
-              setIsSuccess(true);
-              setIsError(false);
-              getLocation();
+              // getCurrentLocation();
               let loginUser = {
                 username: values.username,
                 password: values.password
               }
-              const result = await axios.post(`${api}/auth/login`, loginUser);
-              localStorage.clear();
-              dispatch(clearCart());
-              localStorage.setItem("accessToken", result.data.data.accessToken);
-              localStorage.setItem("username", loginUser.username);
-              setTimeout(() => {
-                navigate('/');
-              }, 2000)
+              try {
+                localStorage.clear();
+                const result = await axios.post(`${api}/auth/login`, loginUser)
+                dispatch(clearCart());
+                localStorage.setItem("accessToken", result.data.data.accessToken);
+                localStorage.setItem("username", loginUser.username);
+                setIsSuccess(true);
+                setTimeout(() => {
+                  navigate('/');
+                }, 2000)
+                setIsError(false);
+              } catch (error) {
+                console.log(error);
+
+              }
             } catch (error) {
               console.log(error);
               setIsError(true);
+              setIsSuccess(false)
               setTimeout(() => {
                 setIsError(false);
               }, 8000)

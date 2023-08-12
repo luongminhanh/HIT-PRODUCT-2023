@@ -30,40 +30,43 @@ const OrderHistory = () => {
                                 <th>Đơn Hàng</th>
                                 <th>Tên Hàng</th>
                                 <th>Ngày Đặt</th>
+                                {/* <th>Giờ Đặt</th> */}
                                 <th>Trạng Thái</th>
                                 <th>Số Lượng Đặt</th>
                                 <th>Tổng Tiền</th>
-                                <th>Đặt lại</th>
+                                {/* <th>Đặt lại</th> */}
                             </tr>
                         </thead>
 
                         <tbody>
                             {dataHistoryBuy && dataHistoryBuy.map((item) => (
                                 <>
-                                <tr>
-                                <td>{item.bill.id}</td>
-                                <td>{item.product.name}</td>
-                                <td>{item.bill.createdDate}</td>
-                                <td>{item.bill.status}</td>
-                                <td>{item.quantity}</td>
-                                <td>{item.bill.payment.toLocaleString('vi-VN')} VND</td>
-                                <td>
-                                    <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
-                                </td>
-                            </tr>
+                                    <tr>
+                                        <td>{item.bill.id}</td>
+                                        <td>{item.product.name}</td>
+                                        <td>{item.bill.createdDate.split("T")[0].split("-").reverse().join("-")}</td>
+                                        {/* <td>{item.bill.createdDate.split("T")[1]}</td> */}
+                                        <td>{item.bill.status}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>{item.bill.payment.toLocaleString('vi-VN')} VND</td>
+                                        {/* <td>
+                                            <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
+                                        </td> */}
+                                    </tr>
                                 </>
                             ))}
-                         </tbody>
+                        </tbody>
                     </table>
                 </div>
-                <div className="order-history-paging">
+                {/* <div className="order-history-paging">
                     <Button className='btn-history-paging' text={<Icon className="fa-solid fa-angles-left"></Icon>}></Button>
                     <Button className='btn-history-paging  active' text='1'></Button>
                     <Button className='btn-history-paging' text='2'></Button>
                     <Button className='btn-history-paging' text='3'></Button>
                     <Button className='btn-history-paging' text='4'></Button>
                     <Button className='btn-history-paging' text={<Icon className="fa-solid fa-angles-right"></Icon>}></Button>
-                </div>
+                </div> */}
+                <br /><br />
             </div>
         </div >
     );

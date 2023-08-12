@@ -481,3 +481,20 @@ export const getStatisticShops = () => {
     return res
 }
 
+export const cancelProduct = (id) => {
+    axios.put(`${api}/bill/cancel-order/${id}`,
+        id,
+        {
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            }
+        }
+    )
+        .then(res => {
+            // window.location.reload();
+            console.log(`ok`);
+        }).catch(err => {
+            alert(err)
+        });
+}
+
