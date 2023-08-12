@@ -1,17 +1,16 @@
 import React from 'react'
 
-
 const TableCategories = ({ listCategory, handleClickBtnUpdate, handleClickViewCategory, handleClickBtnDelete }) => {
 
     return (
         <div>
+            {console.log("list", listCategory)}
             <table className="table table-hover table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
+                        <th scope="col">Image</th>
                         <th scope="col">Name</th>
-                        <th scope="col">Created Date</th>
-                        <th scope="col">LastModified Date</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -20,10 +19,11 @@ const TableCategories = ({ listCategory, handleClickBtnUpdate, handleClickViewCa
                         listCategory.map((item, index) => {
                             return (
                                 <tr key={`table-categorys-${index}`}>
-                                    <td>{item.id}</td>
+                                    <td>{item.categoryId}</td>
+                                    <td className='image-category'>
+                                        <img width="50px" height="50px" src={item.image}/>
+                                    </td>
                                     <td>{item.name}</td>
-                                    <td>{item.createdDate}</td>
-                                    <td>{item.lastModifiedDate}</td>
                                     <td>
                                         <button 
                                         className='btn btn-success'

@@ -67,7 +67,7 @@ export const deleteUser = (userId) => {
             console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -84,7 +84,7 @@ export const putUpdateUser = (data) => {
             // window.location.reload();
             console.log(`ok`);
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -141,7 +141,7 @@ export const deleteProduct = (productId) => {
             console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -204,7 +204,7 @@ export const deleteShop = (shopId) => {
             console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -264,7 +264,7 @@ export const deleteCategory = (categoryId) => {
             console.log(`Xoa thanh cong`);
             window.location.reload();
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -383,7 +383,7 @@ export const deleteProductFromCart = (cartId, productId) => {
         .then(res => {
             console.log(`Xoa thanh cong`);
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -404,7 +404,7 @@ export const updateProductInCart = (cartId, productId, quantity, shopId) => {
         .then(res => {
             console.log(res, `update product`);
         }).catch(err => {
-            alert(err)
+            console.log(err)
         });
 }
 
@@ -416,7 +416,7 @@ export const searchProduct = (search) => {
                 'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
             }
         })
-        .catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+        .catch(err => console.log(err));
 }
 
 export const placeOrder = (customerId) => {
@@ -425,7 +425,7 @@ export const placeOrder = (customerId) => {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
         }
-    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+    }).catch(err => console.log(err));
 }
 
 export const postCreateBill = (customerId, billId) => {
@@ -449,7 +449,7 @@ export const getAllBills = () => {
             headers: {
                 'Authorization': 'Bearer ' + accessToken
             }
-        }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));;
+        }).catch(err => console.log(err));
     return res
 }
 
@@ -459,7 +459,7 @@ export const billOfCurrentCustomer = (customerId) => {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
         }
-    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+    }).catch(err => console.log(err));
 }
 
 export const historyBillsOfCurrentCustomer = (customerId) => {
@@ -468,7 +468,7 @@ export const historyBillsOfCurrentCustomer = (customerId) => {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
         }
-    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+    }).catch(err => console.log(err));
 }
 
 export const getStatisticShops = () => {

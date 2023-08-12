@@ -123,12 +123,12 @@ function Dashboard() {
         <div className="dashboard-barchart">
           <BarChartBox dataShops={dataShops}/>
         </div>
-        <div className="dashboard-areachart">
+        {/* <div className="dashboard-areachart">
           <AreaChartBox />
         </div>
         <div className="dashboard-piechart">
           <PieChartBox />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ const SideBar = () => {
             onClick={({key}) => {
                 if (key==="signout"){
                     console.log("signout");
+                    navigate("/");
                 }
                 else {
                     navigate(key);

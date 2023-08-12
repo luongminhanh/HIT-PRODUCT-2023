@@ -1,7 +1,7 @@
 import { Formik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import Button from '../components/Button';
-import { getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
+import { billOfCurrentCustomer, getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -28,18 +28,18 @@ const Order = () => {
         console.log("heree", dataProductInCart);
     }
 
-    const handlePayBill = async () => {     
+    const handlePayBill = async () => {
         if (dataCustomer.address == null || dataCustomer.phoneNumber == null)
-        toast.info("Phải cập nhật địa chỉ và số điện thoại trong mục tài khoản của tôi", {
-            position: `top-right`,
-            autoClose: 2000
-        });
-        else {   
-        const res = await placeOrder(localStorage.cartId);
-        console.log(res.data.data[0].billId);
-        setBillId(res.data.data[0].billId);
-        postCreateBill(localStorage.cartId, res.data.data[0].billId);
-        navigate("/purchaseorder");
+            toast.info("Phải cập nhật địa chỉ và số điện thoại trong mục tài khoản của tôi", {
+                position: `top-right`,
+                autoClose: 2000
+            });
+        else {
+            const res = await placeOrder(localStorage.cartId);
+            console.log(res.data.data[0].billId);
+            setBillId(res.data.data[0].billId);
+            postCreateBill(localStorage.cartId, res.data.data[0].billId);
+            navigate("/purchaseorder");
         }
     }
 
@@ -47,6 +47,18 @@ const Order = () => {
         getCurrentCustomer();
         getProductsInCart(localStorage.getItem("cartId"));
     }, []);
+
+    const [dataBillBuy, setDataBillBuy] = useState([]);
+    const handleGetOrders = async () => {
+        const res = await placeOrder(localStorage.cartId);
+        console.log(res.data.data, "hiện tại bill");
+        setDataBillBuy(res.data.data[0]);
+    }
+
+    useEffect(() => {
+        handleGetOrders();
+    }, [])
+
     return (
         <div className='order order-container'>
             <div>
@@ -132,9 +144,18 @@ const Order = () => {
                                     <td>{cart.cartTotalAmount.toLocaleString('vi-VN')}đ</td>
                                 </tr>
                                 <tr>
-                                    <th>Phí vận chuyển (tạm tính):</th>
-                                    <td>{cart.cartTotalAmount.toLocaleString('vi-VN') > 0 ? shipPrice.toLocaleString('vi-VN') : 0}đ</td>
+                                    <th>Phí vận chuyển: </th>
+                                    <td>{parseInt(dataBillBuy?.feeShip).toLocaleString('vi-VN')}đ</td>
                                 </tr>
+                                <tr>
+                                    <th>Thời gian giao dự kiến: </th>
+                                    <td>{new Date(dataBillBuy?.timeShip).toLocaleString()}</td>
+                                </tr>
+                                <tr>
+                                    <th>Khoảng cách : </th>
+                                    <td>{parseInt(dataBillBuy?.distance).toLocaleString('vi-VN')}km</td>
+                                </tr>
+                                
                             </thead>
                             <tbody>
                                 <tr>
@@ -145,13 +166,13 @@ const Order = () => {
                                 <tr style={{ fontSize: 20 }}>
                                     <th>Tổng tiền: </th>
                                     <th className='pay-money'>
-                                        {cart.cartTotalAmount > 0 ? (cart.cartTotalAmount + shipPrice).toLocaleString('vi-VN') : 0}đ 
+                                        {parseInt(dataBillBuy?.payment).toLocaleString('vi-VN')}đ
                                     </th>
                                 </tr>
                                 <tr>
                                     <td colSpan={2}>
                                         <div>
-                                            <Button text='MUA HÀNG' onClick={() => {handlePayBill(); navigate("/infor")}}/>
+                                            <Button text='MUA HÀNG' onClick={() => { handlePayBill(); navigate("/infor") }} />
                                         </div>
                                     </td>
                                 </tr>
