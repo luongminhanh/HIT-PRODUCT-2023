@@ -152,7 +152,7 @@ const FoodSuggestions = ({ title, data, className, container, color, isHorizonta
                         }
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button onClick={() => navigate('/search')} text='Xem thêm' className='showMore' />
+                        <Button onClick={() => {navigate('/search'); setTimeout(() => window.scrollTo(0, 0), 2000)}} text='Xem thêm' className='showMore' />
                     </div>
                 </div>
             </div>

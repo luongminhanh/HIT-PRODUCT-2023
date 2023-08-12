@@ -7,7 +7,7 @@ const MyOrder = () => {
     const navigate = useNavigate();
     const [dataBillBuy, setDataBillBuy] = useState([]);
     const handleGetOrders = async () => {
-        const res = await billOfCurrentCustomer(1);
+        const res = await billOfCurrentCustomer(localStorage.cartId);
         console.log(res.data.data, "hiện tại bill");
         setDataBillBuy(res.data.data);
     }
