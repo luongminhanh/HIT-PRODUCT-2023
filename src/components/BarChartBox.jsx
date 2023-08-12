@@ -1,4 +1,4 @@
-import { Bar, BarChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 import '../assets/scss/components/BarChartBox.scss'
 const data = [
     {
@@ -18,43 +18,22 @@ const data = [
         uv: 2000,
         pv: 9800,
         amt: 2290,
-    },
-    {
-        name: 'Page D',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: 'Page E',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: 'Page F',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: 'Page G',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
+    }   
 ];
-const BarChartBox = () => {
+const BarChartBox = ({dataShops}) => {
+    console.log("here is data shops", dataShops);
     return (
         <div className='admin-barChartBox'>
-            <h1>Doanh thu</h1>
+            <h1>Tổng doanh thu các shop</h1>
             <ResponsiveContainer width="98%" height={250}>
-                <BarChart width={150} height={40} data={data}>
+                <BarChart width={150} height={40} data={dataShops}>
+                    <XAxis dataKey="shopName" />
                     <Tooltip
-                        contentStyle={{ background: "#b6b8bae3" }}
+                        contentStyle={{ background: "blue" }}
                         labelStyle={{ display: "none" }} 
-                        cursor={{fill: "none"}}/>
-                    <Bar dataKey="uv" fill="#fc5209" />
+                        cursor={{fill: "none"}}
+                    />                        
+                    <Bar dataKey="revenue" fill="#fc5209" />
                 </BarChart>
             </ResponsiveContainer>
         </div>

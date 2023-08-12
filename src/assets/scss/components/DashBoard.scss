@@ -8,6 +8,7 @@
 .dashboard-main-charts {
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 30px;
     margin-top: 50px;
     .dashboard-barchart, .dashboard-piechart, .dashboard-areachart{
