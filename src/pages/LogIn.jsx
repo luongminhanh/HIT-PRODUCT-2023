@@ -50,20 +50,18 @@ const LogIn = () => {
                         onSubmit={async (values) => {
                             try {
                                 const result = await axios.post(`${api}/auth/login`, values);
+
                                 if (result.status == 200) {
                                     setIsError(false)
                                     setIsSuccess(true);
-                                    // setTimeout(() => {
                                     if (result.data.data.authorities[0].authority === "ROLE_USER")
                                         navigate("/");
                                     else navigate("admin")
-                                    // }, 2000)
                                     localStorage.clear();
                                     dispatch(clearCart());
                                     localStorage.clear();
                                     localStorage.setItem("accessToken", result.data.data.accessToken);
                                     localStorage.setItem("username", values.username);
-                                    // localStorage.setItem("accessToken", result.data.data.accessToken);
                                 }
                             } catch (error) {
                                 setIsError(true);

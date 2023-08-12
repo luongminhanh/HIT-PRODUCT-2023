@@ -9,6 +9,7 @@ import { fetchCartItems, setCartId1 } from '../store/cartSlice';
 
 const Home = () => {
   const [cartItem, setCartItem] = useState({});
+
   const [cartId, setCartId] = useState(null);
   const [username, setUsername] = useState("");
   const dispatch = useDispatch();
@@ -20,12 +21,12 @@ const Home = () => {
     //   setCartId(storedCartId);
     //   fetchItemInCart();
     // } else {
-      
-      const resCur = await getCurrentUserLogin();
-      const customerId = resCur.data.data.customerId;
-      localStorage.setItem("cartId", customerId);
-      setCartId(customerId);
-      fetchItemInCart();
+
+    const resCur = await getCurrentUserLogin();
+    const customerId = resCur.data.data.customerId;
+    localStorage.setItem("cartId", customerId);
+    setCartId(customerId);
+    fetchItemInCart();
     // }
   };
 

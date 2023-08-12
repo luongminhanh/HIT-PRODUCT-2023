@@ -42,6 +42,15 @@ const Register = () => {
     if (isShowReatPassword) setIsShowReatPassword(false)
     else setIsShowReatPassword(true)
   }
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => position);
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }
+  const a = getLocation();
+  console.log(a);
   return (
     <div className="register">
       <div className='register__form'>
@@ -65,6 +74,7 @@ const Register = () => {
               await axios.post(`${api}/auth/register`, values)
               setIsSuccess(true);
               setIsError(false);
+              getLocation();
               let loginUser = {
                 username: values.username,
                 password: values.password
@@ -72,9 +82,10 @@ const Register = () => {
               const result = await axios.post(`${api}/auth/login`, loginUser);
               localStorage.clear();
               dispatch(clearCart());
-              localStorage.setItem("accessToken", result.data.data.accessToken)
+              localStorage.setItem("accessToken", result.data.data.accessToken);
+              localStorage.setItem("username", loginUser.username);
               setTimeout(() => {
-                 navigate('/');
+                navigate('/');
               }, 2000)
             } catch (error) {
               console.log(error);
@@ -146,7 +157,6 @@ const Register = () => {
                 </div>
 
                 <div className='register-error'>
-
                   <ErrorMessage name="repeatPassword"></ErrorMessage>
                 </div>
 

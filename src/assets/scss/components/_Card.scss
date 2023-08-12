@@ -42,15 +42,20 @@
             margin: 0 auto;
             transition: all ease 4s;
             overflow: hidden;
+            padding-top: 24%;
 
             img {
-                width: 140px;
-                height: 140px;
+                width: 130px;
+                height: 130px;
                 border-radius: 50%;
                 object-fit: cover;
-                @include absBox(24%, null, null, 22%);
+                position: relative;
+                z-index: 50;
+                // @include absBox(24%, null, null, 22%);
+                margin: 0 auto;
                 z-index: 3;
                 transition: all ease 2s;
+                display: flex;
 
                 @include mobile() {
                     @include absBox(24%, null, null, 24%);
@@ -77,18 +82,27 @@
 
     }
 
+    .card-content-nameproduct {
+        display: flex;
+        height: 80px !important;
+        align-items: center;
+    }
+
     .card-content {
         padding: 10px;
         margin-top: 16px;
 
+
         span {
             line-height: 36px;
-            padding: 50px 0;
             font-size: $text-24;
             color: $color1e1d23;
             font-weight: 500;
             overflow: hidden;
+            font-family: $appleFont;
+            display: block;
         }
+
 
         p {
             color: $color808080;
@@ -159,4 +173,3 @@
         }
     }
 }
-

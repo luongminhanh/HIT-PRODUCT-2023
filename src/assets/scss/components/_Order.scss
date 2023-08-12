@@ -39,15 +39,14 @@ body {
             &-title {
                 display: block;
                 background-color: $orangeColor !important;
-                // padding: 1px 0;
+                height: 48px;
 
                 h3 {
-                    // line-height: 0;
+                    line-height: 48px !important;
                     margin-left: 16px;
                     color: $whiteText;
                     font-weight: 500;
-                    font-size: 25px;
-                    padding: 3px;
+                    font-size: 20px;
                 }
             }
 
@@ -110,9 +109,7 @@ body {
                 border-bottom: 1px solid #ccc;
             }
 
-            .products-name {
-                // text-transform: uppercase;
-            }
+
 
         }
 
