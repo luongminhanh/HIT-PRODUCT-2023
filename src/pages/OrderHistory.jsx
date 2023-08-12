@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Icon from '../components/Icon';
 import Button from '../components/Button';
+import { historyBillsOfCurrentCustomer } from '../store/apiRequest';
+import { useNavigate } from 'react-router-dom';
 
 const OrderHistory = () => {
-    // const [isActive, setIsActive] = useState(false);
-    // const handleActivePaging = () => {
+    const navigate = useNavigate();
+    const [dataHistoryBuy, setDataHistoryBuy] = useState([]);
+    const handleGetHistoryOrders = async () => {
+        const res = await historyBillsOfCurrentCustomer(1);
+        console.log(res.data.data, "hiện tại History");
+        setDataHistoryBuy(res.data.data);
+    }
 
-    // }
+    useEffect(() => {
+        handleGetHistoryOrders();
+    }, [])
     return (
         <div className='order-history order-contaniner'>
             <div>
@@ -30,73 +39,22 @@ const OrderHistory = () => {
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>#99</td>
-                                <td>Bánh Mì Trứng</td>
-                                <td>13:36 03-05-2023</td>
-                                <td>Chờ Xử Lý</td>
-                                <td>1</td>
-                                <td>100.000.000VND</td>
+                            {dataHistoryBuy && dataHistoryBuy.map((item) => (
+                                <>
+                                <tr>
+                                <td>{item.bill.id}</td>
+                                <td>{item.product.name}</td>
+                                <td>{item.bill.createdDate}</td>
+                                <td>{item.bill.status}</td>
+                                <td>{item.quantity}</td>
+                                <td>{item.bill.payment.toLocaleString('vi-VN')} VND</td>
                                 <td>
                                     <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>#98</td>
-                                <td>Bánh Mì Trứng</td>
-                                <td>13:36 03-05-2023</td>
-                                <td>Hủy Hàng</td>
-                                <td>1</td>
-                                <td>100.000.000VND</td>
-                                <td>
-                                    <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#97</td>
-                                <td>Bánh Mì Trứng</td>
-                                <td>13:36 03-05-2023</td>
-                                <td>Giao Hàng Thành Công</td>
-                                <td>1</td>
-                                <td>100.000.000VND</td>
-                                <td>
-                                    <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#96</td>
-                                <td>Bánh Mì Trứng</td>
-                                <td>13:36 03-05-2023</td>
-                                <td>Giao Hàng Thành Công</td>
-                                <td>1</td>
-                                <td>100.000.000VND</td>
-                                <td>
-                                    <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#95</td>
-                                <td>Bánh Mì Trứng</td>
-                                <td>13:36 03-05-2023</td>
-                                <td>Hủy Hàng</td>
-                                <td>1</td>
-                                <td>100.000.000VND</td>
-                                <td>
-                                    <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>#94</td>
-                                <td>Bánh Mì Trứng</td>
-                                <td>13:36 03-05-2023</td>
-                                <td>Hủy Hàng</td>
-                                <td>1</td>
-                                <td>100.000.000VND</td>
-                                <td>
-                                    <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
-                                </td>
-                            </tr>
-                        </tbody>
+                                </>
+                            ))}
+                         </tbody>
                     </table>
                 </div>
                 <div className="order-history-paging">

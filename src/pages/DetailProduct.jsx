@@ -18,7 +18,8 @@ const DetailProduct = () => {
     const [dataProduct, setDataProduct] = useState({});
     const [listProduct, setListProduct] = useState([]);
     const search = "";
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const fetchDetailProduct = async () => {
         const res = await getDetailProducts(idProduct, idShop);
         if (res && res.data && res.data.data) {
@@ -44,6 +45,10 @@ const DetailProduct = () => {
     const [valueInput, setValueInput] = useState(1);
     const handleValueInput = (e) => {
         setValueInput(e.target.value);
+    }
+
+    const handleBuy = () => {
+        navigate("/order");
     }
 
     return (
@@ -85,6 +90,7 @@ const DetailProduct = () => {
                             <Button
                                 className='detail-product-add-to-buy'
                                 text='Đặt hàng'
+                                onClick={() => handleBuy()}
                             />
                         </div> <br />
                         <hr />

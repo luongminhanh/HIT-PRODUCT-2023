@@ -420,8 +420,8 @@ export const searchProduct = (search) => {
         .catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
 }
 
-export const placeOrder = () => {
-    return axios.get(`http://207.148.118.106:8286/api/v1/customer/1/bill` ,
+export const placeOrder = (customerId) => {
+    return axios.get(`http://207.148.118.106:8286/api/v1/customer/${customerId}/bill` ,
     {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
@@ -452,6 +452,24 @@ export const getAllBills = () => {
             }
         }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));;
     return res
+}
+
+export const billOfCurrentCustomer = (customerId) => {
+    return axios.get(`${api}/billbuy/customer/${customerId}`,
+    {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
+        }
+    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
+}
+
+export const historyBillsOfCurrentCustomer = (customerId) => {
+    return axios.get(`${api}/billhistory/customer/${customerId}`,
+     {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("accessToken")
+        }
+    }).catch(err => toast.info("Đăng nhập để thực hiện các chức của hệ thống"));
 }
 
 export const getStatisticShops = () => {
