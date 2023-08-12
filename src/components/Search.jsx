@@ -55,7 +55,9 @@ const Search = () => {
                                 image={item.productImageUrl}
                                 productName={item.productName}
                                 shopAddress={item.shopAddress}
-                                price={item.productPrice} />
+                                price={item.productPrice}
+                                shopId={item.shopId}
+                                />
                         }
                     })}
                     {/* <div className="order-history-paging">

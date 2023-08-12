@@ -51,10 +51,10 @@ const UserInfor = () => {
     }
     const [isError, setIsError] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+
     useEffect(() => {
         getInforUser();
     }, [])
-    // console.log(userInfor);
     return (
         <>
             {
@@ -94,9 +94,9 @@ const UserInfor = () => {
                                 <Formik
                                     initialValues={{
                                         fullname: userInfor.fullName,
-                                        day: '',
-                                        month: '',
-                                        year: '',
+                                        day: parseInt(userInfor.dob.split("T")[0].split("-")[2]),
+                                        month: parseInt(userInfor.dob.split("T")[0].split("-")[1]),
+                                        year: parseInt(userInfor.dob.split("T")[0].split("-")[0]),
                                         phoneNumber: userInfor.phoneNumber,
                                         address: userInfor.address.addressName
                                     }}
@@ -123,9 +123,10 @@ const UserInfor = () => {
                                                 phoneNumber: values.phoneNumber,
                                                 dob: `${values.year}-${values.month < 10 ? `0${values.month}` : `${values.month}`}-${values.day < 10 ? `0${values.day}` : `${values.day}`}`
                                             }
-                                            setIsError(false)
-                                            setIsSuccess(true);
                                             await putUpdateUser(valuesNewUser);
+                                            setIsSuccess(true);
+                                            setIsError(false)
+                                            await getInforUser();
                                         } catch (error) {
                                             setIsError(true);
                                             setTimeout(() => {

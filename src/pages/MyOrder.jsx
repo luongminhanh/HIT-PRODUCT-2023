@@ -7,7 +7,7 @@ const MyOrder = () => {
     const navigate = useNavigate();
     const [dataBillBuy, setDataBillBuy] = useState([]);
     const handleGetOrders = async () => {
-        const res = await billOfCurrentCustomer(6);
+        const res = await billOfCurrentCustomer(localStorage.cartId);
         console.log(res.data.data, "hiện tại bill");
         setDataBillBuy(res.data.data);
     }
@@ -21,7 +21,7 @@ const MyOrder = () => {
             try {
                 await cancelProduct(id)
                 console.log("Hủy rồi nha");
-                await handleGetOrders();
+                handleGetOrders();
             } catch (error) {
                 console.log(error);
                 console.log("Lỗi rồi");

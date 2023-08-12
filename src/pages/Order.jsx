@@ -4,11 +4,12 @@ import Button from '../components/Button';
 import { getCurrentUserLogin, getCustomer, getProductInCart, placeOrder, postCreateBill } from '../store/apiRequest';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Loading from '../components/Loading'
+import { toast } from 'react-toastify';
+import Loading from '../components/Loading';
 
 const Order = () => {
     const [dataUser, setDataUser] = useState({});
-    const [dataCustomer, setDataCustomer] = useState();
+    const [dataCustomer, setDataCustomer] = useState({});
     const [dataProductInCart, setDataProductInCart] = useState([]);
     const [shipPrice, setShipPrice] = useState(35000);
     const [billId, setBillId] = useState(0);
@@ -19,6 +20,7 @@ const Order = () => {
         setDataUser(res.data.data);
         const resCus = await getCustomer(localStorage.getItem("cartId"));
         setDataCustomer(resCus.data.data);
+        console.log(resCus.data.data)
     }
 
     const getProductsInCart = async (cartId) => {
@@ -28,11 +30,18 @@ const Order = () => {
     }
 
     const handlePayBill = async () => {
-        const res = await placeOrder(localStorage.cartId);
-        console.log(res.data.data[0].billId);
-        setBillId(res.data.data[0].billId);
-        postCreateBill(localStorage.cartId, res.data.data[0].billId);
-        navigate("/purchaseorder")
+        if (dataCustomer.address == null || dataCustomer.phoneNumber == null)
+            toast.info("Phải cập nhật địa chỉ và số điện thoại trong mục tài khoản của tôi", {
+                position: `top-right`,
+                autoClose: 2000
+            });
+        else {
+            const res = await placeOrder(localStorage.cartId);
+            console.log(res.data.data[0].billId);
+            setBillId(res.data.data[0].billId);
+            postCreateBill(localStorage.cartId, res.data.data[0].billId);
+            navigate("/purchaseorder");
+        }
     }
 
     useEffect(() => {
@@ -72,7 +81,7 @@ const Order = () => {
                                         <div className="form-item">
                                             <div>
                                                 <label htmlFor="">Địa chỉ cụ thể <span>*</span></label> <br />
-                                                <input type="text" value={dataCustomer.address.addressName} />
+                                                <input type="text" value={dataCustomer?.address?.addressName} />
                                             </div>
                                         </div>
                                     </div>
@@ -103,13 +112,13 @@ const Order = () => {
                                                     </React.Fragment>
                                                 )}
                                                 {/* <tr>
-                                        <td className='products-name'>
-                                            Bánh mì trứng <span className='attention'>x 5</span>
-                                        </td>
-                                        <td>
-                                            120.000.000VND
-                                        </td>
-                                    </tr> */}
+                                    <td className='products-name'>
+                                        Bánh mì trứng <span className='attention'>x 5</span>
+                                    </td>
+                                    <td>
+                                        120.000.000VND
+                                    </td>
+                                </tr> */}
                                             </tbody>
                                         </table>
                                     </div>
@@ -127,8 +136,8 @@ const Order = () => {
                                                 <td>{cart.cartTotalAmount.toLocaleString('vi-VN')}đ</td>
                                             </tr>
                                             <tr>
-                                                <th>Phí vận chuyển:</th>
-                                                <td>{shipPrice.toLocaleString('vi-VN')}đ</td>
+                                                <th>Phí vận chuyển (tạm tính):</th>
+                                                <td>{cart.cartTotalAmount.toLocaleString('vi-VN') > 0 ? shipPrice.toLocaleString('vi-VN') : 0}đ</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -140,13 +149,13 @@ const Order = () => {
                                             <tr style={{ fontSize: 20 }}>
                                                 <th>Tổng tiền: </th>
                                                 <th className='pay-money'>
-                                                    {(cart.cartTotalAmount + shipPrice).toLocaleString('vi-VN')}
+                                                    {cart.cartTotalAmount > 0 ? (cart.cartTotalAmount + shipPrice).toLocaleString('vi-VN') : 0}đ
                                                 </th>
                                             </tr>
                                             <tr>
                                                 <td colSpan={2}>
                                                     <div>
-                                                        <Button text='MUA HÀNG' onClick={() => handlePayBill()} />
+                                                        <Button text='MUA HÀNG' onClick={() => { handlePayBill(); navigate("/infor") }} />
                                                     </div>
                                                 </td>
                                             </tr>
