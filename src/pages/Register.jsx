@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import Button from '../components/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Alert from '../components/Alert';
 import { api } from '../store/apiRequest';
 import { useDispatch } from 'react-redux';
@@ -42,15 +42,32 @@ const Register = () => {
     if (isShowReatPassword) setIsShowReatPassword(false)
     else setIsShowReatPassword(true)
   }
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => position);
-    } else {
-      console.log("Geolocation is not supported by this browser.");
+  const [position, setPosition] = useState(null);
+  const getCurrentLocation = async () => {
+    try {
+      if (navigator.geolocation) {
+        const position = await new Promise((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+              resolve({ latitude, longitude });
+            },
+            (error) => {
+              reject(error);
+            }
+          );
+        });
+        setPosition(position);
+      } else {
+        throw new Error("Geolocation is not supported by this browser.");
+      }
+    } catch (error) {
+      console.log(error);
     }
-  }
-  const a = getLocation();
-  console.log(a);
+  };
+  useEffect(() => {
+    getCurrentLocation();
+  }, [])
   return (
     <div className="register">
       <div className='register__form'>
@@ -65,13 +82,16 @@ const Register = () => {
             username: '',
             password: '',
             repeatPassword: '',
-            email: '',
+            email: ''
           }}
           validationSchema={Schema}
           onSubmit={async (values) => {
-
             try {
-              await axios.post(`${api}/auth/register`, values)
+              let positionUser = {
+                latitude: position.latitude,
+                longitude: position.longitude
+              }
+              await axios.post(`${api}/auth/register`, values, { params: positionUser })
               setIsSuccess(true);
               setIsError(false);
               getLocation();
@@ -94,11 +114,12 @@ const Register = () => {
                 setIsError(false);
               }, 8000)
             }
-
           }}
         >
-          {({ errors }) => {
-            return <Form>
+          {({ values,
+            handleSubmit,
+            isSubmitting, }) => {
+            return <Form onSubmit={handleSubmit}>
               <div>
                 <span>Username</span><br />
                 <Field
@@ -117,7 +138,6 @@ const Register = () => {
                   id="email"
                   type="text"
                   name="email"
-
                 />
                 <div className='register-error'>
                   <ErrorMessage name="email"></ErrorMessage>

@@ -1,4 +1,4 @@
-import { Formik } from "formik"
+import { Field, Formik } from "formik"
 import img from "../assets/images/user.png"
 import '../assets/scss/components/UserInfor.scss'
 import Button from "../components/Button"
@@ -11,6 +11,8 @@ const UserInfor = () => {
     const getCurrentCustomer = async () => {
         const res = await getCurrentUserLogin();
         setUserInfor(res.data.data)
+        console.log(userInfor);
+        console.log(res);
     }
     useEffect(() => {
         getCurrentCustomer();
@@ -50,18 +52,19 @@ const UserInfor = () => {
                     </div>
                     <Formik
                         initialValues={{
-                            fullname: '',
+                            fullname: userInfor.email,
                             birthday: '',
                             phoneNumber: '',
-                            oldPassword: '',
+                            oldPassword: userInfor.newPassword,
                             newPassword: '',
                             comfirmNewPassword: ''
                         }}
+                        enableReinitialize
                         // validationSchema={{
 
                         // }}
-                        onSubmit={() => {
-
+                        onSubmit={(values) => {
+                            console.log(values);
                         }}
                     >
                         {({
@@ -79,21 +82,21 @@ const UserInfor = () => {
                                                 <span>Họ tên</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='text' name="fullname" />
+                                                    <Field type='text' name="fullname" />
                                                 </div>
                                             </div>
                                             <div className='userinfor__changeInfor--birth'>
                                                 <span>Ngày sinh</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='text' name="birthday" />
+                                                    <Field type='text' name="birthday" />
                                                 </div>
                                             </div>
                                             <div className='userinfor__changeInfor--phone'>
                                                 <span>Số điện thoại</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='text' name="phoneNumber" />
+                                                    <Field type='text' name="phoneNumber" />
                                                 </div>
                                             </div>
                                         </div>
@@ -102,7 +105,7 @@ const UserInfor = () => {
                                                 <span>Địa chỉ</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='text' name="address" />
+                                                    <Field type='text' name="address" />
                                                 </div>
                                             </div>
                                         </div>
@@ -111,21 +114,21 @@ const UserInfor = () => {
                                                 <span>Mật khẩu cũ</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='password' name="oldPassword" />
+                                                    <Field type='password' name="oldPassword" />
                                                 </div>
                                             </div>
                                             <div className='userinfor__changePassword--new'>
                                                 <span>Mật khẩu mới</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='password' name="newPassword" />
+                                                    <Field type='password' name="newPassword" />
                                                 </div>
                                             </div>
                                             <div className='userinfor__changePassword--confirm'>
                                                 <span>Xác nhận mật khẩu</span>
                                                 <br></br>
                                                 <div className="inp">
-                                                    <input type='password' name="comfirmNewPassword" />
+                                                    <Field type='password' name="comfirmNewPassword" />
                                                 </div>
                                             </div>
                                         </div>
