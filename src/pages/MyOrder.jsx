@@ -30,12 +30,14 @@ const MyOrder = () => {
         handleGetOrders();
     }, [])
     const handleCancelProduct = async (id) => {
+        console.log(id, "cancel")
         let checkConfirm = confirm("Bạn có chắc chắn muốn hủy đơn hàng này🤨");
         if (checkConfirm) {
             try {
                 await cancelProduct(id)
                 console.log("Hủy rồi nha");
                 handleGetOrders();
+                navigate('/purchaseorder/orderhistory')
             } catch (error) {
                 console.log(error);
                 console.log("Lỗi rồi");
@@ -86,7 +88,7 @@ const MyOrder = () => {
                             ))}
                         <hr />
                         <div className='myorder-detail-cancel'>
-                            <Button onClick={() => handleCancelProduct(item.bill.id)}>Hủy Hàng</Button>
+                            <Button onClick={() => handleCancelProduct(id)}>Hủy Hàng</Button>
                         </div>
                     </div>
                 </div>

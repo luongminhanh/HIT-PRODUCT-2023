@@ -8,11 +8,13 @@ import { useEffect, useState } from "react"
 import * as Yup from 'yup'
 import Alert from "../components/Alert"
 import Loading from '../components/Loading'
+import { useNavigate } from "react-router-dom"
 
 const UserInfor = () => {
     const customerID = localStorage.getItem("cartId");
     const [userInfor, setUserInfor] = useState(null)
     const [position, setPosition] = useState(null);
+    const navigate = useNavigate();
     const getCurrentLocation = async () => {
         try {
             if (navigator.geolocation) {
@@ -94,9 +96,9 @@ const UserInfor = () => {
                                 <Formik
                                     initialValues={{
                                         fullname: userInfor.fullName,
-                                        day: parseInt(userInfor.dob.split("T")[0].split("-")[2]),
-                                        month: parseInt(userInfor.dob.split("T")[0].split("-")[1]),
-                                        year: parseInt(userInfor.dob.split("T")[0].split("-")[0]),
+                                        day: userInfor.dob ? parseInt(userInfor.dob.split("T")[0].split("-")[2]) : '',
+                                        month: userInfor.dob ? parseInt(userInfor.dob.split("T")[0].split("-")[1]) : '',
+                                        year: userInfor.dob ? parseInt(userInfor.dob.split("T")[0].split("-")[0]) : '',
                                         phoneNumber: userInfor.phoneNumber,
                                         address: userInfor.address.addressName
                                     }}
@@ -127,6 +129,7 @@ const UserInfor = () => {
                                             setIsSuccess(true);
                                             setIsError(false)
                                             await getInforUser();
+                                            navigate("/order")
                                         } catch (error) {
                                             setIsError(true);
                                             setTimeout(() => {

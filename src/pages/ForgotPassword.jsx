@@ -37,12 +37,12 @@ const ForgotPassword = () => {
                                 setIsSuccess(true);
                                 setTimeout(() => {
                                     navigate('/login')
-                                }, 16000)
+                                }, 2000)
                             } catch (error) {
                                 setIsError(true);
                                 setTimeout(() => {
                                     setIsError(false);
-                                }, 8000)
+                                }, 6000)
                                 setIsSuccess(false);
                             }
                         }}
