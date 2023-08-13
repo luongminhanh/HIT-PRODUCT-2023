@@ -88,3 +88,17 @@
         color: #fff;
     }
 }
+
+.shop-list-cards {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+
+    >div {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+        width: 1200px;
+    }
+}

@@ -48,7 +48,7 @@ const OrderHistory = () => {
                                         {/* <td>{item.bill.createdDate.split("T")[1]}</td> */}
                                         <td>{item.bill.status}</td>
                                         <td>{item.quantity}</td>
-                                        <td>{item.bill.payment.toLocaleString('vi-VN')} VND</td>
+                                        <td>{item.product.price.toLocaleString('vi-VN')} VND</td>
                                         {/* <td>
                                             <Button className='resetIcon' text={<Icon className="fa-solid fa-arrow-rotate-left" />}></Button>
                                         </td> */}

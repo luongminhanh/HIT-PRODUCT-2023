@@ -10,6 +10,7 @@ import FoodSuggestions from '../components/homeUser/FoodSuggestions';
 import { useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { getCategoryByIdShop, getDataShopbyId, getProductsByIdShop, getProductsByIdShopAndIdCategory } from '../store/apiRequest';
+import CardSearch from '../components/CardSearch';
 
 const Shop = () => {
     const [show, setShow] = useState(false);
@@ -113,14 +114,29 @@ const Shop = () => {
                             </div>
                         </div>
                         <div className="shop-list-cards">
-                            <FoodSuggestions
+                            {/* <FoodSuggestions
                                 title="Gợi ý món ăn"
                                 data={dataProducts}
                                 className='NoneButton'
                                 color='#1e1d23'
                                 isHorizontalCard={false}
                                 isSlideShow={false}
-                            />
+                            /> */}
+                            <div>
+                                {dataProducts && dataProducts.length > 0 ? dataProducts.map((item) => {
+                                    if (!item._id || item === null) {
+                                        return <CardSearch
+                                            key={item.productId}
+                                            id={item.productId}
+                                            image={item.productImageUrl}
+                                            productName={item.productName}
+                                            shopAddress={item.shopAddress ? item.shopAddress : item.shopName}
+                                            price={item.productPrice}
+                                            shopId={item.shopId}
+                                        />
+                                    }
+                                }) : <div>Không xác định</div>}
+                            </div>
                             <br /><br /><br /> <br />
                             {/* <div className="order-history-paging">
                                 <ButtonComponent className='btn-history-paging' text={<Icon className="fa-solid fa-angles-left"></Icon>}></ButtonComponent>
