@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import imgProduct from '../assets/images/listPD_3.jpg';
-import { billOfCurrentCustomer, cancelProduct } from '../store/apiRequest';
+
+import { billOfCurrentCustomer, cancelProduct, placeOrder } from '../store/apiRequest';
+
+
+
+
 import axios from 'axios';
 
 const MyOrder = () => {
     const navigate = useNavigate();
     const [dataBillBuy, setDataBillBuy] = useState([]);
+    const [dataPlaceOrder, setDataPlaceOder] = useState([]);
     const handleGetOrders = async () => {
         const res = await billOfCurrentCustomer(localStorage.cartId);
         console.log(res.data.data, "hiện tại bill");
         setDataBillBuy(res.data.data);
+        const res2 = await placeOrder(localStorage.cartId)
+        // setDataPlaceOder()
+        console.log(res2);
     }
+
+    // console.log(dataBillBuy);
+
     const uniqueIds = [...new Set(dataBillBuy.map(bill => bill.bill.id))];
     console.log(uniqueIds, "hello");
-
     useEffect(() => {
         handleGetOrders();
     }, [])
@@ -47,7 +57,7 @@ const MyOrder = () => {
                                 {dataBillBuy.filter(bill => bill.bill.id == id)[0].bill.status}
                                 {console.log(dataBillBuy, "bill buy", id, "id")}
                             </h5>
-                            <Button onClick={() => navigate('')}>Xem Shop</Button>
+                            <Button onClick={() => navigate('/shop/1')}>Xem Shop</Button>
                         </div>
                         <hr />
                         {dataBillBuy
