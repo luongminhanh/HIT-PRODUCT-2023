@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { billOfCurrentCustomer, cancelProduct } from '../store/apiRequest';
+import { billOfCurrentCustomer, cancelProduct, placeOrder } from '../store/apiRequest';
 import axios from 'axios';
 const MyOrder = () => {
     const navigate = useNavigate();
     const [dataBillBuy, setDataBillBuy] = useState([]);
+    const [dataPlaceOrder, setDataPlaceOder] = useState([]);
     const handleGetOrders = async () => {
         const res = await billOfCurrentCustomer(localStorage.cartId);
         console.log(res.data.data, "hiện tại bill");
         setDataBillBuy(res.data.data);
+        const res2 = await placeOrder(localStorage.cartId)
+        // setDataPlaceOder()
+        console.log(res2);
     }
+    // console.log(dataBillBuy);
 
     useEffect(() => {
         handleGetOrders();
@@ -40,7 +45,7 @@ const MyOrder = () => {
                                 <i className="fa-solid fa-shop"></i>
                                 {item.bill.status}
                             </h5>
-                            <Button onClick={() => navigate('')}>Xem Shop</Button>
+                            <Button onClick={() => navigate('/shop/1')}>Xem Shop</Button>
                         </div>
                         <hr />
                         <div className="myorder-detail-product">

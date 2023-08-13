@@ -498,3 +498,17 @@ export const cancelProduct = (id) => {
         });
 }
 
+export const getDataShopbyId = (id) => {
+    return axios.get(`${api}/shop/${id}`)
+}
+export const getCategoryByIdShop = (id) => {
+    return axios.get(`${api}/category/get-categories-by-shop/${id}`)
+}
+export const getProductsByIdShop = (id) => {
+    return axios.get(`${api}/product/get-products-by-shop/${id}`)
+}
+
+export const getProductsByIdShopAndIdCategory = (iDShop, idCategogy) => {
+    return axios.get(`${api}/product/get-products-by-category-shop/${iDShop}/category/${idCategogy}`)
+}
+
