@@ -57,7 +57,7 @@ function ModalUpdateUser({ show, setShow, dataUser, fetchListUser }) {
             console.log("hello");
             console.log("dataUser.username", dataUser.username);
         }
-    }, [dataUser]);
+    }, [dataUser, phoneNumber]);
 
     return (
         <>

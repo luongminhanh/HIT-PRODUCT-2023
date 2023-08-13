@@ -35,8 +35,8 @@ const ManageCategories = () => {
     const fetchListCategory = async () => {
         const res = await getAllCategories();
         if (res && res.data) {
-            console.log(res.data.data.items);
-            setListCategory(res.data.data.items);
+            console.log(res.data.data, "hello");
+            setListCategory(res.data.data);
         }
     }
 
