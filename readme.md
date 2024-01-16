@@ -10,4 +10,9 @@ Pages: Router tới từng màn hình lớn.\
 Services: Viết các hàm hỗ trợ cần xử lý cho toàn dự án.\
 Store: Viết redux cho toàn dự án.\
 
+## Cách chạy dự án
+```sh
+ npm run dev
+```
+
 
